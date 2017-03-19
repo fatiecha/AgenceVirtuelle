@@ -30,7 +30,6 @@ public class Consommation implements Serializable {
 	private Contrat contrat;
 	public Consommation() {
 		super();
-		// TODO Auto-generated constructor stub
 	}
 	public Consommation(String periode, Date date_releve, int nbr_jour, double index_lu, double volume_consomme,
 			double volume_facture, Type_lecture lecture, Contrat contrat) {

@@ -26,7 +26,6 @@ public class Paiement implements Serializable {
 
 	public Paiement() {
 		super();
-		// TODO Auto-generated constructor stub
 	}
 
 	public Paiement(Date date, Type_paiement type_paiement, Facture facture) {

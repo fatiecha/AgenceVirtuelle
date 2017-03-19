@@ -28,7 +28,6 @@ public class Reclamation implements Serializable {
 
 	public Reclamation() {
 		super();
-		// TODO Auto-generated constructor stub
 	}
 
 	public Reclamation(Date date, String origine, Boolean etat, String commentaire, Type_reclamation type_reclamation,

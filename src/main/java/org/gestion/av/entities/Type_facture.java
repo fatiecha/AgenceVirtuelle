@@ -14,7 +14,6 @@ public class Type_facture implements Serializable{
 	private String libelle;
 	public Type_facture() {
 		super();
-		// TODO Auto-generated constructor stub
 	}
 	public Type_facture(String libelle) {
 		super();

@@ -37,7 +37,6 @@ public class Facture implements Serializable{
 	
 	public Facture() {
 		super();
-		// TODO Auto-generated constructor stub
 	}
 	public Facture(String periode, double montant, double solde, Date date_exigibilite, Date date,
 			Type_facture type_facture, Contrat contrat) {

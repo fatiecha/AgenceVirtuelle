@@ -14,7 +14,6 @@ public class Type_paiement implements Serializable{
 	private String libelle;
 	public Type_paiement() {
 		super();
-		// TODO Auto-generated constructor stub
 	}
 	public Type_paiement(String libelle) {
 		super();

@@ -14,7 +14,6 @@ public class Type_reclamation implements Serializable{
 	private String libelle;
 	public Type_reclamation() {
 		super();
-		// TODO Auto-generated constructor stub
 	}
 	public Type_reclamation(String libelle) {
 		super();

@@ -42,7 +42,6 @@ public class Contrat implements Serializable {
 
 	public Contrat() {
 		super();
-		// TODO Auto-generated constructor stub
 	}
 
 	public Long getId() {

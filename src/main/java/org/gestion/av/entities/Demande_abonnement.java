@@ -26,7 +26,6 @@ public class Demande_abonnement implements Serializable{
 	private Contrat contrat;
 	public Demande_abonnement() {
 		super();
-		// TODO Auto-generated constructor stub
 	}
 	public Demande_abonnement(Long tournee, Date date, Client client) {
 		super();

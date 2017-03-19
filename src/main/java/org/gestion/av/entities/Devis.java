@@ -22,7 +22,6 @@ public class Devis implements Serializable{
 	private Contrat contrat;
 	public Devis() {
 		super();
-		// TODO Auto-generated constructor stub
 	}
 	public Devis(Date date, boolean etat, double montant, String commentaire, Contrat contrat) {
 		super();

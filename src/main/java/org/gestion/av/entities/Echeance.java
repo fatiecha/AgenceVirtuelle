@@ -60,6 +60,5 @@ public class Echeance implements Serializable{
 	}
 	public Echeance() {
 		super();
-		// TODO Auto-generated constructor stub
 	}
 }

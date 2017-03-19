@@ -27,7 +27,6 @@ public class Facilite implements Serializable{
 	
 	public Facilite() {
 		super();
-		// TODO Auto-generated constructor stub
 	}
 	
 	public Facilite(boolean etat, double montant, Contrat contrat) {

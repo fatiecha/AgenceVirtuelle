@@ -14,7 +14,6 @@ public class Type_lecture implements Serializable{
 	private String libelle;
 	public Type_lecture() {
 		super();
-		// TODO Auto-generated constructor stub
 	}
 	public Type_lecture(String libelle) {
 		super();

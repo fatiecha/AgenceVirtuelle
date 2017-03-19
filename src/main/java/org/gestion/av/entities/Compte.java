@@ -46,7 +46,6 @@ public class Compte  implements Serializable{
 	}
 	public Compte() {
 		super();
-		// TODO Auto-generated constructor stub
 	}
 	public Compte(double mt_impayé, double mt_exigible, double credit, double provision) {
 		super();
