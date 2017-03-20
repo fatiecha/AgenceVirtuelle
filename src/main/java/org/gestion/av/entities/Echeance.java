@@ -15,8 +15,8 @@ public class Echeance implements Serializable{
 	
 	private int ordre;
 	private double montant;
-	private Date date;
-	private boolean etat;
+	private Date dateEcheance;
+	private String etat;
 	@ManyToOne
 	@JoinColumn(name="code_facilite")
 	private Facilite facilite;
@@ -33,15 +33,15 @@ public class Echeance implements Serializable{
 		this.montant = montant;
 	}
 	public Date getDate() {
-		return date;
+		return dateEcheance;
 	}
 	public void setDate(Date date) {
-		this.date = date;
+		this.dateEcheance = date;
 	}
-	public boolean isEtat() {
+	public String isEtat() {
 		return etat;
 	}
-	public void setEtat(boolean etat) {
+	public void setEtat(String etat) {
 		this.etat = etat;
 	}
 	public Facilite getFacilite() {
@@ -50,11 +50,11 @@ public class Echeance implements Serializable{
 	public void setFacilite(Facilite facilite) {
 		this.facilite = facilite;
 	}
-	public Echeance(int ordre, double montant, Date date, boolean etat, Facilite facilite) {
+	public Echeance(int ordre, double montant, Date date, String etat, Facilite facilite) {
 		super();
 		this.ordre = ordre;
 		this.montant = montant;
-		this.date = date;
+		this.dateEcheance = date;
 		this.etat = etat;
 		this.facilite = facilite;
 	}

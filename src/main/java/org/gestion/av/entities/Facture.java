@@ -20,6 +20,7 @@ public class Facture implements Serializable{
 	private String periode;
 	private double montant;
 	private double solde;
+	private boolean etat;
 	private Date date_exigibilite;
 	private Date date;
 	@ManyToOne
@@ -108,6 +109,12 @@ public class Facture implements Serializable{
 	}
 	public void setFacilite(Facilite facilite) {
 		this.facilite = facilite;
+	}
+	public boolean isEtat() {
+		return etat;
+	}
+	public void setEtat(boolean etat) {
+		this.etat = etat;
 	}
 	
 	

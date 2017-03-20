@@ -19,6 +19,7 @@ public class Demande_abonnement implements Serializable{
 	private Long id;
 	private  Long tournee;
 	private Date date;
+	private String tarif;
 	@ManyToOne
 	@JoinColumn(name="code_client")
 	private Client client;
@@ -27,11 +28,23 @@ public class Demande_abonnement implements Serializable{
 	public Demande_abonnement() {
 		super();
 	}
-	public Demande_abonnement(Long tournee, Date date, Client client) {
+	
+	
+	public Demande_abonnement(Long tournee, Date date, String tarif, Client client, Contrat contrat) {
 		super();
 		this.tournee = tournee;
 		this.date = date;
+		this.tarif = tarif;
 		this.client = client;
+		this.contrat = contrat;
+	}
+
+
+	public String getTarif() {
+		return tarif;
+	}
+	public void setTarif(String tarif) {
+		this.tarif = tarif;
 	}
 	public Long getId() {
 		return id;

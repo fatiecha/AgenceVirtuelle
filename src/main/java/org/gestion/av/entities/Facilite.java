@@ -15,7 +15,7 @@ public class Facilite implements Serializable{
 	@Id
 	@GeneratedValue(strategy=GenerationType.IDENTITY)
 	private long id;
-	private boolean etat;
+	private String etat;
 	private double montant;
 	@ManyToOne
 	@JoinColumn(name="code_contrat")
@@ -29,7 +29,7 @@ public class Facilite implements Serializable{
 		super();
 	}
 	
-	public Facilite(boolean etat, double montant, Contrat contrat) {
+	public Facilite(String etat, double montant, Contrat contrat) {
 		super();
 		this.etat = etat;
 		this.montant = montant;
@@ -58,10 +58,10 @@ public class Facilite implements Serializable{
 	public void setId(long id) {
 		this.id = id;
 	}
-	public boolean isEtat() {
+	public String isEtat() {
 		return etat;
 	}
-	public void setEtat(boolean etat) {
+	public void setEtat(String etat) {
 		this.etat = etat;
 	}
 	public double getMontant() {

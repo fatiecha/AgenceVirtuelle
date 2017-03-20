@@ -22,7 +22,12 @@ public class Contrat implements Serializable {
 	private Date date;
 	private String service;
 	private String CIN;
-	
+	private String agence;
+	private String branchement;
+	private String etat;
+	private String numCompteur;
+	private Date datePoseCompteur;
+
 	@OneToOne
 	private Demande_abonnement demande_abonnement;
 
@@ -133,13 +138,68 @@ public class Contrat implements Serializable {
 	public void setClients(List<Client> clients) {
 		this.clients = clients;
 	}
+	
 
-	public Contrat(Date date, String service, String cIN, Demande_abonnement demande_abonnement) {
+	public String getAgence() {
+		return agence;
+	}
+
+	public void setAgence(String agence) {
+		this.agence = agence;
+	}
+
+	public String getBranchement() {
+		return branchement;
+	}
+
+	public void setBranchement(String branchement) {
+		this.branchement = branchement;
+	}
+
+	public String isEtat() {
+		return etat;
+	}
+
+	public void setEtat(String etat) {
+		this.etat = etat;
+	}
+
+	public String getNumCompteur() {
+		return numCompteur;
+	}
+
+	public void setNumCompteur(String numCompteur) {
+		this.numCompteur = numCompteur;
+	}
+
+	public Date getDatePoseCompteur() {
+		return datePoseCompteur;
+	}
+
+	public void setDatePoseCompteur(Date datePoseCompteur) {
+		this.datePoseCompteur = datePoseCompteur;
+	}
+
+	public String getEtat() {
+		return etat;
+	}
+
+	public Contrat(Date date, String service, String cIN, String agence, String branchement, String etat,
+			String numCompteur, Date datePoseCompteur, Demande_abonnement demande_abonnement) {
 		super();
 		this.date = date;
 		this.service = service;
 		CIN = cIN;
+		this.agence = agence;
+		this.branchement = branchement;
+		this.etat = etat;
+		this.numCompteur = numCompteur;
+		this.datePoseCompteur = datePoseCompteur;
 		this.demande_abonnement = demande_abonnement;
 	}
+
+
+
+	
 
 }

@@ -17,8 +17,10 @@ public class Reclamation implements Serializable {
 	private Long id;
 	private Date date;
 	private String origine;
-	private Boolean etat;
+	private String etat;
 	private String commentaire;
+	private Date dateResolution;
+	private String commentaireResolution;
 	@ManyToOne
 	@JoinColumn(name = "code_type_reclamation")
 	private Type_reclamation type_reclamation;
@@ -30,7 +32,7 @@ public class Reclamation implements Serializable {
 		super();
 	}
 
-	public Reclamation(Date date, String origine, Boolean etat, String commentaire, Type_reclamation type_reclamation,
+	public Reclamation(Date date, String origine, String etat, String commentaire, Type_reclamation type_reclamation,
 			Contrat contrat) {
 		super();
 		this.date = date;
@@ -39,6 +41,23 @@ public class Reclamation implements Serializable {
 		this.commentaire = commentaire;
 		this.type_reclamation = type_reclamation;
 		this.contrat = contrat;
+	}
+	
+
+	public Date getDateResolution() {
+		return dateResolution;
+	}
+
+	public void setDateResolution(Date dateResolution) {
+		this.dateResolution = dateResolution;
+	}
+
+	public String getCommentaireResolution() {
+		return commentaireResolution;
+	}
+
+	public void setCommentaireResolution(String commentaireResolution) {
+		this.commentaireResolution = commentaireResolution;
 	}
 
 	public Long getId() {
@@ -65,11 +84,11 @@ public class Reclamation implements Serializable {
 		this.origine = origine;
 	}
 
-	public Boolean getEtat() {
+	public String getEtat() {
 		return etat;
 	}
 
-	public void setEtat(Boolean etat) {
+	public void setEtat(String etat) {
 		this.etat = etat;
 	}
 
