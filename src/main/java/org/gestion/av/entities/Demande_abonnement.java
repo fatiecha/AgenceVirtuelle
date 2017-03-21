@@ -30,6 +30,9 @@ public class Demande_abonnement implements Serializable{
 	}
 	
 	
+	
+
+
 	public Demande_abonnement(Long tournee, Date date, String tarif, Client client, Contrat contrat) {
 		super();
 		this.tournee = tournee;
@@ -38,6 +41,9 @@ public class Demande_abonnement implements Serializable{
 		this.client = client;
 		this.contrat = contrat;
 	}
+
+
+
 
 
 	public String getTarif() {

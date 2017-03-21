@@ -39,17 +39,20 @@ public class Facture implements Serializable{
 	public Facture() {
 		super();
 	}
-	public Facture(String periode, double montant, double solde, Date date_exigibilite, Date date,
+
+	public Facture(String periode, double montant, double solde, boolean etat, Date date_exigibilite, Date date,
 			Type_facture type_facture, Contrat contrat) {
 		super();
 		this.periode = periode;
 		this.montant = montant;
 		this.solde = solde;
+		this.etat = etat;
 		this.date_exigibilite = date_exigibilite;
 		this.date = date;
 		this.type_facture = type_facture;
 		this.contrat = contrat;
 	}
+
 	public long getId() {
 		return id;
 	}

@@ -19,11 +19,7 @@ public class AgenceController {
 	}
 
 	
-	@RequestMapping(value = "/login")
-	public String login(Model model) {
-		
-		return "index";
-	}
+	
 
 
 
