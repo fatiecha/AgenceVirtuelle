@@ -1,10 +1,151 @@
 <!DOCTYPE html>
-<html>
-<head>
-<meta charset="ISO-8859-1">
-<title>Insert title here</title>
-</head>
-<body>
 
+<html xmlns:th="http://www.thymeleaf.org">
+<!--<![endif]-->
+<!-- BEGIN HEAD -->
+<head th:replace="/Fragment/resources_css :: css_resources"></head>
+
+<!-- END HEAD -->
+
+<body
+	class="page-header-fixed page-sidebar-closed-hide-logo page-container-bg-solid">
+	<!-- BEGIN HEADER -->
+	<div th:include="/Fragment/header :: entete"></div>
+
+	<!-- END HEADER -->
+	<!-- BEGIN HEADER & CONTENT DIVIDER -->
+	<div class="clearfix"></div>
+	<!-- END HEADER & CONTENT DIVIDER -->
+	<!-- BEGIN CONTAINER -->
+	<div class="page-container">
+		<!-- BEGIN SIDEBAR -->
+		<div th:include="/Fragment/menu :: menu"></div>
+		<!-- END SIDEBAR -->
+		<!-- BEGIN CONTENT -->
+		<div class="page-content-wrapper">
+			<!-- BEGIN CONTENT BODY -->
+			<div class="page-content">
+				<!-- BEGIN PAGE HEADER-->
+
+				<h3 class="page-title">Espace Client</h3>
+				<div class="page-bar">
+					<ul class="page-breadcrumb">
+						<li><i class="icon-home"></i> <a href="index.html">Acceuil</a>
+							<i class="fa fa-angle-right"></i></li>
+						<li><a href="#">Mes Devis</a> <i class="fa fa-angle-right"></i>
+						</li>
+
+					</ul>
+
+				</div>
+				<!-- END PAGE HEADER-->
+				<div class="tab-pane active" id="tab_0"
+					style="background-color: #17c4bb">
+					<div class="portlet box green" style="background-color: #17c4bb">
+						<div class="portlet-title">
+							<div class="caption">
+								<i class="fa fa-gift"></i>Mes Devis
+							</div>
+							<div class="tools">
+								<a href="javascript:;" class="collapse"> </a> <a
+									href="#portlet-config" data-toggle="modal" class="config">
+								</a> <a href="javascript:;" class="reload"> </a> <a
+									href="javascript:;" class="remove"> </a>
+							</div>
+						</div>
+						<div class="portlet-body form">
+							<!-- BEGIN FORM-->
+							<form action="#" class="form-horizontal">
+								<div class="form-body">
+									<div class="form-group">
+										<label class="col-md-4 control-label">Choisir votre
+											Contrat </label>
+										<div class="col-md-4">
+											<select name="thelist" onChange="combo(this, 'theinput')"
+												class="form-control input-circle">
+												<option value="val1">val1</option>
+											</select>
+										</div>
+									</div>
+									<div class="form-actions">
+										<div class="row">
+											<div class="col-md-offset-4 col-md-9">
+												<button type="submit" class="btn btn-circle green">Submit</button>
+												<button type="button"
+													class="btn btn-circle grey-salsa btn-outline">Cancel</button>
+											</div>
+										</div>
+									</div>
+								</div>
+							</form>
+							<!-- END FORM-->
+						</div>
+					</div>
+				</div>
+				<div class="portlet box green">
+					<div class="portlet-title">
+						<div class="caption">
+							<i class="fa fa-cogs"></i>Liste Devis
+						</div>
+						<div class="tools">
+							<a href="javascript:;" class="collapse"> </a> <a
+								href="#portlet-config" data-toggle="modal" class="config"> </a>
+							<a href="javascript:;" class="reload"> </a> <a
+								href="javascript:;" class="remove"> </a>
+						</div>
+					</div>
+					<div class="portlet-body">
+						<div class="table-scrollable">
+							<table class="table table-striped table-bordered table-hover">
+								<thead>
+									<tr>
+										<th>Numéro Devis</th>
+										<th>Numéro Contrat</th>
+										<th>Date</th>
+										<th>Etat Devis</th>
+										<th>Montant</th>
+										<th>Commentaire</th>
+
+
+
+									</tr>
+								</thead>
+								<tbody>
+									<tr>
+										<td>AAC</td>
+										<td>AUST</td>
+										<td>AAC</td>
+										<td>AUST</td>
+										<td>AAC</td>
+										<td>AUST</td>
+										
+
+
+
+
+									</tr>
+
+								</tbody>
+							</table>
+						</div>
+					</div>
+				</div>
+				<!-- END SAMPLE TABLE PORTLET-->
+			</div>
+		</div>
+	</div>
+	<!-- END CONTENT BODY -->
+
+	<!-- END CONTAINER -->
+	<!-- BEGIN FOOTER -->
+	<div th:include="/Fragment/footer:: footer"></div>
+
+	<!-- END FOOTER -->
+	<!--[if lt IE 9]>
+<script src="resources/assets/global/plugins/respond.min.js"></script>
+<script src="resources/assets/global/plugins/excanvas.min.js"></script> 
+<![endif]-->
+	<div th:include="/Fragment/resources_js :: js_resources"></div>
 </body>
+
 </html>

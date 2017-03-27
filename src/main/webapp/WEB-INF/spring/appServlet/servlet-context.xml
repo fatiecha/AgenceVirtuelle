@@ -44,7 +44,7 @@
     <property name="maxUploadSize" value="50000000"/>
 </bean>
 	<import resource="classpath:applicationContext.xml" />
-	<!-- <context:component-scan base-package="fr.norsys.scc" /> -->
+	<context:component-scan base-package="org.gestion.av" />
 
 
 </beans>

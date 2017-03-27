@@ -1,10 +1,100 @@
 <!DOCTYPE html>
-<html>
-<head>
-<meta charset="ISO-8859-1">
-<title>Insert title here</title>
-</head>
-<body>
 
+<html xmlns:th="http://www.thymeleaf.org">
+<!--<![endif]-->
+<!-- BEGIN HEAD -->
+<head th:replace="/Fragment/resources_css :: css_resources"></head>
+
+<!-- END HEAD -->
+
+<body
+	class="page-header-fixed page-sidebar-closed-hide-logo page-container-bg-solid">
+	<!-- BEGIN HEADER -->
+	<div th:include="/Fragment/header :: entete"></div>
+
+	<!-- END HEADER -->
+	<!-- BEGIN HEADER & CONTENT DIVIDER -->
+	<div class="clearfix"></div>
+	<!-- END HEADER & CONTENT DIVIDER -->
+	<!-- BEGIN CONTAINER -->
+	<div class="page-container">
+		<!-- BEGIN SIDEBAR -->
+		<div th:include="/Fragment/menu :: menu"></div>
+		<!-- END SIDEBAR -->
+		<!-- BEGIN CONTENT -->
+		<div class="page-content-wrapper">
+			<!-- BEGIN CONTENT BODY -->
+			<div class="page-content">
+				<!-- BEGIN PAGE HEADER-->
+
+				<h3 class="page-title">
+					Blank Page Layout <small>blank page layout</small>
+				</h3>
+				<div class="page-bar">
+					<ul class="page-breadcrumb">
+						<li><i class="icon-home"></i> <a href="index.html">Home</a> <i
+							class="fa fa-angle-right"></i></li>
+						<li><a href="#">Blank Page</a> <i class="fa fa-angle-right"></i>
+						</li>
+						<li><span>Page Layouts</span></li>
+					</ul>
+
+				</div>
+				<!-- END PAGE HEADER-->
+			 <div class="portlet box green">
+                                <div class="portlet-title">
+                                    <div class="caption">
+                                        <i class="fa fa-cogs"></i>Mes Contrats </div>
+                                    <div class="tools">
+                                        <a href="javascript:;" class="collapse"> </a>
+                                        <a href="#portlet-config" data-toggle="modal" class="config"> </a>
+                                        <a href="javascript:;" class="reload"> </a>
+                                        <a href="javascript:;" class="remove"> </a>
+                                    </div>
+                                </div>
+                                <div class="portlet-body flip-scroll">
+                                    <table class="table table-bordered table-striped table-condensed flip-content">
+                                        <thead class="flip-content">
+                                            <tr>
+                                                <th width="20%"  align="center"> Numéro Contrat </th>
+                                                
+                                                <th width="20%"  style=" align=center;" >Service </th>
+                                                <th width="20%"  align="center"> Numéro Client  </th>
+                                                <th width="25%"  align="center"> Nom Prénom Client </th>
+                                                <th width="15%"  align="center">Action </th>
+                                                
+                                            </tr>
+                                        </thead>
+                                        <tbody>
+                                            <tr>
+                                                <td> AAC </td>
+                                                <td> AUSTRALIAN AGRICULTURAL COMPANY LIMITED. </td>
+                                               
+                                                <td class="numeric"> -0.01 </td>
+                                                <td class="numeric"> -0.36% </td>
+                         						<td><button  style="background-color: #800020 ; color:white;" type="button" class="btn btn-circle ">Détail</button></td>
+                                                
+                                            </tr>
+                                           
+                                        </tbody>
+                                    </table>
+                                </div>
+                            </div>
+			</div>
+			<!-- END CONTENT BODY -->
+		</div>
+
+	</div>
+	<!-- END CONTAINER -->
+	<!-- BEGIN FOOTER -->
+	<div th:include="/Fragment/footer:: footer"></div>
+
+	<!-- END FOOTER -->
+	<!--[if lt IE 9]>
+<script src="resources/assets/global/plugins/respond.min.js"></script>
+<script src="resources/assets/global/plugins/excanvas.min.js"></script> 
+<![endif]-->
+	<div th:include="/Fragment/resources_js :: js_resources"></div>
 </body>
+
 </html>

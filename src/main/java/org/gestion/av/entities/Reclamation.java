@@ -18,6 +18,8 @@ public class Reclamation implements Serializable {
 	private Date date;
 	private String origine;
 	private String etat;
+	private String typeR;
+	private Long idcon;
 	private String commentaire;
 	private Date dateResolution;
 	private String commentaireResolution;
@@ -42,7 +44,21 @@ public class Reclamation implements Serializable {
 		this.type_reclamation = type_reclamation;
 		this.contrat = contrat;
 	}
-	
+	public String getTypeR() {
+		return typeR;
+	}
+
+	public void setTypeR(String typeR) {
+		this.typeR = typeR;
+	}
+
+	public Long getIdcon() {
+		return idcon;
+	}
+
+	public void setIdcon(Long idcon) {
+		this.idcon = idcon;
+	}
 
 	public Date getDateResolution() {
 		return dateResolution;

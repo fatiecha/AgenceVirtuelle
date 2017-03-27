@@ -1,0 +1,67 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<beans xmlns="http://www.springframework.org/schema/beans"
+	xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xmlns:tx="http://www.springframework.org/schema/tx"
+	xmlns:context="http://www.springframework.org/schema/context"
+	xsi:schemaLocation="http://www.springframework.org/schema/beans http://www.springframework.org/schema/beans/spring-beans.xsd
+		http://www.springframework.org/schema/tx http://www.springframework.org/schema/tx/spring-tx.xsd
+		http://www.springframework.org/schema/context http://www.springframework.org/schema/context/spring-context.xsd">
+
+
+
+	<bean id="clientMetier" class="org.gestion.av.metier.AjoutClientMetier"></bean>
+	<bean id="concliMetier" class="org.gestion.av.metier.AjoutConCliMetier"></bean>
+	<bean id="aboMetier" class="org.gestion.av.metier.AjoutDemAboMetier"></bean>
+	<bean id="reclamationMetier" class="org.gestion.av.metier.AjoutReclamationMetier"></bean>
+	<bean id="connexionMetier" class="org.gestion.av.metier.ConnexionMetier"></bean>
+	<bean id="consulterCompteMetier" class="org.gestion.av.metier.ConsulterCompteMetier"></bean>
+	<bean id="consulterConsommationsMetier" class="org.gestion.av.metier.ConsulterConsommationsMetier"></bean>
+	<bean id="consulterContratsMetier" class="org.gestion.av.metier.ConsulterContratsMetier"></bean>
+	<bean id="consulterDevisMetier" class="org.gestion.av.metier.ConsulterDevisMetier"></bean>
+	<bean id="consulterFacilitesMetier" class="org.gestion.av.metier.ConsulterFacilitesMetier"></bean>
+	<bean id="consulterFacturesMetier" class="org.gestion.av.metier.ConsulterFacturesMetier"></bean>
+	<bean id="consulterReclamationsMetier" class="org.gestion.av.metier.ConsulterReclamationsMetier"></bean>
+
+	<bean id="aboController" class="org.gestion.av.controllers.AboController">
+		<property name="aboMetier" ref="aboMetier"></property>
+	</bean>
+
+	<bean id="clientController" class="org.gestion.av.controllers.ClientController">
+		<property name="clientMetier" ref="clientMetier"></property>
+				<property name="connexionMetier" ref="connexionMetier"></property>
+		
+
+	</bean>
+	<bean id="compteController" class="org.gestion.av.controllers.CompteController">
+				<property name="consulterCompteMetier" ref="consulterCompteMetier"></property>
+
+	</bean>
+
+	<bean id="consommationController" class="org.gestion.av.controllers.ConsommationController">
+		<property name="consulterConsommationsMetier" ref="consulterConsommationsMetier"></property>
+
+	</bean>
+	<bean id="contratController" class="org.gestion.av.controllers.ContratController">
+		<property name="consulterContratsMetier" ref="consulterContratsMetier"></property>
+		<property name="concliMetier" ref="concliMetier"></property>
+	
+	</bean>
+	<bean id="devisController" class="org.gestion.av.controllers.DevisController">
+		<property name="consulterDevisMetier" ref="consulterDevisMetier"></property>
+
+	</bean>
+	<bean id="faciliteController" class="org.gestion.av.controllers.FaciliteController">
+		<property name="consulterFacilitesMetier" ref="consulterFacilitesMetier"></property>
+
+	</bean>
+	<bean id="factureController" class="org.gestion.av.controllers.FactureController">
+		<property name="consulterFacturesMetier" ref="consulterFacturesMetier"></property>
+
+	</bean>
+	<bean id="reclamationController" class="org.gestion.av.controllers.ReclamationController">
+		<property name="reclamationMetier" ref="reclamationMetier"></property>
+		<property name="consulterReclamationsMetier" ref="consulterReclamationsMetier"></property>
+	</bean>
+
+
+
+</beans>

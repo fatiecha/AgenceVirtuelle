@@ -2,7 +2,13 @@ package tools;
 
 import java.io.ByteArrayOutputStream;
 
+import javax.xml.soap.MessageFactory;
+import javax.xml.soap.MimeHeaders;
+import javax.xml.soap.SOAPBody;
+import javax.xml.soap.SOAPElement;
+import javax.xml.soap.SOAPEnvelope;
 import javax.xml.soap.SOAPMessage;
+import javax.xml.soap.SOAPPart;
 import javax.xml.transform.Source;
 import javax.xml.transform.Transformer;
 import javax.xml.transform.TransformerFactory;
@@ -20,7 +26,7 @@ public class PSR {
         transformer.transform(sourceContent, result);
         String s =out.toString();
         s=s.substring(s.indexOf("<ns:return>")+11);
-        s=s.substring(0,s.indexOf("</ns:return>") );
+       s=s.substring(0,s.indexOf("</ns:return>") );
         
 		return s;
     }
@@ -39,4 +45,5 @@ public class PSR {
         int a=Integer.parseInt(s);
 		return a;
     }
+	
 }

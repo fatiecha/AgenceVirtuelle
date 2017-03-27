@@ -25,7 +25,7 @@ public class AjoutReclamationMetier {
 	            SOAPConnection soapConnection = soapConnectionFactory.createConnection();
 
 	            // Send SOAP Message to SOAP Server
-	            String url = "http://localhost:8082/Agence_virtuelle_ws/services/AjouterReclamationWS";
+	            String url = "http://localhost:9091/Agence_virtuelle_ws/services/AjouterReclamationWS";
 	            SOAPMessage soapResponse = soapConnection.call(createSOAPRequest( codec, origine ,type_reclamation, comm), url);
 
 	            // Process the SOAP Response

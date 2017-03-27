@@ -15,8 +15,8 @@ import org.springframework.transaction.annotation.Transactional;
 import tools.PSR;
 @Transactional
 public class AjoutClientMetier {
-	PSR r=new PSR();
-	public  String ajoutClient(String s, String s1, String s2, String s3, String s4, String s5) {
+	static PSR r=new PSR();
+	public static  String ajoutClient(String s, String s1, String s2, String s3, String s4, String s5) {
 		String a = null;
 		 try {
 	            // Create SOAP Connection
@@ -24,7 +24,7 @@ public class AjoutClientMetier {
 	            SOAPConnection soapConnection = soapConnectionFactory.createConnection();
 
 	            // Send SOAP Message to SOAP Server
-	            String url = "http://localhost:8082/Agence_virtuelle_ws/services/AjouterClientWS";
+	            String url = "http://localhost:9091/Agence_virtuelle_ws/services/AjouterClientWS";
 	            SOAPMessage soapResponse = soapConnection.call(createSOAPRequest2(s,s1,s2,s3,s4,s5), url);
 
 	            // Process the SOAP Response
@@ -38,7 +38,7 @@ public class AjoutClientMetier {
 		return a;
 	}
 	
-	private  SOAPMessage createSOAPRequest2(String s, String s1, String s2, String s3, String s4, String s5) throws Exception {
+	private static  SOAPMessage createSOAPRequest2(String s, String s1, String s2, String s3, String s4, String s5) throws Exception {
         MessageFactory messageFactory = MessageFactory.newInstance();
         SOAPMessage soapMessage = messageFactory.createMessage();
         SOAPPart soapPart = soapMessage.getSOAPPart();
@@ -78,5 +78,7 @@ public class AjoutClientMetier {
         return soapMessage;
     }
 	
-	
+	public static void main(String[] args) throws Exception {
+		String s=ajoutClient("xxxxxxxxx", "hitary s1", "hitary", "hitary s3", "hitary s4", "hitary s5");
+	System.out.println(s);}
 }

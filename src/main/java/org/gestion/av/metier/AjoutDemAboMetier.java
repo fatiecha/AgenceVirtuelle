@@ -15,9 +15,9 @@ import org.springframework.transaction.annotation.Transactional;
 import tools.PSR;
 @Transactional
 public class AjoutDemAboMetier {
-	PSR r=new PSR();
+	static PSR r=new PSR();
 
-	public  String ajouterAbo(String tournee, String code_client,String service,String tarif) {
+	public static  String ajouterAbo(String tournee, String code_client,String service,String tarif) {
 		String a = null;
 		 try {
 	            // Create SOAP Connection
@@ -25,7 +25,7 @@ public class AjoutDemAboMetier {
 	            SOAPConnection soapConnection = soapConnectionFactory.createConnection();
 
 	            // Send SOAP Message to SOAP Server
-	            String url = "http://localhost:8082/Agence_virtuelle_ws/services/AjouterDemAboWS";
+	            String url = "http://localhost:9091/Agence_virtuelle_ws/services/AjouterDemAboWS";
 	            SOAPMessage soapResponse = soapConnection.call(createSOAPRequest(tournee,code_client,service,tarif), url);
 
 	            // Process the SOAP Response
@@ -38,7 +38,7 @@ public class AjoutDemAboMetier {
 	        }
 		return a;
 	}
-	private  SOAPMessage createSOAPRequest(String st_tournee, String st_code_client,String st_service,String st_tarif) throws Exception {
+	private static  SOAPMessage createSOAPRequest(String st_tournee, String st_code_client,String st_service,String st_tarif) throws Exception {
         MessageFactory messageFactory = MessageFactory.newInstance();
         SOAPMessage soapMessage = messageFactory.createMessage();
         SOAPPart soapPart = soapMessage.getSOAPPart();
@@ -73,5 +73,7 @@ public class AjoutDemAboMetier {
 
         return soapMessage;
     }
-	
+	public static void main(String[] args) throws Exception {
+		String s=ajouterAbo("1222222222222222","1","1","1");
+	System.out.println(s);}
 }

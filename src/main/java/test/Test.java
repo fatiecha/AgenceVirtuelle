@@ -1,10 +1,10 @@
 package test;
 
-import org.gestion.av.metier.AjoutClientMetier;
-import org.gestion.av.metier.AjoutConCliMetier;
-import org.gestion.av.metier.AjoutDemAboMetier;
-import org.gestion.av.metier.AjoutReclamationMetier;
-import org.gestion.av.metier.ConnexionMetier;
+import java.util.ArrayList;
+import java.util.List;
+
+import org.gestion.av.entities.Reclamation;
+import org.gestion.av.metier.ConsulterReclamationsMetier;
 import org.springframework.context.support.ClassPathXmlApplicationContext;
 
 public class Test {
@@ -12,14 +12,24 @@ public class Test {
 		// pr faire l'injection des dependances
 		ClassPathXmlApplicationContext context = new ClassPathXmlApplicationContext(
 				new String[] { "applicationContext.xml" });
-		
-		AjoutDemAboMetier metier3=(AjoutDemAboMetier)context.getBean("metier3");
-		AjoutConCliMetier metier2=(AjoutConCliMetier)context.getBean("metier2");
-			//int b=metier.seConnecter("az","az");
-			//System.out.println(b);
-		String  a=metier2.ajouterConCli("15","12");
-		System.out.println(a);
+		ConsulterReclamationsMetier metier = (ConsulterReclamationsMetier) context.getBean("metier");
+		List<Reclamation> l = new ArrayList<Reclamation>();
 
+		l = metier.consuterReclamations("1");
+		for (int i = 0; i < l.size(); i++) {
+			Reclamation d = l.get(i);
+
+			System.out.println("com" + d.getCommentaire());
+			System.out.println("org" + d.getOrigine());
+
+			System.out.println("typer" + d.getTypeR());
+			System.out.println("idcon" + d.getIdcon());
+
+			System.out.println("etat" + d.getEtat());
 		
+
+		}
+
 	}
+
 }
