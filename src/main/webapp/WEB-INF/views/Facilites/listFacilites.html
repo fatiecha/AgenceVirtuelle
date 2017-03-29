@@ -3,6 +3,7 @@
 <html xmlns:th="http://www.thymeleaf.org">
 <!--<![endif]-->
 <!-- BEGIN HEAD -->
+<meta charset="UTF-8" />
 <head th:replace="/Fragment/resources_css :: css_resources"></head>
 
 <!-- END HEAD -->
@@ -27,64 +28,161 @@
 			<div class="page-content">
 				<!-- BEGIN PAGE HEADER-->
 
-				<h3 class="page-title">
-					Blank Page Layout <small>blank page layout</small>
-				</h3>
+				<h3 class="page-title">Espace Client</h3>
 				<div class="page-bar">
 					<ul class="page-breadcrumb">
-						<li><i class="icon-home"></i> <a href="index.html">Home</a> <i
+						<li><i class="icon-home"></i> <a href="index.html">Acceuil</a>
+							<i class="fa fa-angle-right"></i></li>
+						<li><a href="#"> Mes facilit√©s</a> <i
 							class="fa fa-angle-right"></i></li>
-						<li><a href="#">Blank Page</a> <i class="fa fa-angle-right"></i>
-						</li>
-						<li><span>Page Layouts</span></li>
+
 					</ul>
 
 				</div>
 				<!-- END PAGE HEADER-->
-			 <div class="portlet box green">
-                                <div class="portlet-title">
-                                    <div class="caption">
-                                        <i class="fa fa-cogs"></i>Mes Contrats </div>
-                                    <div class="tools">
-                                        <a href="javascript:;" class="collapse"> </a>
-                                        <a href="#portlet-config" data-toggle="modal" class="config"> </a>
-                                        <a href="javascript:;" class="reload"> </a>
-                                        <a href="javascript:;" class="remove"> </a>
-                                    </div>
-                                </div>
-                                <div class="portlet-body flip-scroll">
-                                    <table class="table table-bordered table-striped table-condensed flip-content">
-                                        <thead class="flip-content">
-                                            <tr>
-                                                <th width="20%"  align="center"> NumÈro Contrat </th>
-                                                
-                                                <th width="20%"  style=" align=center;" >Service </th>
-                                                <th width="20%"  align="center"> NumÈro Client  </th>
-                                                <th width="25%"  align="center"> Nom PrÈnom Client </th>
-                                                <th width="15%"  align="center">Action </th>
-                                                
-                                            </tr>
-                                        </thead>
-                                        <tbody>
-                                            <tr>
-                                                <td> AAC </td>
-                                                <td> AUSTRALIAN AGRICULTURAL COMPANY LIMITED. </td>
-                                               
-                                                <td class="numeric"> -0.01 </td>
-                                                <td class="numeric"> -0.36% </td>
-                         						<td><button  style="background-color: #800020 ; color:white;" type="button" class="btn btn-circle ">DÈtail</button></td>
-                                                
-                                            </tr>
-                                           
-                                        </tbody>
-                                    </table>
-                                </div>
-                            </div>
-			</div>
-			<!-- END CONTENT BODY -->
-		</div>
+				<div class="tab-pane active" id="tab_0"
+					style="background-color: #17c4bb">
+					<div class="portlet box green" style="background-color: #17c4bb">
+						<div class="portlet-title">
+							<div class="caption">
+								<i class="fa fa-gift"></i>Mes facilit√©s
+							</div>
+							<div class="tools">
+								<a href="javascript:;" class="collapse"> </a> <a
+									href="#portlet-config" data-toggle="modal" class="config">
+								</a> <a href="javascript:;" class="reload"> </a> <a
+									href="javascript:;" class="remove"> </a>
+							</div>
+						</div>
+						<div class="portlet-body form">
+							<!-- BEGIN FORM-->
+							<form action="#" class="form-horizontal">
+								<div class="form-body">
+									<div class="form-group">
+										<label class="col-md-4 control-label">Choisir votre
+											Contrat </label>
+										<div class="col-md-4">
+											<select name="thelist" onChange="combo(this, 'theinput')"
+												class="form-control input-circle">
+												<option value="val1">val1</option>
+											</select>
+										</div>
+									</div>
+									<div class="form-actions">
+										<div class="row">
+											<div class="col-md-offset-4 col-md-9">
+												<button type="submit" class="btn btn-circle green">Valider</button>
+												<button type="button"
+													class="btn btn-circle grey-salsa btn-outline">Annuler</button>
+											</div>
+										</div>
+									</div>
+								</div>
+							</form>
+							<!-- END FORM-->
+						</div>
+					</div>
+				</div>
+				               
+				
+				<div class="portlet box green">
+					<div class="portlet-title">
+						<div class="caption">
+							<i class="fa fa-cogs"></i>Mes Facilit√©s
+						</div>
+						<div class="tools">
+							<a href="javascript:;" class="collapse"> </a> <a
+								href="#portlet-config" data-toggle="modal" class="config"> </a>
+							<a href="javascript:;" class="reload"> </a> <a
+								href="javascript:;" class="remove"> </a>
+						</div>
+					</div>
+					<div class="portlet-body">
+						<div class="table-scrollable">
+							<table class="table table-striped table-bordered table-hover">
+								<thead>
+									<tr>
+										<th width="25%" >Num√©ro Facilit√©</th>
 
+										<th width="25%" >Etat</th>
+										<th width="25%" >Montant</th>
+										<th width="25%" >Action</th>
+
+
+
+									</tr>
+								</thead>
+								<tbody>
+									<tr>
+										<td>AAC</td>
+										<td>AUST</td>
+										<td>AAC</td>
+										<td><button
+												style="background-color: #800020; color: white;"
+												type="button" class="icon-list btn btn-circle ">
+												D√©tail</button></td>
+
+
+
+
+
+									</tr>
+
+								</tbody>
+							</table>
+						</div>
+					</div>
+				</div>
+				<!-- END SAMPLE TABLE PORTLET-->
+				<div class="portlet box green">
+					<div class="portlet-title">
+						<div class="caption">
+							<i class="fa fa-cogs"></i>Mes Ech√©ances
+						</div>
+						<div class="tools">
+							<a href="javascript:;" class="collapse"> </a> <a
+								href="#portlet-config" data-toggle="modal" class="config"> </a>
+							<a href="javascript:;" class="reload"> </a> <a
+								href="javascript:;" class="remove"> </a>
+						</div>
+					</div>
+					<div class="portlet-body">
+						<div class="table-scrollable">
+							<table class="table table-striped table-bordered table-hover">
+								<thead>
+									<tr>
+										<th width="25%" >Ordre</th>
+										<th width="25%" >Date</th>
+										<th width="25%" >Etat</th>
+										<th width="25%" >Montant</th>
+
+
+
+									</tr>
+								</thead>
+								<tbody>
+									<tr>
+										<td>AAC</td>
+										<td>AUST</td>
+										<td>AAC</td>
+										<td>AAC</td>
+
+
+
+
+
+									</tr>
+
+								</tbody>
+							</table>
+						</div>
+					</div>
+				</div>
+			</div>
+		</div>
 	</div>
+	<!-- END CONTENT BODY -->
+
 	<!-- END CONTAINER -->
 	<!-- BEGIN FOOTER -->
 	<div th:include="/Fragment/footer:: footer"></div>

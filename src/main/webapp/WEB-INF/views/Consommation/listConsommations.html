@@ -3,6 +3,7 @@
 <html xmlns:th="http://www.thymeleaf.org">
 <!--<![endif]-->
 <!-- BEGIN HEAD -->
+<meta charset="UTF-8" />
 <head th:replace="/Fragment/resources_css :: css_resources"></head>
 
 <!-- END HEAD -->
@@ -32,9 +33,9 @@
 					<ul class="page-breadcrumb">
 						<li><i class="icon-home"></i> <a href="index.html">Acceuil</a>
 							<i class="fa fa-angle-right"></i></li>
-						<li><a href="#">Liste Consommation</a> <i class="fa fa-angle-right"></i>
-						</li>
-						
+						<li><a href="#">Liste Consommation</a> <i
+							class="fa fa-angle-right"></i></li>
+
 					</ul>
 
 				</div>
@@ -70,9 +71,9 @@
 									<div class="form-actions">
 										<div class="row">
 											<div class="col-md-offset-4 col-md-9">
-												<button type="submit" class="btn btn-circle green">Submit</button>
+												<button type="submit" class="btn btn-circle green">Valider</button>
 												<button type="button"
-													class="btn btn-circle grey-salsa btn-outline">Cancel</button>
+													class="btn btn-circle grey-salsa btn-outline">Annuler</button>
 											</div>
 										</div>
 									</div>
@@ -82,71 +83,125 @@
 						</div>
 					</div>
 				</div>
-				<div class="portlet box green">
-					<div class="portlet-title">
-						<div class="caption">
-							<i class="fa fa-cogs"></i>Liste Consommations
+				<div class="portlet-body form">
+					<div class="tab-content">
+						<div class="tab-pane active" id="portlet_tab_1_1">
+							<div class="skin skin-minimal">
+								<form role="form">
+									<div class="form-body">
+										<div class="form-group">
+
+											<div class="input-group">
+												<div class="icheck-inline">
+													<label>Visualiser mon historique</label> <label> <input
+														type="radio" name="radio1" class="icheck"
+														data-radio="iradio_square-grey" th:value="courbe" />
+														Courbe
+													</label> <label> <input type="radio" name="radio1"
+														class="icheck" data-radio="iradio_square-grey"
+														th:value="barre" /> Barre
+													</label>
+													<div class="form-actions ">
+														<a data-toggle="modal" href="#static">
+															<button type="submit" class="btn btn-circle green "
+																style="margin-left: 100px;">Voir</button>
+														</a>
+													</div>
+
+												</div>
+											</div>
+										</div>
+									</div>
+
+								</form>
+
+								<div id="static" class="modal fade" tabindex="-1"
+									data-backdrop="static" data-keyboard="false">
+									<div class="modal-dialog"
+										style="height: 600px; width: 900px; text-align: center;">
+										<div class="modal-content"
+											style="height: 600px; width: 900px; text-align: center;">
+											<div class="modal-header">
+												<button type="button" class="close" data-dismiss="modal"
+													aria-hidden="true"></button>
+											</div>
+											<div class="modal-body"></div>
+											<img
+												th:src="@{~/av/resources/assets/pages/img/background/333.jpg}"
+												alt="body" />
+										</div>
+									</div>
+								</div>
+							</div>
 						</div>
-						<div class="tools">
-							<a href="javascript:;" class="collapse"> </a> <a
-								href="#portlet-config" data-toggle="modal" class="config"> </a>
-							<a href="javascript:;" class="reload"> </a> <a
-								href="javascript:;" class="remove"> </a>
+
+						<div class="portlet box green">
+							<div class="portlet-title">
+								<div class="caption">
+									<i class="fa fa-cogs"></i>Liste Consommations
+								</div>
+								<div class="tools">
+									<a href="javascript:;" class="collapse"> </a> <a
+										href="#portlet-config" data-toggle="modal" class="config">
+									</a> <a href="javascript:;" class="reload"> </a> <a
+										href="javascript:;" class="remove"> </a>
+								</div>
+							</div>
+							<div class="portlet-body">
+								<div class="table-scrollable">
+									<table class="table table-striped table-bordered table-hover">
+										<thead>
+											<tr>
+												<th>PÃ©riode</th>
+												<th>Date de la relÃ¨ve</th>
+
+												<th>Type lecture</th>
+												<th>Nombre de jours</th>
+
+												<th>Index lu</th>
+												<th>Volume ConsommÃ©</th>
+												<th>Volume FacturÃ©</th>
+
+											</tr>
+										</thead>
+										<tbody>
+											<tr>
+												<td>AAC</td>
+												<td>AUST</td>
+												<td>AAC</td>
+												<td>AUST</td>
+												<td>AAC</td>
+												<td>AUST</td>
+												<td>AAC</td>
+
+
+
+
+											</tr>
+
+										</tbody>
+									</table>
+								</div>
+							</div>
 						</div>
+						<!-- END SAMPLE TABLE PORTLET-->
 					</div>
-					<div class="portlet-body">
-                                    <div class="table-scrollable">
-                                        <table class="table table-striped table-bordered table-hover">
-                                            <thead>
-								<tr>
-									<th  >Période</th>
-									<th  >Date de la relève</th>
-
-									<th >Type lecture</th>
-									<th >Nombre de jours</th>
-
-									<th >Index lu</th>
-									<th >Volume Consommé</th>
-									<th >Volume Facturé</th>
-
-								</tr>
-							</thead>
-							<tbody>
-								<tr>
-									<td>AAC</td>
-									<td>AUST</td>
-									<td>AAC</td>
-									<td>AUST</td>
-									<td>AAC</td>
-									<td>AUST</td>
-									<td>AAC</td>
-
-
-
-
-								</tr>
-
-							</tbody>
-					   </table>
-                                    </div>
-                                </div>
-                            </div>
-                            <!-- END SAMPLE TABLE PORTLET-->
-                        </div>
-                    </div>
-                </div>
+				</div>
+			</div>
 			<!-- END CONTENT BODY -->
-		
-	<!-- END CONTAINER -->
-	<!-- BEGIN FOOTER -->
-	<div th:include="/Fragment/footer:: footer"></div>
 
-	<!-- END FOOTER -->
-	<!--[if lt IE 9]>
+			<!-- END CONTAINER -->
+			<!-- BEGIN FOOTER -->
+			<div th:include="/Fragment/footer:: footer"></div>
+
+			<!-- END FOOTER -->
+			<!--[if lt IE 9]>
 <script src="resources/assets/global/plugins/respond.min.js"></script>
 <script src="resources/assets/global/plugins/excanvas.min.js"></script> 
 <![endif]-->
-	<div th:include="/Fragment/resources_js :: js_resources"></div>
+			<div th:include="/Fragment/resources_js :: js_resources"></div>
+		</div>
+	</div>
 </body>
 
 </html>
