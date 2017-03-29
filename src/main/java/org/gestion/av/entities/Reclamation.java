@@ -19,6 +19,8 @@ public class Reclamation implements Serializable {
 	private String origine;
 	private String etat;
 	private String typeR;
+	private String DateS;
+	private String DateResolutionS;
 	private Long idcon;
 	private String commentaire;
 	private Date dateResolution;
@@ -46,6 +48,23 @@ public class Reclamation implements Serializable {
 	}
 	public String getTypeR() {
 		return typeR;
+	}
+	
+
+	public String getDateResolutionS() {
+		return DateResolutionS;
+	}
+
+	public void setDateResolutionS(String dateResolutionS) {
+		DateResolutionS = dateResolutionS;
+	}
+
+	public String getDateS() {
+		return DateS;
+	}
+
+	public void setDateS(String dateS) {
+		DateS = dateS;
 	}
 
 	public void setTypeR(String typeR) {

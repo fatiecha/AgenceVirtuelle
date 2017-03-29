@@ -22,6 +22,8 @@ public class Consommation implements Serializable {
 	private double index_lu;
 	private double volume_consomme;
 	private double volume_facture;
+	private String type_lec;
+	private String dateS;
 	@ManyToOne
 	@JoinColumn(name="code_type_lecture")
 	private Type_lecture type_lecture;
@@ -31,6 +33,7 @@ public class Consommation implements Serializable {
 	public Consommation() {
 		super();
 	}
+	
 	public Consommation(String periode, Date date_releve, int nbr_jour, double index_lu, double volume_consomme,
 			double volume_facture, Type_lecture lecture, Contrat contrat) {
 		super();
@@ -42,6 +45,21 @@ public class Consommation implements Serializable {
 		this.volume_facture = volume_facture;
 		this.type_lecture = lecture;
 		this.contrat = contrat;
+	}
+	
+	public String getDateS() {
+		return dateS;
+	}
+
+	public void setDateS(String dateS) {
+		this.dateS = dateS;
+	}
+
+	public String getType_lec() {
+		return type_lec;
+	}
+	public void setType_lec(String type_lec) {
+		this.type_lec = type_lec;
 	}
 	public long getId() {
 		return id;

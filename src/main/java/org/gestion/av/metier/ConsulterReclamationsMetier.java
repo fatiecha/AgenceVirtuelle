@@ -41,9 +41,8 @@ import tools.PSR;
 
 @Transactional
 public class ConsulterReclamationsMetier {
-	PSR r = new PSR();
 
-	public static List<Reclamation> consuterReclamations(String id_contrat) {
+	public List<Reclamation> consuterReclamations(String id_contrat) {
 		List<Reclamation> reclamations = new ArrayList<Reclamation>();
 
 		try {
@@ -66,7 +65,7 @@ public class ConsulterReclamationsMetier {
 		return reclamations;
 	}
 
-	private static SOAPMessage createSOAPRequest(String id_contrat) throws Exception {
+	private SOAPMessage createSOAPRequest(String id_contrat) throws Exception {
 		MessageFactory messageFactory = MessageFactory.newInstance();
 		SOAPMessage soapMessage = messageFactory.createMessage();
 		SOAPPart soapPart = soapMessage.getSOAPPart();
@@ -98,7 +97,7 @@ public class ConsulterReclamationsMetier {
 	private static ArrayList<Reclamation> printSOAPResponse(SOAPMessage soapResponse) throws Exception {
 		ArrayList<Reclamation> rslt = new ArrayList<Reclamation>();
 		SimpleDateFormat formatter = new SimpleDateFormat("yyyy-MM-dd");
-		SimpleDateFormat formater = new SimpleDateFormat("dd/MM/yyyy");
+		SimpleDateFormat formater = new SimpleDateFormat("dd-MM-yyyy");
 		try {
 			TransformerFactory transformerFactory = TransformerFactory.newInstance();
 			Transformer transformer = transformerFactory.newTransformer();
@@ -125,35 +124,25 @@ public class ConsulterReclamationsMetier {
 
 			for (int i = 0; i < nodeList.getLength(); i++) {
 
-
 				Reclamation dev = new Reclamation();
 				Node nNode = nodeList.item(i);
 				if (nNode.getNodeType() == Node.ELEMENT_NODE) {
 					Element eElement = (Element) nNode;
 
-					
-					
-					dev.setCommentaire( eElement.getElementsByTagName("ax213:commentaire").item(0)
-							.getTextContent());
-					dev.setCommentaireResolution( eElement
-							.getElementsByTagName("ax213:commentaireResolution").item(0).getTextContent());
-					dev.setOrigine(eElement.getElementsByTagName("ax213:origine").item(0)
-							.getTextContent());
-					dev.setDate(formatter.parse( eElement.getElementsByTagName("ax213:date")
-							.item(0).getTextContent()));
-					String today = formater.format(formatter.parse( eElement.getElementsByTagName("ax213:date")
-							.item(0).getTextContent()));
-					System.out.println("Today : " + today);
-					dev.setDateResolution(formatter.parse( eElement
-							.getElementsByTagName("ax213:dateResolution").item(0).getTextContent()));
-					dev.setEtat( eElement.getElementsByTagName("ax213:etat").item(0)
-							.getTextContent());
-					dev.setIdcon(Long.parseLong( eElement.getElementsByTagName("ax213:contrat")
-							.item(0).getTextContent()));
-					dev.setTypeR( eElement.getElementsByTagName("ax213:type_reclamation").item(0)
-							.getTextContent());
-					dev.setId(Long.parseLong(eElement.getElementsByTagName("ax213:id").item(0)
-							.getTextContent()));
+					dev.setCommentaire(eElement.getElementsByTagName("ax213:commentaire").item(0).getTextContent());
+					dev.setCommentaireResolution(
+							eElement.getElementsByTagName("ax213:commentaireResolution").item(0).getTextContent());
+					dev.setOrigine(eElement.getElementsByTagName("ax213:origine").item(0).getTextContent());
+					dev.setDateS(formater.format(
+							formatter.parse(eElement.getElementsByTagName("ax213:date").item(0).getTextContent())));
+
+					dev.setDateResolutionS(formater.format(formatter
+							.parse(eElement.getElementsByTagName("ax213:dateResolution").item(0).getTextContent())));
+					dev.setEtat(eElement.getElementsByTagName("ax213:etat").item(0).getTextContent());
+					dev.setIdcon(
+							Long.parseLong(eElement.getElementsByTagName("ax213:contrat").item(0).getTextContent()));
+					dev.setTypeR(eElement.getElementsByTagName("ax213:type_reclamation").item(0).getTextContent());
+					dev.setId(Long.parseLong(eElement.getElementsByTagName("ax213:id").item(0).getTextContent()));
 
 					rslt.add(dev);
 
@@ -175,16 +164,4 @@ public class ConsulterReclamationsMetier {
 		return rslt;
 	}
 
-	public static void main(String[] args) throws Exception {
-		List<Reclamation> l = new ArrayList<Reclamation>();
-
-		l = consuterReclamations("1");
-		for (Reclamation d : l) {
-			System.out.println("id=== " + d.getId());
-			System.out.println("origine=== " +d.getOrigine());
-			System.out.println("date=== " +d.getDate());
-			System.out.println("etat=== " +d.getEtat());
-			System.out.println("cmt=== " +d.getCommentaire());
-		}
-	}
 }

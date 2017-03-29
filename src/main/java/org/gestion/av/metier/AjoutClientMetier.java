@@ -16,7 +16,7 @@ import tools.PSR;
 @Transactional
 public class AjoutClientMetier {
 	static PSR r=new PSR();
-	public static  String ajoutClient(String s, String s1, String s2, String s3, String s4, String s5) {
+	public   String ajoutClient(String s, String s1, String s2, String s3, String s4, String s5) {
 		String a = null;
 		 try {
 	            // Create SOAP Connection
@@ -38,7 +38,7 @@ public class AjoutClientMetier {
 		return a;
 	}
 	
-	private static  SOAPMessage createSOAPRequest2(String s, String s1, String s2, String s3, String s4, String s5) throws Exception {
+	private   SOAPMessage createSOAPRequest2(String s, String s1, String s2, String s3, String s4, String s5) throws Exception {
         MessageFactory messageFactory = MessageFactory.newInstance();
         SOAPMessage soapMessage = messageFactory.createMessage();
         SOAPPart soapPart = soapMessage.getSOAPPart();
@@ -78,7 +78,5 @@ public class AjoutClientMetier {
         return soapMessage;
     }
 	
-	public static void main(String[] args) throws Exception {
-		String s=ajoutClient("xxxxxxxxx", "hitary s1", "hitary", "hitary s3", "hitary s4", "hitary s5");
-	System.out.println(s);}
+
 }

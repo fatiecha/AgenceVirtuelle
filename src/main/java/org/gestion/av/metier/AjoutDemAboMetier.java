@@ -17,7 +17,7 @@ import tools.PSR;
 public class AjoutDemAboMetier {
 	static PSR r=new PSR();
 
-	public static  String ajouterAbo(String tournee, String code_client,String service,String tarif) {
+	public   String ajouterAbo(String tournee, String code_client,String service,String tarif) {
 		String a = null;
 		 try {
 	            // Create SOAP Connection
@@ -38,7 +38,7 @@ public class AjoutDemAboMetier {
 	        }
 		return a;
 	}
-	private static  SOAPMessage createSOAPRequest(String st_tournee, String st_code_client,String st_service,String st_tarif) throws Exception {
+	private   SOAPMessage createSOAPRequest(String st_tournee, String st_code_client,String st_service,String st_tarif) throws Exception {
         MessageFactory messageFactory = MessageFactory.newInstance();
         SOAPMessage soapMessage = messageFactory.createMessage();
         SOAPPart soapPart = soapMessage.getSOAPPart();
@@ -73,7 +73,5 @@ public class AjoutDemAboMetier {
 
         return soapMessage;
     }
-	public static void main(String[] args) throws Exception {
-		String s=ajouterAbo("1222222222222222","1","1","1");
-	System.out.println(s);}
+	
 }

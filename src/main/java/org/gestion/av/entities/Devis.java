@@ -17,6 +17,7 @@ public class Devis implements Serializable{
 	private boolean etat;
 	private double montant;
 	private String commentaire;
+	private String dateS;
 	@ManyToOne
 	@JoinColumn(name="code_contrat")
 	private Contrat contrat;
@@ -30,6 +31,13 @@ public class Devis implements Serializable{
 		this.montant = montant;
 		this.commentaire = commentaire;
 		this.contrat = contrat;
+	}
+	
+	public String getDateS() {
+		return dateS;
+	}
+	public void setDateS(String dateS) {
+		this.dateS = dateS;
 	}
 	public long getId() {
 		return id;
