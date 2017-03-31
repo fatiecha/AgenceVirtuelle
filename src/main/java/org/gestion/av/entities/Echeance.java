@@ -17,12 +17,34 @@ public class Echeance implements Serializable{
 	private double montant;
 	private Date dateEcheance;
 	private String etat;
+	private String DateS;
 	@ManyToOne
 	@JoinColumn(name="code_facilite")
 	private Facilite facilite;
 	public int getOrdre() {
 		return ordre;
 	}
+	
+	public Date getDateEcheance() {
+		return dateEcheance;
+	}
+
+	public void setDateEcheance(Date dateEcheance) {
+		this.dateEcheance = dateEcheance;
+	}
+
+	public String getDateS() {
+		return DateS;
+	}
+
+	public void setDateS(String dateS) {
+		DateS = dateS;
+	}
+
+	public String getEtat() {
+		return etat;
+	}
+
 	public void setOrdre(int ordre) {
 		this.ordre = ordre;
 	}

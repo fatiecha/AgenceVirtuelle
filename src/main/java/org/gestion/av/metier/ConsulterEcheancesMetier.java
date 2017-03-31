@@ -29,18 +29,16 @@ import javax.xml.xpath.XPathConstants;
 import javax.xml.xpath.XPathExpressionException;
 import javax.xml.xpath.XPathFactory;
 
-import org.gestion.av.entities.Facture;
-import org.springframework.transaction.annotation.Transactional;
+import org.gestion.av.entities.Echeance;
 import org.w3c.dom.Document;
 import org.w3c.dom.Element;
 import org.w3c.dom.Node;
 import org.w3c.dom.NodeList;
 import org.xml.sax.SAXException;
 
-@Transactional
-public class ConsulterFacturesMetier {
-	public List<Facture> consuterFacture(String id_contrat) {
-		List<Facture> Factures = new ArrayList<Facture>();
+public class ConsulterEcheancesMetier {
+	public ArrayList<Echeance> consuterEcheance(String id_fac) {
+		List<Echeance> Echeances = new ArrayList<Echeance>();
 		String s = null;
 		try {
 			// Create SOAP Connection
@@ -48,20 +46,21 @@ public class ConsulterFacturesMetier {
 			SOAPConnection soapConnection = soapConnectionFactory.createConnection();
 
 			// Send SOAP Message to SOAP Server
-			String url = "http://localhost:9091/Agence_virtuelle_ws/services/ConsulterFacturesWS";
-			SOAPMessage soapResponse = soapConnection.call(createSOAPRequest(id_contrat), url);
+			String url = "http://localhost:9091/Agence_virtuelle_ws/services/ConsulterFacilitesWS";
+			SOAPMessage soapResponse = soapConnection.call(createSOAPRequest(id_fac), url);
 
 			// Process the SOAP Response
-			Factures = printSOAPResponse(soapResponse);
+			Echeances = printSOAPResponse(soapResponse);
+			
 			soapConnection.close();
 		} catch (Exception e) {
 			System.err.println("Error occurred while sending SOAP Request to Server");
 			e.printStackTrace();
 		}
-		return Factures;
+		return (ArrayList<Echeance>) Echeances;
 	}
 
-	private SOAPMessage createSOAPRequest(String id_contrat) throws Exception {
+	private SOAPMessage createSOAPRequest(String id_fac) throws Exception {
 		MessageFactory messageFactory = MessageFactory.newInstance();
 		SOAPMessage soapMessage = messageFactory.createMessage();
 		SOAPPart soapPart = soapMessage.getSOAPPart();
@@ -73,12 +72,12 @@ public class ConsulterFacturesMetier {
 		envelope.addNamespaceDeclaration("a0", serverURI);
 
 		SOAPBody soapBody = envelope.getBody();
-		SOAPElement soapBodyElem = soapBody.addChildElement("consulterFacture", "a0");
+		SOAPElement soapBodyElem = soapBody.addChildElement("consulterEcheance", "a0");
 		SOAPElement soapBodyElem1 = soapBodyElem.addChildElement("id", "a0");
-		soapBodyElem1.addTextNode(id_contrat);
+		soapBodyElem1.addTextNode(id_fac);
 
 		MimeHeaders headers = soapMessage.getMimeHeaders();
-		headers.addHeader("SOAPAction", serverURI + "consulterFacture");
+		headers.addHeader("SOAPAction", serverURI + "consulterEcheance");
 
 		soapMessage.saveChanges();
 
@@ -90,8 +89,8 @@ public class ConsulterFacturesMetier {
 		return soapMessage;
 	}
 
-	private static ArrayList<Facture> printSOAPResponse(SOAPMessage soapResponse) throws Exception {
-		ArrayList<Facture> rslt = new ArrayList<Facture>();
+	private static ArrayList<Echeance> printSOAPResponse(SOAPMessage soapResponse) throws Exception {
+		ArrayList<Echeance> rslt = new ArrayList<Echeance>();
 		SimpleDateFormat formatter = new SimpleDateFormat("yyyy-MM-dd");
 		SimpleDateFormat formater = new SimpleDateFormat("dd-MM-yyyy");
 		try {
@@ -115,31 +114,22 @@ public class ConsulterFacturesMetier {
 
 			XPath xPath = XPathFactory.newInstance().newXPath();
 
-			String expression = "/Envelope/Body/consulterFactureResponse/return";
+			String expression = "/Envelope/Body/consulterEcheanceResponse/return";
 			NodeList nodeList = (NodeList) xPath.compile(expression).evaluate(doc, XPathConstants.NODESET);
 
 			for (int i = 0; i < nodeList.getLength(); i++) {
 
-				Facture dev = new Facture();
+				Echeance dev = new Echeance();
 				Node nNode = nodeList.item(i);
 				if (nNode.getNodeType() == Node.ELEMENT_NODE) {
 					Element eElement = (Element) nNode;
 
-
+					dev.setMontant(Double
+							.parseDouble(eElement.getElementsByTagName("ax29:montant").item(0).getTextContent()));
 					dev.setDateS(formater.format(
-							formatter.parse(eElement.getElementsByTagName("ax211:date").item(0).getTextContent())));
-					dev.setDate_exigibiliteS(formater.format(
-							formatter.parse(eElement.getElementsByTagName("ax211:date_exigibilite").item(0).getTextContent())));
-					dev.setMontant(
-							Double.parseDouble(eElement.getElementsByTagName("ax211:montant").item(0).getTextContent()));
-
-					dev.setId(Long.parseLong(eElement.getElementsByTagName("ax211:id").item(0).getTextContent()));
-					dev.setEtat(
-							Boolean.parseBoolean(eElement.getElementsByTagName("ax211:etat").item(0).getTextContent()));
-					dev.setPeriode(eElement.getElementsByTagName("ax211:periode").item(0).getTextContent());
-					dev.setSolde(
-							Double.parseDouble(eElement.getElementsByTagName("ax211:solde").item(0).getTextContent()));
-					dev.setType_fac(eElement.getElementsByTagName("ax211:type_facture").item(0).getTextContent());
+							formatter.parse(eElement.getElementsByTagName("ax29:dateEcheance").item(0).getTextContent())));
+					dev.setOrdre(Integer.parseInt(eElement.getElementsByTagName("ax29:ordre").item(0).getTextContent()));
+					dev.setEtat(eElement.getElementsByTagName("ax29:etat").item(0).getTextContent());
 
 					rslt.add(dev);
 
@@ -161,5 +151,4 @@ public class ConsulterFacturesMetier {
 		return rslt;
 	}
 
-	
 }

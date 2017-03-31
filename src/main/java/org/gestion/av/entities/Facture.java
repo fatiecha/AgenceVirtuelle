@@ -18,6 +18,9 @@ public class Facture implements Serializable{
 	@GeneratedValue(strategy=GenerationType.IDENTITY)
 	private long id;
 	private String periode;
+	private String dateS;
+	private String type_fac;
+	private String date_exigibiliteS;
 	private double montant;
 	private double solde;
 	private boolean etat;
@@ -51,6 +54,30 @@ public class Facture implements Serializable{
 		this.date = date;
 		this.type_facture = type_facture;
 		this.contrat = contrat;
+	}
+
+	public String getType_fac() {
+		return type_fac;
+	}
+
+	public void setType_fac(String type_fac) {
+		this.type_fac = type_fac;
+	}
+
+	public String getDateS() {
+		return dateS;
+	}
+
+	public void setDateS(String dateS) {
+		this.dateS = dateS;
+	}
+
+	public String getDate_exigibiliteS() {
+		return date_exigibiliteS;
+	}
+
+	public void setDate_exigibiliteS(String date_exigibiliteS) {
+		this.date_exigibiliteS = date_exigibiliteS;
 	}
 
 	public long getId() {

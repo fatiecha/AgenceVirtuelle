@@ -21,12 +21,15 @@ public class Contrat implements Serializable {
 	private Long id;
 	private Date date;
 	private String service;
+	private Long idClient;
+	private String NomClient;
 	private String CIN;
 	private String agence;
 	private String branchement;
 	private String etat;
 	private String numCompteur;
 	private Date datePoseCompteur;
+	private String datePoseCompteurS;
 
 	@OneToOne
 	private Demande_abonnement demande_abonnement;
@@ -182,6 +185,30 @@ public class Contrat implements Serializable {
 
 	public String getEtat() {
 		return etat;
+	}
+
+	public Long getIdClient() {
+		return idClient;
+	}
+
+	public void setIdClient(Long idClient) {
+		this.idClient = idClient;
+	}
+
+	public String getNomClient() {
+		return NomClient;
+	}
+
+	public void setNomClient(String nomClient) {
+		NomClient = nomClient;
+	}
+
+	public String getDatePoseCompteurS() {
+		return datePoseCompteurS;
+	}
+
+	public void setDatePoseCompteurS(String datePoseCompteurS) {
+		this.datePoseCompteurS = datePoseCompteurS;
 	}
 
 	public Contrat(Date date, String service, String cIN, String agence, String branchement, String etat,

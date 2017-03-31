@@ -40,9 +40,8 @@ import org.xml.sax.SAXException;
 
 @Transactional
 public class ConsulterContratsMetier {
-	public List<Contrat> consuterContrats(String id_contrat) {
+	public ArrayList<Contrat> consuterContrats(String id_client) {
 		List<Contrat> Contrats = new ArrayList<Contrat>();
-
 		try {
 			// Create SOAP Connection
 			SOAPConnectionFactory soapConnectionFactory = SOAPConnectionFactory.newInstance();
@@ -50,7 +49,7 @@ public class ConsulterContratsMetier {
 
 			// Send SOAP Message to SOAP Server
 			String url = "http://localhost:9091/Agence_virtuelle_ws/services/ConsulterContratsWS";
-			SOAPMessage soapResponse = soapConnection.call(createSOAPRequest(id_contrat), url);
+			SOAPMessage soapResponse = soapConnection.call(createSOAPRequest(id_client), url);
 
 			// Process the SOAP Response
 			Contrats = printSOAPResponse(soapResponse);
@@ -60,7 +59,7 @@ public class ConsulterContratsMetier {
 			System.err.println("Error occurred while sending SOAP Request to Server");
 			e.printStackTrace();
 		}
-		return Contrats;
+		return (ArrayList<Contrat>) Contrats;
 	}
 
 	private SOAPMessage createSOAPRequest(String id_client) throws Exception {
@@ -75,12 +74,12 @@ public class ConsulterContratsMetier {
 		envelope.addNamespaceDeclaration("a0", serverURI);
 
 		SOAPBody soapBody = envelope.getBody();
-		SOAPElement soapBodyElem = soapBody.addChildElement("consulterContrat", "a0");
+		SOAPElement soapBodyElem = soapBody.addChildElement("consulterContrats", "a0");
 		SOAPElement soapBodyElem1 = soapBodyElem.addChildElement("id", "a0");
 		soapBodyElem1.addTextNode(id_client);
 
 		MimeHeaders headers = soapMessage.getMimeHeaders();
-		headers.addHeader("SOAPAction", serverURI + "consulterContrat");
+		headers.addHeader("SOAPAction", serverURI + "consulterContrats");
 
 		soapMessage.saveChanges();
 
@@ -117,7 +116,7 @@ public class ConsulterContratsMetier {
 
 			XPath xPath = XPathFactory.newInstance().newXPath();
 
-			String expression = "/Envelope/Body/consulterContratResponse/return";
+			String expression = "/Envelope/Body/consulterContratsResponse/return";
 			NodeList nodeList = (NodeList) xPath.compile(expression).evaluate(doc, XPathConstants.NODESET);
 
 			for (int i = 0; i < nodeList.getLength(); i++) {
@@ -127,7 +126,12 @@ public class ConsulterContratsMetier {
 				if (nNode.getNodeType() == Node.ELEMENT_NODE) {
 					Element eElement = (Element) nNode;
 
-					
+					dev.setId(Long.parseLong(eElement.getElementsByTagName("ax25:id").item(0).getTextContent()));
+					dev.setIdClient(
+							Long.parseLong(eElement.getElementsByTagName("ax25:idClient").item(0).getTextContent()));
+					dev.setService(eElement.getElementsByTagName("ax25:service").item(0).getTextContent());
+					dev.setNomClient(eElement.getElementsByTagName("ax25:nomClient").item(0).getTextContent());
+
 					rslt.add(dev);
 
 				}
