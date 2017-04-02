@@ -31,8 +31,8 @@ public class ClientController {
 	public String index(Model model) {
 		return "ajoutClient";
 	}
-	@RequestMapping(value = "/connexion")
+	@RequestMapping(value = "/login")
 	public String index2(Model model) {
-		return "connexion";
+		return "login";
 	}
 }

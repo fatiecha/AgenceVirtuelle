@@ -45,7 +45,7 @@ public class DetailContratMetier {
 			SOAPConnection soapConnection = soapConnectionFactory.createConnection();
 
 			// Send SOAP Message to SOAP Server
-			String url = "http://localhost:9091/Agence_virtuelle_ws/services/ConsulterContratsWS";
+			String url = "http://localhost:9091/Agence_virtuelle_ws/services/DetailContratWS";
 			
 			SOAPMessage soapResponse = soapConnection.call(createSOAPRequest(id_contrat), url);
 
@@ -73,7 +73,7 @@ public class DetailContratMetier {
 
 		SOAPBody soapBody = envelope.getBody();
 		SOAPElement soapBodyElem = soapBody.addChildElement("detailContrat", "a0");
-		SOAPElement soapBodyElem1 = soapBodyElem.addChildElement("id_cta_st", "a0");
+		SOAPElement soapBodyElem1 = soapBodyElem.addChildElement("id", "a0");
 		soapBodyElem1.addTextNode(id_contrat);
 
 		MimeHeaders headers = soapMessage.getMimeHeaders();

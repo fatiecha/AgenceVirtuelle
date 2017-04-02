@@ -30,6 +30,8 @@ public class Contrat implements Serializable {
 	private String numCompteur;
 	private Date datePoseCompteur;
 	private String datePoseCompteurS;
+	private String tarif;
+	private String tournee;
 
 	@OneToOne
 	private Demande_abonnement demande_abonnement;
@@ -223,6 +225,22 @@ public class Contrat implements Serializable {
 		this.numCompteur = numCompteur;
 		this.datePoseCompteur = datePoseCompteur;
 		this.demande_abonnement = demande_abonnement;
+	}
+
+	public String getTarif() {
+		return tarif;
+	}
+
+	public void setTarif(String tarif) {
+		this.tarif = tarif;
+	}
+
+	public String getTournee() {
+		return tournee;
+	}
+
+	public void setTournee(String tournee) {
+		this.tournee = tournee;
 	}
 
 

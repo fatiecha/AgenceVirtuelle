@@ -40,7 +40,7 @@ import org.xml.sax.SAXException;
 
 @Transactional
 public class ConsulterContratsMetier {
-	public ArrayList<Contrat> consuterContrats(String id_client) {
+	public ArrayList<Contrat> consulterContrats(String id_client) {
 		List<Contrat> Contrats = new ArrayList<Contrat>();
 		try {
 			// Create SOAP Connection
@@ -131,6 +131,15 @@ public class ConsulterContratsMetier {
 							Long.parseLong(eElement.getElementsByTagName("ax25:idClient").item(0).getTextContent()));
 					dev.setService(eElement.getElementsByTagName("ax25:service").item(0).getTextContent());
 					dev.setNomClient(eElement.getElementsByTagName("ax25:nomClient").item(0).getTextContent());
+					dev.setBranchement(eElement.getElementsByTagName("ax25:branchement").item(0).getTextContent());
+					dev.setAgence(eElement.getElementsByTagName("ax25:agence").item(0).getTextContent());
+					dev.setEtat(eElement.getElementsByTagName("ax25:etat").item(0).getTextContent());
+					dev.setNumCompteur(eElement.getElementsByTagName("ax25:numCompteur").item(0).getTextContent());
+					dev.setDatePoseCompteurS(formater.format(formatter
+							.parse(eElement.getElementsByTagName("ax25:datePoseCompteur").item(0).getTextContent())));
+
+					// dev.setTarif(eElement.getElementsByTagName("ax25:tarif").item(0).getTextContent());
+					// dev.setTournee(eElement.getElementsByTagName("ax25:tournee").item(0).getTextContent());
 
 					rslt.add(dev);
 
