@@ -7,7 +7,7 @@
 		http://www.springframework.org/schema/context http://www.springframework.org/schema/context/spring-context.xsd">
 
 
-
+	<bean id="countFIMetier" class="org.gestion.av.metier.CountFIMetier"></bean>
 	<bean id="clientMetier" class="org.gestion.av.metier.AjoutClientMetier"></bean>
 	<bean id="concliMetier" class="org.gestion.av.metier.AjoutConCliMetier"></bean>
 	<bean id="aboMetier" class="org.gestion.av.metier.AjoutDemAboMetier"></bean>
@@ -21,6 +21,10 @@
 	<bean id="consulterEcheancesMetier" class="org.gestion.av.metier.ConsulterEcheancesMetier"></bean>
 	<bean id="consulterFacturesMetier" class="org.gestion.av.metier.ConsulterFacturesMetier"></bean>
 	<bean id="consulterReclamationsMetier" class="org.gestion.av.metier.ConsulterReclamationsMetier"></bean>
+	<bean id="daoService" class="org.gestion.av.daoImpl.AgenceDaoImpl"></bean>
+	<bean id="agenceServiceImpl" class="org.gestion.av.serviceImpl.AgenceServiceImpl">
+		<property name="dao" ref="daoService"></property>
+	</bean>
 
 	<bean id="aboController" class="org.gestion.av.controllers.AboController">
 		<property name="aboMetier" ref="aboMetier"></property>
@@ -29,6 +33,7 @@
 	<bean id="clientController" class="org.gestion.av.controllers.ClientController">
 		<property name="clientMetier" ref="clientMetier"></property>
 		<property name="connexionMetier" ref="connexionMetier"></property>
+		<property name="countFIMetier" ref="countFIMetier"></property>
 
 
 	</bean>
@@ -61,6 +66,8 @@
 	<bean id="reclamationController" class="org.gestion.av.controllers.ReclamationController">
 		<property name="reclamationMetier" ref="reclamationMetier"></property>
 		<property name="consulterReclamationsMetier" ref="consulterReclamationsMetier"></property>
+		<property name="consulterContratsMetier" ref="consulterContratsMetier"></property>
+		<property name="agenceService" ref="agenceServiceImpl"></property>
 	</bean>
 
 

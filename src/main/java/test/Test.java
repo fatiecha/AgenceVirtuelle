@@ -20,48 +20,55 @@ import org.gestion.av.metier.ConsulterEcheancesMetier;
 import org.gestion.av.metier.ConsulterFacilitesMetier;
 import org.gestion.av.metier.ConsulterFacturesMetier;
 import org.gestion.av.metier.ConsulterReclamationsMetier;
+import org.gestion.av.metier.CountFIMetier;
+import org.gestion.av.service.IAgenceService;
+import org.gestion.av.serviceImpl.AgenceServiceImpl;
 import org.springframework.context.support.ClassPathXmlApplicationContext;
 
 
 public class Test {
 	public static void main(String[] args) {
 		// pr faire l'injection des dependances
+		
+		
+
 		ClassPathXmlApplicationContext context = new ClassPathXmlApplicationContext(
 				new String[] { "applicationContext.xml" });
-		 ConsulterDevisMetier metierd = (ConsulterDevisMetier)
-		 context.getBean("consulterDevisMetier");
+		IAgenceService metier= (IAgenceService) context.getBean("agenceServiceImpl");
 
-		 ConsulterFacturesMetier metierf = (ConsulterFacturesMetier)
-		 context.getBean("consulterFacturesMetier");
-		
-		 ConsulterFacilitesMetier metierfa = (ConsulterFacilitesMetier)
-		 context.getBean("consulterFacilitesMetier");
-		
-		 ConsulterContratsMetier metierc = (ConsulterContratsMetier)
-				 context.getBean("consulterContratsMetier");
-		 ConsulterReclamationsMetier metierr = (ConsulterReclamationsMetier)
-				 context.getBean("consulterReclamationsMetier");
-		 ConsulterCompteMetier metiercp = (ConsulterCompteMetier)
-				 context.getBean("consulterCompteMetier");
-		 ConsulterEcheancesMetier metiere = (ConsulterEcheancesMetier)
-				 context.getBean("consulterEcheancesMetier");
-		 ConsulterConsommationsMetier metierco = (ConsulterConsommationsMetier)
-		 context.getBean("consulterConsommationsMetier");
-		 
+		 CountFIMetier metierd = (CountFIMetier) context.getBean("countFIMetier");
+//
+//		 ConsulterFacturesMetier metierf = (ConsulterFacturesMetier)
+//		 context.getBean("consulterFacturesMetier");
+//		
+//		 ConsulterFacilitesMetier metierfa = (ConsulterFacilitesMetier)
+//		 context.getBean("consulterFacilitesMetier");
+//		
+//		 ConsulterContratsMetier metierc = (ConsulterContratsMetier)
+//				 context.getBean("consulterContratsMetier");
+//		 ConsulterReclamationsMetier metierr = (ConsulterReclamationsMetier)
+//				 context.getBean("consulterReclamationsMetier");
+//		 ConsulterCompteMetier metiercp = (ConsulterCompteMetier)
+//				 context.getBean("consulterCompteMetier");
+//		 ConsulterEcheancesMetier metiere = (ConsulterEcheancesMetier)
+//				 context.getBean("consulterEcheancesMetier");
+//		 ConsulterConsommationsMetier metierco = (ConsulterConsommationsMetier)
+//		 context.getBean("consulterConsommationsMetier");
+//		 
 //		 ConnexionMetier aj = (ConnexionMetier)
 //				 context.getBean("connexionMetier");
 //long s=aj.seConnecter("az", "az");
 //System.out.println(s);
-		List<Contrat> l = new ArrayList<Contrat>();
-		l= metierc.consulterContrats("1");
-		for(int i=0;i<l.size();i++){
-			Contrat t=l.get(i);
-			System.out.println(t.getBranchement());
-			System.out.println("datec "+t.getDatePoseCompteurS());
-			System.out.println("nom "+t.getNomClient());
-
-System.out.println("hhhhhhhh");
-		}
+//		List<Contrat> l = new ArrayList<Contrat>();
+//		l= metierc.consulterContrats("1");
+//		for(int i=0;i<l.size();i++){
+//			Contrat t=l.get(i);
+//			System.out.println(t.getBranchement());
+//			System.out.println("datec "+t.getDatePoseCompteurS());
+//			System.out.println("nom "+t.getNomClient());
+//
+//System.out.println("hhhhhhhh");
+//		}
 		
 		
 		
@@ -86,5 +93,8 @@ System.out.println("hhhhhhhh");
 //			System.out.println(t.getTarif());
 //
 //		}
+		
+		System.out.println(metierd.countFactureImpayees("1"));
+		
 }
 }
