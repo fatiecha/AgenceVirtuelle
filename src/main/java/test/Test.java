@@ -20,7 +20,6 @@ import org.gestion.av.metier.ConsulterEcheancesMetier;
 import org.gestion.av.metier.ConsulterFacilitesMetier;
 import org.gestion.av.metier.ConsulterFacturesMetier;
 import org.gestion.av.metier.ConsulterReclamationsMetier;
-import org.gestion.av.metier.DetailContratMetier;
 import org.springframework.context.support.ClassPathXmlApplicationContext;
 
 

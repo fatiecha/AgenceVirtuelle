@@ -17,10 +17,10 @@ public class AboController {
 		this.aboMetier = pAboMetier;
 	}
 
-	@RequestMapping(value = "/")
-	public String index(Model model) {
-		return "Abonnement/ajoutAbo";
-	}
+//	@RequestMapping(value = "/")
+//	public String index(Model model) {
+//		return "Abonnement/ajoutAbo";
+//	}
 	@RequestMapping(value = "/Abonnement/ajoutAbo")
 	public String index2(Model model) {
 		return "Abonnement/ajoutAbo";
