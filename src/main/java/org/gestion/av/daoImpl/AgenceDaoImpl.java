@@ -1,5 +1,6 @@
 package org.gestion.av.daoImpl;
 
+import java.util.ArrayList;
 import java.util.List;
 
 import javax.persistence.EntityManager;
@@ -18,14 +19,22 @@ public class AgenceDaoImpl implements IAgenceDao {
 
 	@Override
 	public List<Type_reclamation> getlibelleTypeReclamation() {
-		Query req=em.createQuery("select * from type_reclamation");
-		return req.getResultList();	}
+		
 
+	Query query = em.createQuery("select n from Type_reclamation n ");
+    List<Type_reclamation> Type_reclamations = new ArrayList<>();
+
+    Type_reclamations = query.getResultList();
+    return Type_reclamations;
+	
+	}
+	
 	@Override
 	public Client getClient(long idClient) {
-		Query req=em.createQuery("select * from client where id =:x");
+		Query req=em.createQuery("select nom,prenom,CIN from Client where id =:x");
 		req.setParameter("x", idClient);
 		return (Client) req.getSingleResult();
 	}
+	
+	}
 
-}

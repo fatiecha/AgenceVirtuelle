@@ -20,6 +20,7 @@ public class Contrat implements Serializable {
 	@GeneratedValue(strategy = GenerationType.IDENTITY)
 	private Long id;
 	private Date date;
+	private String numero;
 	private String service;
 	private Long idClient;
 	private String NomClient;
@@ -71,6 +72,14 @@ public class Contrat implements Serializable {
 	}
 
 	
+
+	public String getNumero() {
+		return numero;
+	}
+
+	public void setNumero(String numero) {
+		this.numero = numero;
+	}
 
 	public Demande_abonnement getDemande_abonnement() {
 		return demande_abonnement;
@@ -213,10 +222,11 @@ public class Contrat implements Serializable {
 		this.datePoseCompteurS = datePoseCompteurS;
 	}
 
-	public Contrat(Date date, String service, String cIN, String agence, String branchement, String etat,
+	public Contrat(Date date, String numero, String service, String cIN, String agence, String branchement, String etat,
 			String numCompteur, Date datePoseCompteur, Demande_abonnement demande_abonnement) {
 		super();
 		this.date = date;
+		this.numero=numero;
 		this.service = service;
 		CIN = cIN;
 		this.agence = agence;

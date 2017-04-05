@@ -3,6 +3,8 @@ package test;
 import java.util.ArrayList;
 import java.util.List;
 
+import org.gestion.av.daoImpl.AgenceDaoImpl;
+import org.gestion.av.entities.Client;
 import org.gestion.av.entities.Compte;
 import org.gestion.av.entities.Consommation;
 import org.gestion.av.entities.Contrat;
@@ -25,76 +27,71 @@ import org.gestion.av.service.IAgenceService;
 import org.gestion.av.serviceImpl.AgenceServiceImpl;
 import org.springframework.context.support.ClassPathXmlApplicationContext;
 
-
 public class Test {
 	public static void main(String[] args) {
 		// pr faire l'injection des dependances
-		
-		
 
 		ClassPathXmlApplicationContext context = new ClassPathXmlApplicationContext(
 				new String[] { "applicationContext.xml" });
-		IAgenceService metier= (IAgenceService) context.getBean("agenceServiceImpl");
+		IAgenceService metier = (IAgenceService) context.getBean("agenceServiceImpl");
 
-		 CountFIMetier metierd = (CountFIMetier) context.getBean("countFIMetier");
-//
-//		 ConsulterFacturesMetier metierf = (ConsulterFacturesMetier)
-//		 context.getBean("consulterFacturesMetier");
-//		
-//		 ConsulterFacilitesMetier metierfa = (ConsulterFacilitesMetier)
-//		 context.getBean("consulterFacilitesMetier");
-//		
-//		 ConsulterContratsMetier metierc = (ConsulterContratsMetier)
-//				 context.getBean("consulterContratsMetier");
-//		 ConsulterReclamationsMetier metierr = (ConsulterReclamationsMetier)
-//				 context.getBean("consulterReclamationsMetier");
-//		 ConsulterCompteMetier metiercp = (ConsulterCompteMetier)
-//				 context.getBean("consulterCompteMetier");
-//		 ConsulterEcheancesMetier metiere = (ConsulterEcheancesMetier)
-//				 context.getBean("consulterEcheancesMetier");
-//		 ConsulterConsommationsMetier metierco = (ConsulterConsommationsMetier)
-//		 context.getBean("consulterConsommationsMetier");
-//		 
-//		 ConnexionMetier aj = (ConnexionMetier)
-//				 context.getBean("connexionMetier");
-//long s=aj.seConnecter("az", "az");
-//System.out.println(s);
-//		List<Contrat> l = new ArrayList<Contrat>();
-//		l= metierc.consulterContrats("1");
-//		for(int i=0;i<l.size();i++){
-//			Contrat t=l.get(i);
-//			System.out.println(t.getBranchement());
-//			System.out.println("datec "+t.getDatePoseCompteurS());
-//			System.out.println("nom "+t.getNomClient());
-//
-//System.out.println("hhhhhhhh");
-//		}
+		CountFIMetier metierd = (CountFIMetier) context.getBean("countFIMetier");
+		//
+		// ConsulterFacturesMetier metierf = (ConsulterFacturesMetier)
+		// context.getBean("consulterFacturesMetier");
+		//
+		// ConsulterFacilitesMetier metierfa = (ConsulterFacilitesMetier)
+		// context.getBean("consulterFacilitesMetier");
+		//
+		 ConsulterContratsMetier metierc = (ConsulterContratsMetier)
+		 context.getBean("consulterContratsMetier");
+		// ConsulterReclamationsMetier metierr = (ConsulterReclamationsMetier)
+		// context.getBean("consulterReclamationsMetier");
+		// ConsulterCompteMetier metiercp = (ConsulterCompteMetier)
+		// context.getBean("consulterCompteMetier");
+		// ConsulterEcheancesMetier metiere = (ConsulterEcheancesMetier)
+		// context.getBean("consulterEcheancesMetier");
+		// ConsulterConsommationsMetier metierco =
+		// (ConsulterConsommationsMetier)
+		// context.getBean("consulterConsommationsMetier");
+		//
+		// ConnexionMetier aj = (ConnexionMetier)
+		// context.getBean("connexionMetier");
+		// long s=aj.seConnecter("az", "az");
+		// System.out.println(s);
+		 List<Contrat> l = new ArrayList<Contrat>();
+		 l= metierc.consulterContrats("1");
+		 for(int i=0;i<l.size();i++){
+		 Contrat t=l.get(i);
+		 System.out.println(t.getNumero());
 		
-		
-		
-		
-		
-		
-		
-		
-//		System.out.println("agence "+l.getAgence());
-//		System.out.println("branchement "+l.getBranchement());
-//		System.out.println("date "+l.getDatePoseCompteurS());
-//			System.out.println("===============");
-//		public static void main(String[] args) {
-//			DetailContratWS c=new DetailContratWS();
-//			Contrat t=new Contrat();
-//			t=c.detailContrat("2");
-//			System.out.println(t.getDatePoseCompteur());
-//			System.out.println(t.getAgence());
-//			System.out.println(t.getBranchement());
-//			System.out.println(t.getEtat());
-//			System.out.println(t.getTournee());
-//			System.out.println(t.getTarif());
-//
-//		}
-		
-		System.out.println(metierd.countFactureImpayees("1"));
-		
-}
+		 }
+
+//		System.out.println("hhhhhhh");
+		// List<Type_reclamation> l=new ArrayList<>();
+		// l=a.getlibelleTypeReclamation();
+		// for(int i=0;i<l.size();i++){
+		// Type_reclamation r=l.get(i);
+//		// System.out.println(r.getLibelle());
+//		Client c = metier.getClient(1l);
+//		System.out.println(c.getNom());
+	}
+
+	// System.out.println("agence "+l.getAgence());
+	// System.out.println("branchement "+l.getBranchement());
+	// System.out.println("date "+l.getDatePoseCompteurS());
+	// System.out.println("===============");
+	// public static void main(String[] args) {
+	// DetailContratWS c=new DetailContratWS();
+	// Contrat t=new Contrat();
+	// t=c.detailContrat("2");
+	// System.out.println(t.getDatePoseCompteur());
+	// System.out.println(t.getAgence());
+	// System.out.println(t.getBranchement());
+	// System.out.println(t.getEtat());
+	// System.out.println(t.getTournee());
+	// System.out.println(t.getTarif());
+	//
+	// }
+
 }

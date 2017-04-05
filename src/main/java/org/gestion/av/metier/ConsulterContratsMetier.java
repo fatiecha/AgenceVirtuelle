@@ -129,6 +129,7 @@ public class ConsulterContratsMetier {
 					dev.setId(Long.parseLong(eElement.getElementsByTagName("ax25:id").item(0).getTextContent()));
 					dev.setIdClient(
 							Long.parseLong(eElement.getElementsByTagName("ax25:idClient").item(0).getTextContent()));
+					dev.setNumero(eElement.getElementsByTagName("ax25:numero").item(0).getTextContent());
 					dev.setService(eElement.getElementsByTagName("ax25:service").item(0).getTextContent());
 					dev.setNomClient(eElement.getElementsByTagName("ax25:nomClient").item(0).getTextContent());
 					dev.setBranchement(eElement.getElementsByTagName("ax25:branchement").item(0).getTextContent());
