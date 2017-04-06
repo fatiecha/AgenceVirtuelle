@@ -17,7 +17,7 @@ import tools.PSR;
 @Transactional
 public class AjoutConCliMetier {
 	PSR r=new PSR();
-	public  String ajouterConCli(String id1, String id2) {
+	public  String ajouterConCli(String id1, String id2,String service) {
 		String a = null;
 		 try {
 	            // Create SOAP Connection
@@ -26,7 +26,7 @@ public class AjoutConCliMetier {
 
 	            // Send SOAP Message to SOAP Server
 	            String url = "http://localhost:9091/Agence_virtuelle_ws/services/AjouterConCliWS";
-	            SOAPMessage soapResponse = soapConnection.call(createSOAPRequest( id1, id2), url);
+	            SOAPMessage soapResponse = soapConnection.call(createSOAPRequest( id1, id2,service), url);
 
 	            // Process the SOAP Response
 	           a= r.printSOAPResponseString(soapResponse);
@@ -38,7 +38,7 @@ public class AjoutConCliMetier {
 	        }
 		return a;
 	}
-	private  SOAPMessage createSOAPRequest(String id1, String id2) throws Exception {
+	private  SOAPMessage createSOAPRequest(String id1, String id2,String service) throws Exception {
         MessageFactory messageFactory = MessageFactory.newInstance();
         SOAPMessage soapMessage = messageFactory.createMessage();
         SOAPPart soapPart = soapMessage.getSOAPPart();
@@ -56,6 +56,9 @@ public class AjoutConCliMetier {
         soapBodyElem1.addTextNode(id1);
         SOAPElement soapBodyElem2 = soapBodyElem.addChildElement("id2", "example");
         soapBodyElem2.addTextNode(id2);
+        SOAPElement soapBodyElem3 = soapBodyElem.addChildElement("service", "example");
+        soapBodyElem3.addTextNode(service);
+        
         
 
         MimeHeaders headers = soapMessage.getMimeHeaders();

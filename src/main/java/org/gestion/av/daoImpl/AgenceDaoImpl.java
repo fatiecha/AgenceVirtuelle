@@ -31,7 +31,7 @@ public class AgenceDaoImpl implements IAgenceDao {
 	
 	@Override
 	public Client getClient(long idClient) {
-		Query req=em.createQuery("select nom,prenom,CIN from Client where id =:x");
+		Query req=em.createQuery("select c from Client c  where id =:x");
 		req.setParameter("x", idClient);
 		return (Client) req.getSingleResult();
 	}

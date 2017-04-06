@@ -51,8 +51,13 @@ public class ReclamationController {
 	
 @RequestMapping(value = "/creerReclamation",method=RequestMethod.POST)
 public String SaveReclamation(@ModelAttribute(value = "reclamation") Reclamation r, Model model ) {
-	reclamationMetier.ajouterReclamation(Long.toString(r.getIdcon()), r.getOrigine(), r.getTypeR(), r.getCommentaire());
-	return "redirect:/Reclamation/listReclamations";
+	String msg =null;
+	//msg=reclamationMetier.ajouterReclamation(Long.toString(r.getIdcon()), r.getOrigine(), r.getTypeR(), r.getCommentaire());
+	msg=reclamationMetier.ajouterReclamation(Long.toString(r.getIdcon()),r.getOrigine(), r.getTypeR(), r.getCommentaire());
+if(msg.equals("oui")){
+		return "redirect:/Reclamation/listReclamations";
+	}
+	return "Reclamation/ajoutReclamation";
 }
 
 }

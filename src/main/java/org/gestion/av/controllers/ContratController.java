@@ -1,29 +1,47 @@
 package org.gestion.av.controllers;
 
+import org.gestion.av.models.ConCliModel;
 import org.gestion.av.metier.AjoutConCliMetier;
 import org.gestion.av.metier.ConsulterContratsMetier;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
+import org.springframework.web.bind.annotation.ModelAttribute;
 import org.springframework.web.bind.annotation.RequestMapping;
+import org.springframework.web.bind.annotation.RequestMethod;
+
+@RequestMapping(value = "/Contrat")
 
 @Controller
 public class ContratController {
-private ConsulterContratsMetier consulterContratsMetier;
-private AjoutConCliMetier concliMetier ;
+	private ConsulterContratsMetier consulterContratsMetier;
+	private AjoutConCliMetier concliMetier;
+
 	public void setConcliMetier(AjoutConCliMetier concliMetier) {
-	this.concliMetier = concliMetier;
-}
+		this.concliMetier = concliMetier;
+	}
 
 	public void setConsulterContratsMetier(ConsulterContratsMetier consulterContratsMetier) {
 		this.consulterContratsMetier = consulterContratsMetier;
 	}
 
-	@RequestMapping(value = "/Contrat/listContrats")
+	@RequestMapping(value = "/listContrats")
 	public String index(Model model) {
 		return "Contrat/listContrats";
 	}
-	@RequestMapping(value = "/Contrat/association")
-	public String index2(Model model) {
+
+	@RequestMapping(value = "/association", method = RequestMethod.GET)
+	public String ajoutContratClient(Model model) {
+		model.addAttribute("concli", new ConCliModel());
+		return "Contrat/association";
+	}
+
+	@RequestMapping(value = "/associerContratClient", method = RequestMethod.POST)
+	public String SaveContratClient(@ModelAttribute(value = "concli") ConCliModel c, Model model) {
+		String msg = null;
+		msg = concliMetier.ajouterConCli(c.getIdContrat(), "30", c.getService());
+		if (msg.equals("oui")) {
+			return "redirect:/Contrat/listContrats";
+		}
 		return "Contrat/association";
 	}
 }

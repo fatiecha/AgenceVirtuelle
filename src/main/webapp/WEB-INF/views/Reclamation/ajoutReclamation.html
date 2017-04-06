@@ -62,23 +62,21 @@
 									<div class="form-group">
 										<label class="col-md-4 control-label">Numéro Contrat </label>
 										<div class="col-md-4">
-											<select th:field="*{idcon}" class="form-control" required="required" >
+											<select th:field="*{idcon}" class="form-control input-circle" required="required" >
 												<option th:each="contrat : ${contrats}"
 													th:value="${contrat.id}"
-													th:text="${contrat.id} - ${contrat.service}"></option>
+													th:text="${contrat.id}" ></option>
 																	</select>
-											<select name="thelist" class="form-control input-circle">
-												<option value="val1">val1</option>
-											</select>
+											
 										</div>
 									</div>
 									<div class="form-group">
 										<label class="col-md-4 control-label">Type Réclamation
 										</label>
 										<div class="col-md-4">
-											<select th:field="*{typeR}" class="form-control input-circle"> 
+											<select th:field="*{typeR}" class="form-control input-circle" > 
 												<option th:each="type : ${typesReclamation}"
-													th:value="${type.id}"
+													th:value="${type.libelle}"
 													th:text="${type.libelle}"></option>
 											</select>
 										</div>
@@ -88,9 +86,9 @@
 										<div class="col-md-4">
 											<select th:field="*{origine}"
 												class="form-control input-circle">
-												<option value="reclamation_client">Réclamation
+												<option value="reclamation client">Réclamation
 													Client</option>
-												<option value="information_client">Information
+												<option value="information client">Information
 													Client</option>
 											</select>
 										</div>
@@ -107,7 +105,7 @@
 										<div class="row">
 											<div class="col-md-offset-4 col-md-9">
 												<button type="submit" class="btn btn-circle "
-													style="background-color: #3b5998; color: white;">Soumettre</button>
+													style="background-color: #3b5998; color: white;" >Soumettre</button>
 												<button type="button"
 													class="btn btn-circle grey-salsa btn-outline">Annuler</button>
 											</div>

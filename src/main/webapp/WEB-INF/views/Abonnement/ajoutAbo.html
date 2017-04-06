@@ -57,29 +57,38 @@
 						</div>
 						<div class="portlet-body form">
 							<!-- BEGIN FORM-->
-							<form action="#" class="form-horizontal">
+							<form action="#" class="form-horizontal"
+								th:action="@{/Abonnement/creerAbonnement}" method="post"
+								th:object="${abonnement}">
 								<div class="form-body">
 									<div class="form-group">
 										<label class="col-md-4 control-label">Numéro tournée</label>
 										<div class="col-md-4">
 											<input type="text" class="form-control input-circle"
-												placeholder="Enter text" />
+												placeholder="Enter text" th:field="*{tournee}"/>
 										</div>
 									</div>
 									<div class="form-group">
-										<label class="col-md-4 control-label">Service </label>
+										<label class="col-md-4 control-label">Service</label>
 										<div class="col-md-4">
-											 <select name="thelist" onChange="combo(this, 'theinput')" class="form-control input-circle">
-                                    <option value="eau">Eau</option>
-                                    <option value="basse_tension">Basse Tension</option>
-                                </select>
+											<select th:field="*{service}"
+												class="form-control input-circle">
+												<option value="eau">Eau
+													</option>
+												<option value="basse tension ">Basse tension</option>
+											</select>
 										</div>
 									</div>
+									
 									<div class="form-group">
 										<label class="col-md-4 control-label">Tarif</label>
 										<div class="col-md-4">
-											<input type="text" class="form-control input-circle"
-												placeholder="Enter text" />
+											<select th:field="*{tarif}"
+												class="form-control input-circle">
+												<option value="tarif1">tarif1
+													</option>
+												<option value="tarif2 ">tarif2</option>
+											</select>
 										</div>
 									</div>
 

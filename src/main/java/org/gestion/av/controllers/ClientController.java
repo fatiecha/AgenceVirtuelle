@@ -19,8 +19,7 @@ public class ClientController {
 	private CountFIMetier countFIMetier;
 	private AjoutClientMetier clientMetier;
 	private ConnexionMetier connexionMetier;
-//	private IAgenceService agenceService;
-	
+	private IAgenceService agenceService;
 
 	public void setConnexionMetier(ConnexionMetier connexionMetier) {
 		this.connexionMetier = connexionMetier;
@@ -34,34 +33,41 @@ public class ClientController {
 		this.clientMetier = clientMetier;
 	}
 
-	@RequestMapping(value = "/inscriptionClient",method=RequestMethod.GET)
+	public void setAgenceService(IAgenceService agenceService) {
+		this.agenceService = agenceService;
+	}
+
+	@RequestMapping(value = "/inscriptionClient", method = RequestMethod.GET)
 	public String ajoutClient(Model model) {
-		model.addAttribute("client",new Client());
+		model.addAttribute("client", new Client());
 		return "inscriptionClient";
 	}
-		
-	@RequestMapping(value = "/sinscrire",method=RequestMethod.POST)
-	public String Save(@ModelAttribute(value = "client") Client c, Model model ) {
-		clientMetier.ajoutClient(c.getNom(),c.getPrenom(),c.getCIN(),c.getEmail(),c.getTel(),c.getMDP());
+
+	@RequestMapping(value = "/sinscrire", method = RequestMethod.POST)
+	public String Save(@ModelAttribute(value = "client") Client c, Model model) {
+		clientMetier.ajoutClient(c.getNom(), c.getPrenom(), c.getCIN(), c.getEmail(), c.getTel(), c.getMDP());
 		return "redirect:/Contrat/association";
 	}
-		
+
 	@RequestMapping(value = "/seConnecter")
-	public String login(@ModelAttribute(value = "client") Client cli, Model model ) {
+	public String login(@ModelAttribute(value = "client") Client cli, Model model) {
 		int a;
-		a=connexionMetier.seConnecter(cli.getEmail(), cli.getMDP());
-		if(a!=0){
-//			agenceService.getClient(a);
+		a = connexionMetier.seConnecter(cli.getEmail(), cli.getMDP());
+		if (a != 0) {
+			// agenceService.getClient(a);
 			return "redirect:/Contrat/association";
 		}
 		return "connexionClient";
 	}
-	@RequestMapping(value = "/",method=RequestMethod.GET)
+
+	@RequestMapping(value = "/", method = RequestMethod.GET)
 	public String seConnecter(Model model) {
-		model.addAttribute("client",new Client());
-		model.addAttribute("countModel",countFIMetier.countFactureImpayees("1"));
+		 model.addAttribute("client",new Client());
+		//model.addAttribute("client", agenceService.getClient(1));
+		model.addAttribute("countModel", countFIMetier.countFactureImpayees("1"));
 		return "connexionClient";
 	}
+
 	@RequestMapping(value = "/updateClient")
 	public String index2(Model model) {
 		return "updateClient";

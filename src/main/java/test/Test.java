@@ -13,6 +13,8 @@ import org.gestion.av.entities.Echeance;
 import org.gestion.av.entities.Facilite;
 import org.gestion.av.entities.Facture;
 import org.gestion.av.entities.Reclamation;
+import org.gestion.av.entities.Type_reclamation;
+import org.gestion.av.metier.AjoutConCliMetier;
 import org.gestion.av.metier.ConnexionMetier;
 import org.gestion.av.metier.ConsulterCompteMetier;
 import org.gestion.av.metier.ConsulterConsommationsMetier;
@@ -34,8 +36,9 @@ public class Test {
 		ClassPathXmlApplicationContext context = new ClassPathXmlApplicationContext(
 				new String[] { "applicationContext.xml" });
 		IAgenceService metier = (IAgenceService) context.getBean("agenceServiceImpl");
-
+	   
 		CountFIMetier metierd = (CountFIMetier) context.getBean("countFIMetier");
+//		metier.getlibelleTypeReclamation();
 		//
 		// ConsulterFacturesMetier metierf = (ConsulterFacturesMetier)
 		// context.getBean("consulterFacturesMetier");
@@ -59,24 +62,26 @@ public class Test {
 		// context.getBean("connexionMetier");
 		// long s=aj.seConnecter("az", "az");
 		// System.out.println(s);
-		 List<Contrat> l = new ArrayList<Contrat>();
-		 l= metierc.consulterContrats("1");
-		 for(int i=0;i<l.size();i++){
-		 Contrat t=l.get(i);
-		 System.out.println(t.getNumero());
-		
-		 }
+//		 List<Contrat> l = new ArrayList<Contrat>();
+//		 l= metierc.consulterContrats("1");
+//		 for(int i=0;i<l.size();i++){
+//		 Contrat t=l.get(i);
+//		 System.out.println(t.getNumero());
+//		
+//		 }
 
 //		System.out.println("hhhhhhh");
-		// List<Type_reclamation> l=new ArrayList<>();
-		// l=a.getlibelleTypeReclamation();
-		// for(int i=0;i<l.size();i++){
-		// Type_reclamation r=l.get(i);
-//		// System.out.println(r.getLibelle());
+//		 List<Type_reclamation> l=new ArrayList<>();
+//		 l=metier.getlibelleTypeReclamation();
+//		 for(int i=0;i<l.size();i++){
+//		 Type_reclamation r=l.get(i);
+//		 System.out.println(r.getLibelle());
 //		Client c = metier.getClient(1l);
 //		System.out.println(c.getNom());
-	}
+//	}
+		 AjoutConCliMetier metieroo = (AjoutConCliMetier) context.getBean("concliMetier");
 
+System.out.println(metieroo.ajouterConCli("18", "30", "eaugggg"));
 	// System.out.println("agence "+l.getAgence());
 	// System.out.println("branchement "+l.getBranchement());
 	// System.out.println("date "+l.getDatePoseCompteurS());
@@ -93,5 +98,5 @@ public class Test {
 	// System.out.println(t.getTarif());
 	//
 	// }
-
+	}
 }
