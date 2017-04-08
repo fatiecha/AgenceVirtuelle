@@ -1,11 +1,18 @@
 package org.gestion.av.controllers;
 
+import java.util.ArrayList;
+import java.util.HashMap;
+import java.util.List;
+import java.util.Map;
+
+import javax.servlet.http.HttpServletRequest;
+import javax.servlet.http.HttpSession;
+
 import org.gestion.av.entities.Client;
 import org.gestion.av.metier.AjoutClientMetier;
 import org.gestion.av.metier.ConnexionMetier;
 import org.gestion.av.metier.CountFIMetier;
 import org.gestion.av.service.IAgenceService;
-import org.gestion.av.serviceImpl.AgenceServiceImpl;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
@@ -46,30 +53,41 @@ public class ClientController {
 	@RequestMapping(value = "/sinscrire", method = RequestMethod.POST)
 	public String Save(@ModelAttribute(value = "client") Client c, Model model) {
 		clientMetier.ajoutClient(c.getNom(), c.getPrenom(), c.getCIN(), c.getEmail(), c.getTel(), c.getMDP());
-		return "redirect:/Contrat/association";
+		return "redirect:/Contrat/listContrats";
 	}
 
 	@RequestMapping(value = "/seConnecter")
-	public String login(@ModelAttribute(value = "client") Client cli, Model model) {
-		int a;
-		a = connexionMetier.seConnecter(cli.getEmail(), cli.getMDP());
-		if (a != 0) {
-			// agenceService.getClient(a);
-			return "redirect:/Contrat/association";
+	public String login(HttpServletRequest pRequest, Model model,@ModelAttribute(value = "client") Client cli) {
+		
+		HttpSession pSession = pRequest.getSession();
+		int idClientConnecte;
+		
+		idClientConnecte = connexionMetier.seConnecter(cli.getEmail(), cli.getMDP());
+		if (idClientConnecte != 0) {
+			pSession.setAttribute("nbrFacture",countFIMetier.countFactureImpayees(Long.toString(idClientConnecte)));
+			pSession.setAttribute("clientConnecte", agenceService.getClient(idClientConnecte));
+			return "redirect:/Contrat/listContrats";
 		}
+		
 		return "connexionClient";
 	}
 
 	@RequestMapping(value = "/", method = RequestMethod.GET)
 	public String seConnecter(Model model) {
 		 model.addAttribute("client",new Client());
-		//model.addAttribute("client", agenceService.getClient(1));
-		model.addAttribute("countModel", countFIMetier.countFactureImpayees("1"));
 		return "connexionClient";
 	}
 
-	@RequestMapping(value = "/updateClient")
-	public String index2(Model model) {
+	@RequestMapping(value = "/updateClient", method = RequestMethod.GET)
+	public String updateClient(Model model) {
+		model.addAttribute("client", new Client());
 		return "updateClient";
 	}
+	@RequestMapping(value = "/majClient", method = RequestMethod.POST)
+	public String majClient(@ModelAttribute(value = "client") Client c, Model model) {
+		agenceService.updateClient(new Client(13l,c.getNom(),c.getPrenom(),"ii","ii",c.getTel(),c.getMDP()));
+		return "redirect:/Contrat/association";
+	}
+	
+	
 }

@@ -65,7 +65,7 @@
 											<select th:field="*{idcon}" class="form-control input-circle" required="required" >
 												<option th:each="contrat : ${contrats}"
 													th:value="${contrat.id}"
-													th:text="${contrat.id}" ></option>
+													th:text="${contrat.numero +'-' +contrat.service}" ></option>
 																	</select>
 											
 										</div>

@@ -15,26 +15,27 @@ public class AgenceDaoImpl implements IAgenceDao {
 	@PersistenceContext
 	private EntityManager em;
 
-	
-
 	@Override
 	public List<Type_reclamation> getlibelleTypeReclamation() {
-		
 
-	Query query = em.createQuery("select n from Type_reclamation n ");
-    List<Type_reclamation> Type_reclamations = new ArrayList<>();
+		Query query = em.createQuery("select n from Type_reclamation n ");
+		List<Type_reclamation> Type_reclamations = new ArrayList<>();
 
-    Type_reclamations = query.getResultList();
-    return Type_reclamations;
-	
+		Type_reclamations = query.getResultList();
+		return Type_reclamations;
+
 	}
-	
+
 	@Override
 	public Client getClient(long idClient) {
-		Query req=em.createQuery("select c from Client c  where id =:x");
+		Query req = em.createQuery("select c from Client c  where id =:x");
 		req.setParameter("x", idClient);
 		return (Client) req.getSingleResult();
 	}
-	
-	}
 
+	@Override
+	public void updateClient(Client c) {
+		em.merge(c);
+
+	}
+}

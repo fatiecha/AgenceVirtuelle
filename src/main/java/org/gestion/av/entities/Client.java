@@ -104,5 +104,15 @@ public class Client implements Serializable{
 		this.tel = tel;
 		MDP = mDP;
 	}
-	
+	public Client(long id, String nom, String prenom, String cIN, String email, String tel, String mDP) {
+		super();
+		this.id = id;
+		this.nom = nom;
+		this.prenom = prenom;
+		CIN = cIN;
+		this.email = email;
+		this.tel = tel;
+		MDP = mDP;
+	}
+
 	}

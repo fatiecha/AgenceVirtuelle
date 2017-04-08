@@ -57,13 +57,13 @@
 						</div>
 						<div class="portlet-body form">
 							<!-- BEGIN FORM-->
-							<form action="#" class="form-horizontal">
+							<form action="#" class="form-horizontal" th:action="@{/majClient}" method="post" th:object="${client}">
 								<div class="form-body">
 									<div class="form-group">
 										<label class="col-md-4 control-label">Nom</label>
 										<div class="col-md-4">
 											<input type="text" class="form-control input-circle"
-												placeholder="Enter text" />
+												placeholder="Enter text" th:field="*{nom}" required="required" />
 										</div>
 									</div>
 									
@@ -71,33 +71,33 @@
 										<label class="col-md-4 control-label">Prénom</label>
 										<div class="col-md-4">
 											<input type="text" class="form-control input-circle"
-												placeholder="Enter text" />
+												placeholder="Enter text" th:field="*{prenom}" required="required" />
 										</div>
 									</div>
 									<div class="form-group">
 										<label class="col-md-4 control-label">N° Téléphone</label>
 										<div class="col-md-4">
 											<input type="text" class="form-control input-circle"
-												placeholder="Enter text" />
+												placeholder="Enter text" th:field="*{tel}" required="required" />
 										</div>
 									</div>
 									<div class="form-group">
 										<label class="col-md-4 control-label">Ancien Mot de passe</label>
 										<div class="col-md-4">
-											<input type="text" class="form-control input-circle"
-												placeholder="Enter text" />
+											<input type="password" class="form-control input-circle"
+												placeholder="Enter text" th:field="*{MDP}" required="required" />
 										</div>
 										</div>
-										<div class="form-group">
+<!-- 										<div class="form-group"> -->
 										
-										<label class="col-md-4 control-label ">Nouveau mot de passe</label>
-										<div class="col-md-4">
-											<input type="text" class="form-control input-circle"
-												placeholder="Enter text" />
+<!-- 										<label class="col-md-4 control-label ">Nouveau mot de passe</label> -->
+<!-- 										<div class="col-md-4"> -->
+<!-- 											<input type="password" class="form-control input-circle" -->
+<!-- 												placeholder="Enter text" th:field="*{MDP}" required="required" /> -->
 												
-										</div>
+<!-- 										</div> -->
 									
-									</div>
+<!-- 									</div> -->
 
 									<div class="form-actions">
 										<div class="row">

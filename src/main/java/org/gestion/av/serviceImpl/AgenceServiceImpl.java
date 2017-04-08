@@ -29,4 +29,12 @@ public class AgenceServiceImpl implements IAgenceService {
 
 		return dao.getClient(idClient);
 	}
+
+
+
+	@Override
+	public void updateClient(Client c) {
+		
+		 dao.updateClient(c);
+	}
 }

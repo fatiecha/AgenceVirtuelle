@@ -71,26 +71,17 @@
 									<div class="form-group">
 										<label class="col-md-4 control-label">Service</label>
 										<div class="col-md-4">
-											<select th:field="*{service}"
-												class="form-control input-circle">
-												<option value="eau">Eau
-													</option>
-												<option value="basse tension ">Basse tension</option>
+											<select th:field="*{service}" class="form-control input-circle"
+												required="required" >
+												<option th:each="service : ${services}"
+													th:value="${service}"
+													th:text="${service}"></option>
 											</select>
+
 										</div>
 									</div>
 									
-									<div class="form-group">
-										<label class="col-md-4 control-label">Tarif</label>
-										<div class="col-md-4">
-											<select th:field="*{tarif}"
-												class="form-control input-circle">
-												<option value="tarif1">tarif1
-													</option>
-												<option value="tarif2 ">tarif2</option>
-											</select>
-										</div>
-									</div>
+									<div id="tarifDivAjax"></div>
 
 									<div class="form-actions">
 										<div class="row">
@@ -121,7 +112,26 @@
 <script src="resources/assets/global/plugins/excanvas.min.js"></script> 
 <![endif]-->
 		<div th:include="/Fragment/resources_js :: js_resources"></div>
+		
 	</div>
+	<script type="text/javascript">
+	
+	$(document).ready(function() {
+		$("#service").on("change",function(){
+			$.post("chargerTarif",//l url de la fct de traitement
+				{
+				service:$(this).val()//on envoie les parametres par lesquells on veut travailler dans le controller
+				},
+				function(data, status) {
+					if (status == "success") {
+						$("#tarifDivAjax").html(data);
+					}
+				}			
+			)
+		});
+		});
+		
+		</script>
 </body>
 
 </html>

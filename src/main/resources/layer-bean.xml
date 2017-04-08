@@ -7,7 +7,6 @@
 		http://www.springframework.org/schema/context http://www.springframework.org/schema/context/spring-context.xsd">
 	
 	
-	<bean id="agenceService" class="org.gestion.av.serviceImpl.AgenceServiceImpl"></bean>
 	<bean id="countFIMetier" class="org.gestion.av.metier.CountFIMetier"></bean>
 	<bean id="clientMetier" class="org.gestion.av.metier.AjoutClientMetier"></bean>
 	<bean id="concliMetier" class="org.gestion.av.metier.AjoutConCliMetier"></bean>
@@ -35,7 +34,7 @@
 		<property name="clientMetier" ref="clientMetier"></property>
 		<property name="connexionMetier" ref="connexionMetier"></property>
 		<property name="countFIMetier" ref="countFIMetier"></property>
-		<property name="agenceService" ref="agenceService"></property>
+		<property name="agenceService" ref="agenceServiceImpl"></property>
 
 
 	</bean>

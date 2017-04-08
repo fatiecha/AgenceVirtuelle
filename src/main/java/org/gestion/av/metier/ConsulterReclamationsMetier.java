@@ -135,9 +135,10 @@ public class ConsulterReclamationsMetier {
 					dev.setOrigine(eElement.getElementsByTagName("ax213:origine").item(0).getTextContent());
 					dev.setDateS(formater.format(
 							formatter.parse(eElement.getElementsByTagName("ax213:date").item(0).getTextContent())));
-
-					dev.setDateResolutionS(formater.format(formatter
-							.parse(eElement.getElementsByTagName("ax213:dateResolution").item(0).getTextContent())));
+					dev.setDateResolutionS(formater.format(
+							formatter.parse(eElement.getElementsByTagName("ax213:dateResolution").item(0).getTextContent())));
+//					dev.setDateResolutionS(formater.format(formatter
+//							.parse(eElement.getElementsByTagName("ax213:dateResolution").item(0).getTextContent())));
 					dev.setEtat(eElement.getElementsByTagName("ax213:etat").item(0).getTextContent());
 					dev.setIdcon(
 							Long.parseLong(eElement.getElementsByTagName("ax213:contrat").item(0).getTextContent()));

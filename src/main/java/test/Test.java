@@ -36,7 +36,7 @@ public class Test {
 		ClassPathXmlApplicationContext context = new ClassPathXmlApplicationContext(
 				new String[] { "applicationContext.xml" });
 		IAgenceService metier = (IAgenceService) context.getBean("agenceServiceImpl");
-	   
+	   metier.updateClient(new Client(6l,"nom","prenom","cin","email","tel","mdp"));
 		CountFIMetier metierd = (CountFIMetier) context.getBean("countFIMetier");
 //		metier.getlibelleTypeReclamation();
 		//
@@ -48,8 +48,8 @@ public class Test {
 		//
 		 ConsulterContratsMetier metierc = (ConsulterContratsMetier)
 		 context.getBean("consulterContratsMetier");
-		// ConsulterReclamationsMetier metierr = (ConsulterReclamationsMetier)
-		// context.getBean("consulterReclamationsMetier");
+		 ConsulterReclamationsMetier metierr = (ConsulterReclamationsMetier)
+		 context.getBean("consulterReclamationsMetier");
 		// ConsulterCompteMetier metiercp = (ConsulterCompteMetier)
 		// context.getBean("consulterCompteMetier");
 		// ConsulterEcheancesMetier metiere = (ConsulterEcheancesMetier)
@@ -71,17 +71,17 @@ public class Test {
 //		 }
 
 //		System.out.println("hhhhhhh");
-//		 List<Type_reclamation> l=new ArrayList<>();
-//		 l=metier.getlibelleTypeReclamation();
-//		 for(int i=0;i<l.size();i++){
-//		 Type_reclamation r=l.get(i);
-//		 System.out.println(r.getLibelle());
+		 List<Reclamation> l=new ArrayList<>();
+		 l=metierr.consuterReclamations("1");
+		 for(int i=0;i<l.size();i++){
+			 Reclamation r=l.get(i);
+		 System.out.println(r.getDateS());
 //		Client c = metier.getClient(1l);
 //		System.out.println(c.getNom());
 //	}
-		 AjoutConCliMetier metieroo = (AjoutConCliMetier) context.getBean("concliMetier");
-
-System.out.println(metieroo.ajouterConCli("18", "30", "eaugggg"));
+//		 AjoutConCliMetier metieroo = (AjoutConCliMetier) context.getBean("concliMetier");
+//
+//System.out.println(metieroo.ajouterConCli("18", "30", "eaugggg"));
 	// System.out.println("agence "+l.getAgence());
 	// System.out.println("branchement "+l.getBranchement());
 	// System.out.println("date "+l.getDatePoseCompteurS());
@@ -99,4 +99,4 @@ System.out.println(metieroo.ajouterConCli("18", "30", "eaugggg"));
 	//
 	// }
 	}
-}
+}}

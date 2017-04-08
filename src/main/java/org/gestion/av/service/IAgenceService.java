@@ -10,4 +10,6 @@ public interface IAgenceService {
 	public List<Type_reclamation> getlibelleTypeReclamation();
 
 	public Client getClient(long idClient);
+	public void updateClient(Client c );
+
 }

@@ -6,14 +6,49 @@
 <meta charset="UTF-8" />
 <head th:replace="/Fragment/resources_css :: css_resources"></head>
 <style>
-           .portlet-title{
-	background-color:#3b5998;
+.portlet-title {
+	background-color: #3b5998;
 }
-        </style>
+</style>
 <!-- END HEAD -->
 
 <body
 	class="page-header-fixed page-sidebar-closed-hide-logo page-container-bg-solid">
+	<div id="static" class="modal fade" tabindex="-1"
+		data-backdrop="static" data-keyboard="false">
+		<div class="modal-dialog"
+			style="height: 300px; width: 900px; text-align: center;">
+			<div class="modal-content"
+				style="height: 300px; width: 300px; text-align: center;">
+				<div class="modal-header">
+					<button type="button" class="close" data-dismiss="modal"
+						aria-hidden="true"></button>
+				</div>
+				<div class="modal-body">
+
+					<table>
+						<tbody>
+							<tr><td>Num Compteur</td>
+								<td><span id="numCompteur"></span></td>
+								<td>Date pose compteur</td>
+								<td><span id="datePoseCompteurS"></span></td>
+							</tr>
+							<tr><td>Branchement</td>
+								<td><span id="branchement"></span></td>
+								<td>	Agence</td>
+								<td><span id="agence"></span></td>
+							</tr>
+							<tr><td>Etat</td>
+								<td><span id="etat"></span></td>
+							</tr>
+						</tbody>
+					</table>
+
+				</div>
+
+			</div>
+		</div>
+	</div>
 	<!-- BEGIN HEADER -->
 	<div th:include="/Fragment/header :: entete"></div>
 
@@ -45,7 +80,7 @@
 				</div>
 				<!-- END PAGE HEADER-->
 				<div class="portlet box green">
-					<div class="portlet-title" style="background-color:#3b5998;">
+					<div class="portlet-title" style="background-color: #3b5998;">
 						<div class="caption">
 							<i class="fa fa-cogs"></i>Mes Contrats
 						</div>
@@ -71,69 +106,44 @@
 								</tr>
 							</thead>
 							<tbody>
-								<tr>
-									<td>AAC</td>
-									<td>AUSTRALIAN AGRICULTURAL COMPANY LIMITED.</td>
+								<tr th:each="contrat : ${contrats}">
+									<td th:text="${contrat.numero}"></td>
+									<td th:text="${contrat.service}"></td>
+									<td th:text="${contrat.idClient}"></td>
+									<td th:text="${contrat.NomClient}"></td>
 
-									<td class="numeric">-0.01</td>
-									<td class="numeric">-0.36%</td>
-									<td><button
-											style=" background-color:#3b5998; color:white;"
-											type="button" class="icon-list btn btn-circle "> Détail</button></td>
-
+									<td><div class="form-actions ">
+											<a data-toggle="modal" href="#static">
+												<button style="background-color: #3b5998; color: white;"
+													type="button" class="icon-list btn btn-circle "
+													th:onclick="'detailContrat(\'' + ${contrat.numCompteur} +'\',\' ' +
+													 ${contrat.datePoseCompteurS}+'\',\' ' + ${contrat.branchement} + '\',\' '+ ${contrat.agence} +'\',\' ' + ${contrat.etat}+'\');'">
+													Detail</button>
+											</a>
+										</div></td>
 								</tr>
+
 
 							</tbody>
 						</table>
 					</div>
 				</div>
-				<div class="portlet box green">
-					<div class="portlet-title" style="background-color:#3b5998;">
-						<div class="caption">
-							<i class="fa fa-cogs"></i>Détails Contrat
-						</div>
-						<div class="tools">
-							<a href="javascript:;" class="collapse"> </a> <a
-								href="#portlet-config" data-toggle="modal" class="config"> </a>
-							<a href="javascript:;" class="reload"> </a> <a
-								href="javascript:;" class="remove"> </a>
-						</div>
-					</div>
-					<div class="portlet-body flip-scroll">
-						<table
-							class="table table-bordered table-striped table-condensed flip-content">
-							<thead class="flip-content">
-								<tr>
-									<th>Tournée</th>
-
-									<th>Numéro Compteur</th>
-
-									<th>Date pose Compteur</th>
-									<th>Branchement</th>
-									<th>Agence</th>
-									<th>Etat</th>
-									<th>Tarif</th>
 
 
-								</tr>
-							</thead>
-							<tbody>
-								<tr>
-									<td>AAC</td>
-									<td>ArrrrrrrrrrU</td>
 
-									<td>ArrrrrrrrrrrrrrrAC</td>
-									<td>AU</td><td>AAttrrrrrrrrrrrrrrtttttC</td>
-									<td>AUtttttt</td><td>ArrrrrrrrrrrrrtttttAC</td>
-								
-									
+				<!-- 										<td  -->
+				<!-- 											th:text="${contrat.tournee}"></td> -->
+				<!-- 									<td th:text="${contrat.numCompteur}"></td> -->
+				<!-- 									<td th:text="${contrat.datePoseCompteurS}"></td> -->
+				<!-- 									<td th:text="${contrat.branchement}"></td> -->
+				<!-- 									<td th:text="${contrat.agence}"></td> -->
+				<!-- 									<td th:text="${contrat.etat}"></td> -->
 
-								</tr>
 
-							</tbody>
-						</table>
-					</div>
-				</div>
+
+
+
+
 			</div>
 			<!-- END CONTENT BODY -->
 		</div>
@@ -149,6 +159,19 @@
 <script src="resources/assets/global/plugins/excanvas.min.js"></script> 
 <![endif]-->
 	<div th:include="/Fragment/resources_js :: js_resources"></div>
+	<script type="text/javascript">
+		function detailContrat(numCompteur, datePoseCompteurS, branchement,
+				agence, etat) {
+
+			$("#numCompteur").text(numCompteur);
+			$("#datePoseCompteurS").text(datePoseCompteurS);
+			$("#branchement").text(branchement);
+			$("#agence").text(agence);
+			$("#etat").text(etat);
+
+		}
+	</script>
+
 </body>
 
 </html>
