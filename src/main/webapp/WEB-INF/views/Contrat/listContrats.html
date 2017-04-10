@@ -14,38 +14,74 @@
 
 <body
 	class="page-header-fixed page-sidebar-closed-hide-logo page-container-bg-solid">
-	<div id="static" class="modal fade" tabindex="-1"
-		data-backdrop="static" data-keyboard="false">
-		<div class="modal-dialog"
-			style="height: 300px; width: 900px; text-align: center;">
-			<div class="modal-content"
-				style="height: 300px; width: 300px; text-align: center;">
+
+
+	<div class="modal fade" id="static" tabindex="-1" role="basic"
+		aria-hidden="true">
+		<div class="modal-dialog">
+			<div class="modal-content">
 				<div class="modal-header">
 					<button type="button" class="close" data-dismiss="modal"
 						aria-hidden="true"></button>
+					<h4 class="modal-title">Détail Contrat</h4>
 				</div>
 				<div class="modal-body">
 
-					<table>
-						<tbody>
-							<tr><td>Num Compteur</td>
-								<td><span id="numCompteur"></span></td>
-								<td>Date pose compteur</td>
-								<td><span id="datePoseCompteurS"></span></td>
-							</tr>
-							<tr><td>Branchement</td>
-								<td><span id="branchement"></span></td>
-								<td>	Agence</td>
-								<td><span id="agence"></span></td>
-							</tr>
-							<tr><td>Etat</td>
-								<td><span id="etat"></span></td>
-							</tr>
-						</tbody>
-					</table>
-
+<!-- 										<table> -->
+<!-- 											<tbody> -->
+<!-- 												<tr> -->
+<!-- 													<td>Num Compteur</td> -->
+<!-- 													<td><span id="numCompteur"></span></td> -->
+<!-- 												</tr> -->
+<!-- 												<tr> -->
+<!-- 													<td>Date pose compteur</td> -->
+<!-- 													<td><span id="datePoseCompteurS"></span></td> -->
+<!-- 												</tr> -->
+<!-- 												<tr> -->
+<!-- 													<td>Branchement</td> -->
+<!-- 													<td><span id="branchement"></span></td> -->
+<!-- 												</tr> -->
+<!-- 												<tr> -->
+<!-- 													<td>Agence</td> -->
+<!-- 													<td><span id="agence"></span></td> -->
+<!-- 												</tr> -->
+<!-- 												<tr> -->
+<!-- 													<td>Etat</td> -->
+<!-- 													<td><span id="etat"></span></td> -->
+<!-- 												</tr> -->
+<!-- 											</tbody> -->
+<!-- 										</table> -->
+					<div class="portlet-body">
+						<div class="table-scrollable">
+							<table class="table table-bordered table-hover">
+								<thead>
+									<tr>
+										<th>Num Compteur</th>
+										<th>Date pose compteur</th>
+										<th>Branchement</th>
+										<th>Agence</th>
+										<th>Etat</th>
+									</tr>
+								</thead>
+								<tbody>
+									<tr>
+										<td><span id="numCompteur"></span></td>
+										<td><span id="datePoseCompteurS"></span></td>
+										<td><span id="branchement"></span></td>
+										<td><span id="agence"></span></td>
+										<td><span id="etat"></span></td>
+									</tr>
+									
+								</tbody>
+							</table>
+						</div>
+					</div>
 				</div>
-
+				<div class="modal-footer">
+					<button type="button" class="btn  btn-outline btn-circle"
+						data-dismiss="modal"
+						style="background-color: #ffdb4d; color: white;">Close</button>
+				</div>
 			</div>
 		</div>
 	</div>
@@ -118,7 +154,7 @@
 													type="button" class="icon-list btn btn-circle "
 													th:onclick="'detailContrat(\'' + ${contrat.numCompteur} +'\',\' ' +
 													 ${contrat.datePoseCompteurS}+'\',\' ' + ${contrat.branchement} + '\',\' '+ ${contrat.agence} +'\',\' ' + ${contrat.etat}+'\');'">
-													Detail</button>
+													Détail</button>
 											</a>
 										</div></td>
 								</tr>

@@ -136,7 +136,7 @@ public class ConsulterDevisMetier {
 
 					dev.setId(Long.parseLong(eElement.getElementsByTagName("ax27:id").item(0).getTextContent()));
 					dev.setEtat(
-							Boolean.parseBoolean(eElement.getElementsByTagName("ax27:etat").item(0).getTextContent()));
+							eElement.getElementsByTagName("ax27:etat").item(0).getTextContent());
 
 					rslt.add(dev);
 

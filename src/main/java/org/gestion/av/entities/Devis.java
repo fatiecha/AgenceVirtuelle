@@ -14,7 +14,7 @@ public class Devis implements Serializable{
 	@GeneratedValue
 	private long id;
 	private Date date;
-	private boolean etat;
+	private String etat;
 	private double montant;
 	private String commentaire;
 	private String dateS;
@@ -24,7 +24,9 @@ public class Devis implements Serializable{
 	public Devis() {
 		super();
 	}
-	public Devis(Date date, boolean etat, double montant, String commentaire, Contrat contrat) {
+
+	
+	public Devis(Date date, String etat, double montant, String commentaire, Contrat contrat) {
 		super();
 		this.date = date;
 		this.etat = etat;
@@ -32,7 +34,8 @@ public class Devis implements Serializable{
 		this.commentaire = commentaire;
 		this.contrat = contrat;
 	}
-	
+
+
 	public String getDateS() {
 		return dateS;
 	}
@@ -51,10 +54,11 @@ public class Devis implements Serializable{
 	public void setDate(Date date) {
 		this.date = date;
 	}
-	public boolean isEtat() {
+	
+	public String getEtat() {
 		return etat;
 	}
-	public void setEtat(boolean etat) {
+	public void setEtat(String etat) {
 		this.etat = etat;
 	}
 	public double getMontant() {

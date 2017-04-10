@@ -40,10 +40,9 @@
 
 				</div>
 				<!-- END PAGE HEADER-->
-				<div class="tab-pane active" id="tab_0"
-					>
-					<div class="portlet box green" >
-						<div class="portlet-title" style="background-color:#3b5998;">
+				<div class="tab-pane active" id="tab_0">
+					<div class="portlet box green">
+						<div class="portlet-title" style="background-color: #3b5998;">
 							<div class="caption">
 								<i class="fa fa-gift"></i>Mes Consommations
 							</div>
@@ -56,22 +55,28 @@
 						</div>
 						<div class="portlet-body form">
 							<!-- BEGIN FORM-->
-							<form action="#" class="form-horizontal">
+							<form action="#" class="form-horizontal"
+								th:action="@{/Consommation/FiltreListes}" method="post"
+								th:object="${consommation}">
 								<div class="form-body">
 									<div class="form-group">
 										<label class="col-md-4 control-label">Choisir votre
 											Contrat </label>
 										<div class="col-md-4">
-											<select name="thelist" onChange="combo(this, 'theinput')"
+											<select th:field="*{contrat.id}"
 												class="form-control input-circle">
-												<option value="val1">val1</option>
+												<option th:each="contrat : ${contrats}"
+													th:value="${contrat.id}"
+													th:text="${contrat.numero +'-' +contrat.service}"></option>
 											</select>
+
 										</div>
 									</div>
 									<div class="form-actions">
 										<div class="row">
 											<div class="col-md-offset-4 col-md-9">
-												<button type="submit" class="btn btn-circle "  style="background-color:#3b5998; color:white;">Valider</button>
+												<button type="submit" class="btn btn-circle "
+													style="background-color: #3b5998; color: white;">Valider</button>
 												<button type="button"
 													class="btn btn-circle grey-salsa btn-outline">Annuler</button>
 											</div>
@@ -92,23 +97,49 @@
 										<div class="form-group">
 
 											<div class="input-group">
-												<div class="icheck-inline">
-													<label>Visualiser mon historique</label> <label> <input
-														type="radio" name="radio1" class="icheck"
+<!-- 												<div class="icheck-inline"> -->
+<!-- 													<label>Visualiser mon historique</label> -->
+<!-- 													 <label> <input type="radio" name="radio1"  -->
+<!-- 													 class="icheck" -->
+<!-- 														data-radio="iradio_square-grey" th:value="courbe" /> -->
+<!-- 														Courbe -->
+<!-- 													</label>  -->
+<!-- 													<label> <input type="radio" name="radio1" -->
+<!-- 														class="icheck" data-radio="iradio_square-grey" -->
+<!-- 														th:value="barre" /> Barre -->
+<!-- 													</label> -->
+<!-- 													<div class="form-actions "> -->
+<!-- 														<a data-toggle="modal" href="#static"> -->
+<!-- 															<button type="submit" class="btn btn-circle  " -->
+<!-- 																style="margin-left: 100px; background-color: #3b5998; color: white;">Voir</button> -->
+<!-- 														</a> -->
+<!-- 													</div> -->
+
+<!-- 												</div> -->
+	<table >
+											<tbody>
+												<tr >
+													<td  style="padding-right: 20px;">Visualiser mon historique</td>
+													
+													<td style="padding-right: 20px;"><label> <input type="radio" name="radio1" 
+													 class="icheck"
 														data-radio="iradio_square-grey" th:value="courbe" />
 														Courbe
-													</label> <label> <input type="radio" name="radio1"
-														class="icheck" data-radio="iradio_square-grey"
-														th:value="barre" /> Barre
-													</label>
-													<div class="form-actions ">
+													</label> </td>
+													<td  style="padding-right: 10px;"><label> <input type="radio" name="radio1" 
+														class="icheck" data-radio="iradio_square-grey" 
+														th:value="barre" /> Barre 
+													</label></td> 
+													<td ><div class="form-actions ">
 														<a data-toggle="modal" href="#static">
 															<button type="submit" class="btn btn-circle  "
-																style="margin-left: 100px; background-color:#3b5998; color:white;" >Voir</button>
+																style="margin-left: 100px; background-color: #3b5998; color: white;">Voir</button>
 														</a>
-													</div>
-
-												</div>
+													</div> </td>
+												</tr>
+												
+											</tbody>
+										</table>
 											</div>
 										</div>
 									</div>
@@ -135,8 +166,9 @@
 							</div>
 						</div>
 
-						<div class="portlet box green">
-							<div class="portlet-title" style="background-color:#3b5998;">
+						<div class="portlet box green"
+							th:if="${consommations != null and consommations.size() &gt; 0}">
+							<div class="portlet-title" style="background-color: #3b5998;">
 								<div class="caption">
 									<i class="fa fa-cogs"></i>Liste Consommations
 								</div>
@@ -165,14 +197,14 @@
 											</tr>
 										</thead>
 										<tbody>
-											<tr>
-												<td>AAC</td>
-												<td>AUST</td>
-												<td>AAC</td>
-												<td>AUST</td>
-												<td>AAC</td>
-												<td>AUST</td>
-												<td>AAC</td>
+											<tr th:each="consommation : ${consommations}">
+												<td th:text="${consommation.periode}"></td>
+												<td th:text="${consommation.dateS}"></td>
+												<td th:text="${consommation.type_lec}"></td>
+												<td th:text="${consommation.nbr_jour}"></td>
+												<td th:text="${consommation.index_lu}"></td>
+												<td th:text="${consommation.volume_consomme}"></td>
+												<td th:text="${consommation.volume_facture}"></td>
 
 
 

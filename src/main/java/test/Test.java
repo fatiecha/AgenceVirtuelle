@@ -43,15 +43,20 @@ public class Test {
 		// ConsulterFacturesMetier metierf = (ConsulterFacturesMetier)
 		// context.getBean("consulterFacturesMetier");
 		//
-		// ConsulterFacilitesMetier metierfa = (ConsulterFacilitesMetier)
-		// context.getBean("consulterFacilitesMetier");
+		 ConsulterFacilitesMetier metierfa = (ConsulterFacilitesMetier)
+		 context.getBean("consulterFacilitesMetier");
 		//
-		 ConsulterContratsMetier metierc = (ConsulterContratsMetier)
-		 context.getBean("consulterContratsMetier");
-		 ConsulterReclamationsMetier metierr = (ConsulterReclamationsMetier)
-		 context.getBean("consulterReclamationsMetier");
-		// ConsulterCompteMetier metiercp = (ConsulterCompteMetier)
-		// context.getBean("consulterCompteMetier");
+//		 ConsulterContratsMetier metierc = (ConsulterContratsMetier)
+//		 context.getBean("consulterContratsMetier");
+//		 ConsulterReclamationsMetier metierr = (ConsulterReclamationsMetier)
+//		 context.getBean("consulterReclamationsMetier");
+//		 ConsulterCompteMetier metiercp = (ConsulterCompteMetier)
+//		 context.getBean("consulterCompteMetier");
+//		 Compte c=new Compte();
+//		 c=metiercp.consuterCompte("1");
+//		 System.out.println(c.getMt_exigible());
+//		 System.out.println(c.getCredit());
+
 		// ConsulterEcheancesMetier metiere = (ConsulterEcheancesMetier)
 		// context.getBean("consulterEcheancesMetier");
 		// ConsulterConsommationsMetier metierco =
@@ -71,17 +76,17 @@ public class Test {
 //		 }
 
 //		System.out.println("hhhhhhh");
-		 List<Reclamation> l=new ArrayList<>();
-		 l=metierr.consuterReclamations("1");
+		 List<Facilite> l=new ArrayList<>();
+		 l=metierfa.consuterFacilite("1");
 		 for(int i=0;i<l.size();i++){
-			 Reclamation r=l.get(i);
-		 System.out.println(r.getDateS());
+			 Facilite r=l.get(i);
+		 System.out.println(r.getEtat());
 //		Client c = metier.getClient(1l);
 //		System.out.println(c.getNom());
 //	}
 //		 AjoutConCliMetier metieroo = (AjoutConCliMetier) context.getBean("concliMetier");
-//
-//System.out.println(metieroo.ajouterConCli("18", "30", "eaugggg"));
+////
+//System.out.println(metieroo.ajouterConCli("28", "1", "Basse tension"));
 	// System.out.println("agence "+l.getAgence());
 	// System.out.println("branchement "+l.getBranchement());
 	// System.out.println("date "+l.getDatePoseCompteurS());

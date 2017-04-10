@@ -36,6 +36,14 @@ public class Facilite implements Serializable{
 		this.contrat = contrat;
 	}
 
+	public String getEtat() {
+		return etat;
+	}
+
+	public void setEtat(String etat) {
+		this.etat = etat;
+	}
+
 	public Contrat getContrat() {
 		return contrat;
 	}
@@ -58,12 +66,7 @@ public class Facilite implements Serializable{
 	public void setId(long id) {
 		this.id = id;
 	}
-	public String isEtat() {
-		return etat;
-	}
-	public void setEtat(String etat) {
-		this.etat = etat;
-	}
+	
 	public double getMontant() {
 		return montant;
 	}

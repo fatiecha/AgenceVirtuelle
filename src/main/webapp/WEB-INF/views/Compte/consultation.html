@@ -40,10 +40,9 @@
 
 				</div>
 				<!-- END PAGE HEADER-->
-				<div class="tab-pane active" id="tab_0"
-					>
-					<div class="portlet box green" >
-						<div class="portlet-title" style="background-color:#3b5998;">
+				<div class="tab-pane active" id="tab_0">
+					<div class="portlet box green">
+						<div class="portlet-title" style="background-color: #3b5998;">
 							<div class="caption">
 								<i class="fa fa-gift"></i>Mon Compte
 							</div>
@@ -56,22 +55,28 @@
 						</div>
 						<div class="portlet-body form">
 							<!-- BEGIN FORM-->
-							<form action="#" class="form-horizontal">
+							<form action="#" class="form-horizontal"
+								th:action="@{/Compte/detailCompte}" method="post"
+								th:object="${compte}">
 								<div class="form-body">
 									<div class="form-group">
 										<label class="col-md-4 control-label">Choisir votre
 											Contrat </label>
 										<div class="col-md-4">
-											<select name="thelist" onChange="combo(this, 'theinput')"
-												class="form-control input-circle">
-												<option value="val1">val1</option>
+											<select th:field="*{idContrat}"
+												class="form-control input-circle" required="required">
+												<option th:each="contrat : ${contrats}"
+													th:value="${contrat.id}"
+													th:text="${contrat.numero +'-' +contrat.service}"></option>
 											</select>
+
 										</div>
 									</div>
 									<div class="form-actions">
 										<div class="row">
 											<div class="col-md-offset-4 col-md-9">
-												<button type="submit" class="btn btn-circle " style="background-color:#3b5998; color:white;">Valider</button>
+												<button type="submit" class="btn btn-circle "
+													style="background-color: #3b5998; color: white;">Valider</button>
 												<button type="button"
 													class="btn btn-circle grey-salsa btn-outline">Annuler</button>
 											</div>
@@ -84,7 +89,7 @@
 					</div>
 				</div>
 				<div class="portlet box green">
-					<div class="portlet-title" style="background-color:#3b5998;">
+					<div class="portlet-title" style="background-color: #3b5998;">
 						<div class="caption">
 							<i class="fa fa-cogs"></i>Récapitulatif du Compte
 						</div>
@@ -112,12 +117,10 @@
 								</thead>
 								<tbody>
 									<tr>
-										<td>AAC</td>
-										<td>AUST</td>
-										<td>AAC</td>
-										<td>AUST</td>
-
-
+										<td th:text="${compte.mt_exigible}"></td>
+<!-- 										<td th:text="${compte.mt_impayé}"></td> -->
+										<td th:text="${compte.credit}">AAC</td>
+										<td th:text="${compte.provision}">AAC</td>
 
 
 

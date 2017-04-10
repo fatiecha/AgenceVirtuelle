@@ -56,16 +56,20 @@
 						</div>
 						<div class="portlet-body form">
 							<!-- BEGIN FORM-->
-							<form action="#" class="form-horizontal">
+							<form action="#" class="form-horizontal" th:action="@{/Facilites/FiltreListes}" method="post"
+								th:object="${facilite}">
 								<div class="form-body">
 									<div class="form-group">
 										<label class="col-md-4 control-label">Choisir votre
 											Contrat </label>
 										<div class="col-md-4">
-											<select name="thelist" onChange="combo(this, 'theinput')"
+											<select th:field="*{contrat.id}"
 												class="form-control input-circle">
-												<option value="val1">val1</option>
+												<option th:each="contrat : ${contrats}"
+													th:value="${contrat.id}"
+													th:text="${contrat.numero +'-' +contrat.service}"></option>
 											</select>
+
 										</div>
 									</div>
 									<div class="form-actions">
@@ -85,7 +89,7 @@
 				</div>
 				               
 				
-				<div class="portlet box green">
+				<div class="portlet box green" th:if="${facilites != null and facilites.size() &gt; 0}">
 					<div class="portlet-title" style="background-color:#3b5998;">
 						<div class="caption">
 							<i class="fa fa-cogs"></i>Mes Facilités
@@ -97,7 +101,7 @@
 								href="javascript:;" class="remove"> </a>
 						</div>
 					</div>
-					<div class="portlet-body">
+					<div class="portlet-body" >
 						<div class="table-scrollable">
 							<table class="table table-striped table-bordered table-hover">
 								<thead>
@@ -113,11 +117,11 @@
 									</tr>
 								</thead>
 								<tbody>
-									<tr>
-										<td>AAC</td>
-										<td>AUST</td>
-										<td>AAC</td>
-										<td><button
+									<tr th:each="facilite : ${facilites}">
+												<td th:text="${facilite.id}"></td>
+												<td th:text="${facilite.etat}"></td>
+												<td th:text="${facilite.montant}"></td>
+										<td><button id="voirListEcheances" th:value="${facilite.id}"
 												style="background-color: #3b5998; color: white;"
 												type="button" class="icon-list btn btn-circle ">
 												Détail</button></td>
@@ -134,50 +138,7 @@
 					</div>
 				</div>
 				<!-- END SAMPLE TABLE PORTLET-->
-				<div class="portlet box green">
-					<div class="portlet-title" style="background-color:#3b5998;">
-						<div class="caption">
-							<i class="fa fa-cogs"></i>Mes Echéances
-						</div>
-						<div class="tools">
-							<a href="javascript:;" class="collapse"> </a> <a
-								href="#portlet-config" data-toggle="modal" class="config"> </a>
-							<a href="javascript:;" class="reload"> </a> <a
-								href="javascript:;" class="remove"> </a>
-						</div>
-					</div>
-					<div class="portlet-body">
-						<div class="table-scrollable">
-							<table class="table table-striped table-bordered table-hover">
-								<thead>
-									<tr>
-										<th width="25%" >Ordre</th>
-										<th width="25%" >Date</th>
-										<th width="25%" >Etat</th>
-										<th width="25%" >Montant</th>
-
-
-
-									</tr>
-								</thead>
-								<tbody>
-									<tr>
-										<td>AAC</td>
-										<td>AUST</td>
-										<td>AAC</td>
-										<td>AAC</td>
-
-
-
-
-
-									</tr>
-
-								</tbody>
-							</table>
-						</div>
-					</div>
-				</div>
+				<div id="listEcheances"></div>
 			</div>
 		</div>
 	</div>
@@ -194,5 +155,22 @@
 <![endif]-->
 	<div th:include="/Fragment/resources_js :: js_resources"></div>
 </body>
-
+<script type="text/javascript">
+	
+	$(document).ready(function() {
+		$("#voirListEcheances").on("click",function(){
+			$.post("listEcheances",//l url de la fct de traitement
+				{
+				idFacilite:$(this).val(),//on envoie les parametres par lesquells on veut travailler dans le controller
+				},
+				function(data, status) {
+					if (status == "success") {
+						$("#listEcheances").html(data);
+					}
+				}			
+			)
+		});
+		});
+		
+		</script>
 </html>

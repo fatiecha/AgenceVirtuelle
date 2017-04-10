@@ -27,7 +27,23 @@
 			<!-- BEGIN CONTENT BODY -->
 			<div class="page-content">
 				<!-- BEGIN PAGE HEADER-->
-
+<!-- <div class="modal fade bs-modal-sm" id="small" tabindex="-1" role="dialog" aria-hidden="true"  th:if="${factures = null }"> -->
+<!--                                         <div class="modal-dialog modal-sm"> -->
+<!--                                             <div class="modal-content"> -->
+<!--                                                 <div class="modal-header"> -->
+<!--                                                     <button type="button" class="close" data-dismiss="modal" aria-hidden="true"></button> -->
+<!--                                                     <h4 class="modal-title">Modal Title</h4> -->
+<!--                                                 </div> -->
+<!--                                                 <div class="modal-body"> Modal body goes here </div> -->
+<!--                                                 <div class="modal-footer"> -->
+<!--                                                     <button type="button" class="btn dark btn-outline" data-dismiss="modal">Close</button> -->
+<!--                                                     <button type="button" class="btn green">Save changes</button> -->
+<!--                                                 </div> -->
+<!--                                             </div> -->
+<!--                                             /.modal-content -->
+<!--                                         </div> -->
+<!--                                         /.modal-dialog -->
+<!--                                     </div> -->
 				<h3 class="page-title">Espace Client</h3>
 				<div class="page-bar">
 					<ul class="page-breadcrumb">
@@ -39,10 +55,9 @@
 
 				</div>
 				<!-- END PAGE HEADER-->
-				<div class="tab-pane active" id="tab_0"
-					>
+				<div class="tab-pane active" id="tab_0">
 					<div class="portlet box green" >
-						<div class="portlet-title" style="background-color:#3b5998;">
+						<div class="portlet-title" style="background-color: #3b5998;">
 							<div class="caption">
 								<i class="fa fa-gift"></i>Mes Factures
 							</div>
@@ -55,22 +70,28 @@
 						</div>
 						<div class="portlet-body form">
 							<!-- BEGIN FORM-->
-							<form action="#" class="form-horizontal">
+							<form action="#" class="form-horizontal"
+								th:action="@{/Facture/FiltreListes}" method="post"
+								th:object="${facture}">
 								<div class="form-body">
 									<div class="form-group">
 										<label class="col-md-4 control-label">Choisir votre
 											Contrat </label>
 										<div class="col-md-4">
-											<select name="thelist" onChange="combo(this, 'theinput')"
-												class="form-control input-circle">
-												<option value="val1">val1</option>
+											<select th:field="*{contrat.id}"
+												class="form-control input-circle" required="required">
+												<option th:each="contrat : ${contrats}"
+													th:value="${contrat.id}"
+													th:text="${contrat.numero +'-' +contrat.service}"></option>
 											</select>
+
 										</div>
 									</div>
 									<div class="form-actions">
 										<div class="row">
 											<div class="col-md-offset-4 col-md-9">
-												<button type="submit" class="btn btn-circle " style=" background-color:#3b5998; color:white;">Valider</button>
+												<button type="submit" class="btn btn-circle "
+													style="background-color: #3b5998; color: white;">Valider</button>
 												<button type="button"
 													class="btn btn-circle grey-salsa btn-outline">Annuler</button>
 											</div>
@@ -82,8 +103,8 @@
 						</div>
 					</div>
 				</div>
-				<div class="portlet box green">
-					<div class="portlet-title" style="background-color:#3b5998;">
+				<div class="portlet box green" th:if="${factures != null and factures.size() &gt; 0}">
+					<div class="portlet-title" style="background-color: #3b5998;">
 						<div class="caption">
 							<i class="fa fa-cogs"></i>Liste Factures
 						</div>
@@ -113,17 +134,17 @@
 									</tr>
 								</thead>
 								<tbody>
-									<tr>
-										<td>AAC</td>
-										<td>AUST</td>
-										<td>AAC</td>
-										<td>AUST</td>
+									<tr th:each="facture : ${factures}">
+										<td th:text="${facture.id}"></td>
+										<td th:text="${facture.periode}"></td>
+										<td th:text="${facture.montant}"></td>
 
-										<td>AUST</td>
-										<td>AAC</td>
+										<td th:text="${facture.solde}"></td>
+										<td th:text="${facture.type_fac}"></td>
 
+										<td th:text="${facture.date_exigibiliteS}"></td>
 										<td><button
-												style=" background-color:#3b5998; color:white;"
+												style="background-color: #3b5998; color: white;"
 												type="button" class="fa fa-print btn btn-circle ">
 												Imprimer</button></td>
 

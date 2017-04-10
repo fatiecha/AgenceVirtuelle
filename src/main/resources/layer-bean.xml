@@ -40,11 +40,13 @@
 	</bean>
 	<bean id="compteController" class="org.gestion.av.controllers.CompteController">
 		<property name="consulterCompteMetier" ref="consulterCompteMetier"></property>
+		<property name="consulterContratsMetier" ref="consulterContratsMetier"></property>
 
 	</bean>
 
 	<bean id="consommationController" class="org.gestion.av.controllers.ConsommationController">
 		<property name="consulterConsommationsMetier" ref="consulterConsommationsMetier"></property>
+		<property name="consulterContratsMetier" ref="consulterContratsMetier"></property>
 
 	</bean>
 	<bean id="contratController" class="org.gestion.av.controllers.ContratController">
@@ -54,14 +56,18 @@
 	</bean>
 	<bean id="devisController" class="org.gestion.av.controllers.DevisController">
 		<property name="consulterDevisMetier" ref="consulterDevisMetier"></property>
+		<property name="consulterContratsMetier" ref="consulterContratsMetier"></property>
 
 	</bean>
 	<bean id="faciliteController" class="org.gestion.av.controllers.FaciliteController">
 		<property name="consulterFacilitesMetier" ref="consulterFacilitesMetier"></property>
+		<property name="consulterContratsMetier" ref="consulterContratsMetier"></property>
+		<property name="consulterEcheancesMetier" ref="consulterEcheancesMetier"></property>
 
 	</bean>
 	<bean id="factureController" class="org.gestion.av.controllers.FactureController">
 		<property name="consulterFacturesMetier" ref="consulterFacturesMetier"></property>
+		<property name="consulterContratsMetier" ref="consulterContratsMetier"></property>
 
 	</bean>
 	<bean id="reclamationController" class="org.gestion.av.controllers.ReclamationController">

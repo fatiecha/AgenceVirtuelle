@@ -134,7 +134,10 @@ public class ConsulterCompteMetier {
 							.parseDouble(eElement.getElementsByTagName("ax21:mt_impayé").item(0).getTextContent()));
 					dev.setProvision(Double
 							.parseDouble(eElement.getElementsByTagName("ax21:provision").item(0).getTextContent()));
-
+//					dev.setIdContrat(
+//							Long.parseLong(eElement.getElementsByTagName("ax21:idContrat").item(0).getTextContent()));
+//					dev.set(
+//							Long.parseLong(eElement.getElementsByTagName("ax21:contrat_id").item(0).getTextContent()));
 				}
 			}
 		} catch (ParserConfigurationException e) {

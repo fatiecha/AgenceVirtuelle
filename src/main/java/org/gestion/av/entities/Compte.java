@@ -20,6 +20,15 @@ public class Compte  implements Serializable{
 	@OneToOne
 	
 	private Contrat contrat;
+	private long idContrat;
+	
+	
+	public long getIdContrat() {
+		return idContrat;
+	}
+	public void setIdContrat(long idContrat) {
+		this.idContrat = idContrat;
+	}
 	public double getMt_impayé() {
 		return mt_impayé;
 	}

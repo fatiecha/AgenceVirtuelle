@@ -67,13 +67,13 @@ public class AboController {
 
 		Map<String, List<String>> mapServiceTarifs = new HashMap<String, List<String>>();
 		List<String> tarifEau = new ArrayList<String>();
-		tarifEau.add("tarifeau1");
-		tarifEau.add("tarifeau2");
+		tarifEau.add("Eau domestique");
 		mapServiceTarifs.put("Eau", tarifEau);
 
 		List<String> tarifBasseTension = new ArrayList<String>();
-		tarifBasseTension.add("tarifBassetension1");
-		tarifBasseTension.add("tarifBassetension2");
+		tarifBasseTension.add("BT domestique");
+		tarifBasseTension.add("BT éclairage");
+		tarifBasseTension.add("BT patente (Commerce)");
 		mapServiceTarifs.put("Basse Tension", tarifBasseTension);
 		return mapServiceTarifs;
 	}
