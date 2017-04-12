@@ -20,10 +20,8 @@ public class Reclamation implements Serializable {
 	private String etat;
 	private String typeR;
 	private String DateS;
-	private String DateResolutionS;
 	private Long idcon;
 	private String commentaire;
-	private Date dateResolution;
 	private String commentaireResolution;
 	@ManyToOne
 	@JoinColumn(name = "code_type_reclamation")
@@ -51,13 +49,7 @@ public class Reclamation implements Serializable {
 	}
 	
 
-	public String getDateResolutionS() {
-		return DateResolutionS;
-	}
-
-	public void setDateResolutionS(String dateResolutionS) {
-		DateResolutionS = dateResolutionS;
-	}
+	
 
 	public String getDateS() {
 		return DateS;
@@ -79,14 +71,7 @@ public class Reclamation implements Serializable {
 		this.idcon = idcon;
 	}
 
-	public Date getDateResolution() {
-		return dateResolution;
-	}
-
-	public void setDateResolution(Date dateResolution) {
-		this.dateResolution = dateResolution;
-	}
-
+	
 	public String getCommentaireResolution() {
 		return commentaireResolution;
 	}

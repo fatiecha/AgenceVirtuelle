@@ -1,14 +1,15 @@
 package org.gestion.av.models;
 
 public class ConCliModel {
-public String idContrat;
+public String numeroContrat;
 public String idClient;
 public String service;
-public String getIdContrat() {
-	return idContrat;
+
+public String getNumeroContrat() {
+	return numeroContrat;
 }
-public void setIdContrat(String idContrat) {
-	this.idContrat = idContrat;
+public void setNumeroContrat(String numeroContrat) {
+	this.numeroContrat = numeroContrat;
 }
 public String getIdClient() {
 	return idClient;

@@ -97,49 +97,51 @@
 										<div class="form-group">
 
 											<div class="input-group">
-<!-- 												<div class="icheck-inline"> -->
-<!-- 													<label>Visualiser mon historique</label> -->
-<!-- 													 <label> <input type="radio" name="radio1"  -->
-<!-- 													 class="icheck" -->
-<!-- 														data-radio="iradio_square-grey" th:value="courbe" /> -->
-<!-- 														Courbe -->
-<!-- 													</label>  -->
-<!-- 													<label> <input type="radio" name="radio1" -->
-<!-- 														class="icheck" data-radio="iradio_square-grey" -->
-<!-- 														th:value="barre" /> Barre -->
-<!-- 													</label> -->
-<!-- 													<div class="form-actions "> -->
-<!-- 														<a data-toggle="modal" href="#static"> -->
-<!-- 															<button type="submit" class="btn btn-circle  " -->
-<!-- 																style="margin-left: 100px; background-color: #3b5998; color: white;">Voir</button> -->
-<!-- 														</a> -->
-<!-- 													</div> -->
+												<!-- 												<div class="icheck-inline"> -->
+												<!-- 													<label>Visualiser mon historique</label> -->
+												<!-- 													 <label> <input type="radio" name="radio1"  -->
+												<!-- 													 class="icheck" -->
+												<!-- 														data-radio="iradio_square-grey" th:value="courbe" /> -->
+												<!-- 														Courbe -->
+												<!-- 													</label>  -->
+												<!-- 													<label> <input type="radio" name="radio1" -->
+												<!-- 														class="icheck" data-radio="iradio_square-grey" -->
+												<!-- 														th:value="barre" /> Barre -->
+												<!-- 													</label> -->
+												<!-- 													<div class="form-actions "> -->
+												<!-- 														<a data-toggle="modal" href="#static"> -->
+												<!-- 															<button type="submit" class="btn btn-circle  " -->
+												<!-- 																style="margin-left: 100px; background-color: #3b5998; color: white;">Voir</button> -->
+												<!-- 														</a> -->
+												<!-- 													</div> -->
 
-<!-- 												</div> -->
-	<table >
-											<tbody>
-												<tr >
-													<td  style="padding-right: 20px;">Visualiser mon historique</td>
-													
-													<td style="padding-right: 20px;"><label> <input type="radio" name="radio1" 
-													 class="icheck"
-														data-radio="iradio_square-grey" th:value="courbe" />
-														Courbe
-													</label> </td>
-													<td  style="padding-right: 10px;"><label> <input type="radio" name="radio1" 
-														class="icheck" data-radio="iradio_square-grey" 
-														th:value="barre" /> Barre 
-													</label></td> 
-													<td ><div class="form-actions ">
-														<a data-toggle="modal" href="#static">
-															<button type="submit" class="btn btn-circle  "
-																style="margin-left: 100px; background-color: #3b5998; color: white;">Voir</button>
-														</a>
-													</div> </td>
-												</tr>
-												
-											</tbody>
-										</table>
+												<!-- 												</div> -->
+												<table>
+													<tbody>
+														<tr>
+															<td style="padding-right: 20px;">Visualiser mon
+																historique</td>
+
+															<td style="padding-right: 20px;"><label> <input
+																	type="radio" name="radio1" class="icheck"
+																	data-radio="iradio_square-grey" th:value="courbe" />
+																	Courbe
+															</label></td>
+															<td style="padding-right: 10px;"><label> <input
+																	type="radio" name="radio1" class="icheck"
+																	data-radio="iradio_square-grey" th:value="barre" />
+																	Barre
+															</label></td>
+															<td><div class="form-actions ">
+																	<a data-toggle="modal" href="#static">
+																		<button type="submit" class="btn btn-circle  "
+																			style="margin-left: 100px; background-color: #3b5998; color: white;">Voir</button>
+																	</a>
+																</div></td>
+														</tr>
+
+													</tbody>
+												</table>
 											</div>
 										</div>
 									</div>
@@ -156,10 +158,15 @@
 												<button type="button" class="close" data-dismiss="modal"
 													aria-hidden="true"></button>
 											</div>
-											<div class="modal-body"></div>
-											<img
+											<div class="modal-body"><img
 												th:src="@{~/av/resources/assets/pages/img/background/333.jpg}"
-												alt="body" />
+												alt="body" /></div>
+											
+											<div class="modal-footer">
+												<button type="button" class="btn  btn-outline btn-circle"
+													data-dismiss="modal"
+													style="background-color: #ffdb4d; color: white;">Close</button>
+											</div>
 										</div>
 									</div>
 								</div>

@@ -15,6 +15,7 @@ import org.gestion.av.entities.Facture;
 import org.gestion.av.entities.Reclamation;
 import org.gestion.av.entities.Type_reclamation;
 import org.gestion.av.metier.AjoutConCliMetier;
+import org.gestion.av.metier.AjoutDemAboMetier;
 import org.gestion.av.metier.ConnexionMetier;
 import org.gestion.av.metier.ConsulterCompteMetier;
 import org.gestion.av.metier.ConsulterConsommationsMetier;
@@ -27,6 +28,7 @@ import org.gestion.av.metier.ConsulterReclamationsMetier;
 import org.gestion.av.metier.CountFIMetier;
 import org.gestion.av.service.IAgenceService;
 import org.gestion.av.serviceImpl.AgenceServiceImpl;
+import org.hibernate.engine.profile.Association;
 import org.springframework.context.support.ClassPathXmlApplicationContext;
 
 public class Test {
@@ -35,16 +37,20 @@ public class Test {
 
 		ClassPathXmlApplicationContext context = new ClassPathXmlApplicationContext(
 				new String[] { "applicationContext.xml" });
-		IAgenceService metier = (IAgenceService) context.getBean("agenceServiceImpl");
-	   metier.updateClient(new Client(6l,"nom","prenom","cin","email","tel","mdp"));
-		CountFIMetier metierd = (CountFIMetier) context.getBean("countFIMetier");
+//		IAgenceService metier = (IAgenceService) context.getBean("agenceServiceImpl");
+//	   metier.updateClient(new Client(6l,"nom","prenom","cin","email","tel","mdp"));
+//		CountFIMetier metierd = (CountFIMetier) context.getBean("countFIMetier");
+		
+		
+		
+		
 //		metier.getlibelleTypeReclamation();
 		//
 		// ConsulterFacturesMetier metierf = (ConsulterFacturesMetier)
 		// context.getBean("consulterFacturesMetier");
 		//
-		 ConsulterFacilitesMetier metierfa = (ConsulterFacilitesMetier)
-		 context.getBean("consulterFacilitesMetier");
+//		 ConsulterFacilitesMetier metierfa = (ConsulterFacilitesMetier)
+//		 context.getBean("consulterFacilitesMetier");
 		//
 //		 ConsulterContratsMetier metierc = (ConsulterContratsMetier)
 //		 context.getBean("consulterContratsMetier");
@@ -62,7 +68,6 @@ public class Test {
 		// ConsulterConsommationsMetier metierco =
 		// (ConsulterConsommationsMetier)
 		// context.getBean("consulterConsommationsMetier");
-		//
 		// ConnexionMetier aj = (ConnexionMetier)
 		// context.getBean("connexionMetier");
 		// long s=aj.seConnecter("az", "az");
@@ -76,17 +81,16 @@ public class Test {
 //		 }
 
 //		System.out.println("hhhhhhh");
-		 List<Facilite> l=new ArrayList<>();
-		 l=metierfa.consuterFacilite("1");
-		 for(int i=0;i<l.size();i++){
-			 Facilite r=l.get(i);
-		 System.out.println(r.getEtat());
+//		 List<Facilite> l=new ArrayList<>();
+//		 l=metierfa.consuterFacilite("1");
+//		 for(int i=0;i<l.size();i++){
+//			 Facilite r=l.get(i);
+//		 System.out.println(r.getEtat());
 //		Client c = metier.getClient(1l);
 //		System.out.println(c.getNom());
 //	}
-//		 AjoutConCliMetier metieroo = (AjoutConCliMetier) context.getBean("concliMetier");
-////
-//System.out.println(metieroo.ajouterConCli("28", "1", "Basse tension"));
+		AjoutDemAboMetier metieroo = (AjoutDemAboMetier) context.getBean("aboMetier");
+System.out.println(metieroo.ajouterAbo("4455556", "1", "eau", "tarif"));
 	// System.out.println("agence "+l.getAgence());
 	// System.out.println("branchement "+l.getBranchement());
 	// System.out.println("date "+l.getDatePoseCompteurS());
@@ -104,4 +108,4 @@ public class Test {
 	//
 	// }
 	}
-}}
+}

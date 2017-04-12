@@ -9,6 +9,10 @@ import javax.xml.soap.SOAPElement;
 import javax.xml.soap.SOAPEnvelope;
 import javax.xml.soap.SOAPMessage;
 import javax.xml.soap.SOAPPart;
+import javax.xml.transform.Source;
+import javax.xml.transform.Transformer;
+import javax.xml.transform.TransformerFactory;
+import javax.xml.transform.stream.StreamResult;
 
 import org.springframework.transaction.annotation.Transactional;
 
@@ -17,7 +21,7 @@ import tools.PSR;
 @Transactional
 public class AjoutConCliMetier {
 	PSR r=new PSR();
-	public  String ajouterConCli(String id1, String id2,String service) {
+	public  String ajouterConCli(String numeroContrat, String idclient,String service) {
 		String a = null;
 		 try {
 	            // Create SOAP Connection
@@ -26,11 +30,11 @@ public class AjoutConCliMetier {
 
 	            // Send SOAP Message to SOAP Server
 	            String url = "http://localhost:9091/Agence_virtuelle_ws/services/AjouterConCliWS";
-	            SOAPMessage soapResponse = soapConnection.call(createSOAPRequest( id1, id2,service), url);
+	            SOAPMessage soapResponse = soapConnection.call(createSOAPRequest(numeroContrat, idclient,service), url);
 
 	            // Process the SOAP Response
 	           a= r.printSOAPResponseString(soapResponse);
-
+//	           a= printSOAPResponse33(soapResponse);
 	            soapConnection.close();
 	        } catch (Exception e) {
 	            System.err.println("Error occurred while sending SOAP Request to Server");
@@ -38,7 +42,7 @@ public class AjoutConCliMetier {
 	        }
 		return a;
 	}
-	private  SOAPMessage createSOAPRequest(String id1, String id2,String service) throws Exception {
+	private  SOAPMessage createSOAPRequest(String numeroContrat, String idclient,String service) throws Exception {
         MessageFactory messageFactory = MessageFactory.newInstance();
         SOAPMessage soapMessage = messageFactory.createMessage();
         SOAPPart soapPart = soapMessage.getSOAPPart();
@@ -52,10 +56,10 @@ public class AjoutConCliMetier {
        
         SOAPBody soapBody = envelope.getBody();
         SOAPElement soapBodyElem = soapBody.addChildElement("addContratClient", "example");
-        SOAPElement soapBodyElem1 = soapBodyElem.addChildElement("id1", "example");
-        soapBodyElem1.addTextNode(id1);
-        SOAPElement soapBodyElem2 = soapBodyElem.addChildElement("id2", "example");
-        soapBodyElem2.addTextNode(id2);
+        SOAPElement soapBodyElem1 = soapBodyElem.addChildElement("numeroContrat", "example");
+        soapBodyElem1.addTextNode(numeroContrat);
+        SOAPElement soapBodyElem2 = soapBodyElem.addChildElement("idclient", "example");
+        soapBodyElem2.addTextNode(idclient);
         SOAPElement soapBodyElem3 = soapBodyElem.addChildElement("service", "example");
         soapBodyElem3.addTextNode(service);
         
@@ -73,5 +77,17 @@ public class AjoutConCliMetier {
 
         return soapMessage;
     }
-	
+	private String printSOAPResponse33(SOAPMessage soapResponse) throws Exception {
+		String rslt = null;
+
+		TransformerFactory transformerFactory = TransformerFactory.newInstance();
+		Transformer transformer = transformerFactory.newTransformer();
+		Source sourceContent = soapResponse.getSOAPPart().getContent();
+		StreamResult sr = new StreamResult(System.out);
+
+		transformer.transform(sourceContent, sr);
+
+		return rslt;
+
+	}
 }

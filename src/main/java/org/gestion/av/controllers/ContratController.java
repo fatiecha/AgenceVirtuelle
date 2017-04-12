@@ -49,7 +49,7 @@ public class ContratController {
 			Model model) {
 		Client client = (Client) pRequest.getSession().getAttribute("clientConnecte");
 		String msg = null;
-		msg = concliMetier.ajouterConCli(c.getIdContrat(),Long.toString(client.getId()),  c.getService());
+		msg = concliMetier.ajouterConCli(c.getNumeroContrat(),Long.toString(client.getId()),  c.getService());
 		if (msg.equals("oui")) {
 			return "redirect:/Contrat/listContrats";
 		}
