@@ -130,12 +130,12 @@ public class ConsulterCompteMetier {
 							Double.parseDouble(eElement.getElementsByTagName("ax21:credit").item(0).getTextContent()));
 					dev.setMt_exigible(Double
 							.parseDouble(eElement.getElementsByTagName("ax21:mt_exigible").item(0).getTextContent()));
-					dev.setMt_impayé(Double
+					dev.setMt_impaye(Double
 							.parseDouble(eElement.getElementsByTagName("ax21:mt_impayé").item(0).getTextContent()));
 					dev.setProvision(Double
 							.parseDouble(eElement.getElementsByTagName("ax21:provision").item(0).getTextContent()));
-//					dev.setIdContrat(
-//							Long.parseLong(eElement.getElementsByTagName("ax21:idContrat").item(0).getTextContent()));
+					dev.setIdContrat(
+							Long.parseLong(eElement.getElementsByTagName("ax21:contrat_id").item(0).getTextContent()));
 //					dev.set(
 //							Long.parseLong(eElement.getElementsByTagName("ax21:contrat_id").item(0).getTextContent()));
 				}

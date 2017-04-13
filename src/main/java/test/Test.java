@@ -37,8 +37,8 @@ public class Test {
 
 		ClassPathXmlApplicationContext context = new ClassPathXmlApplicationContext(
 				new String[] { "applicationContext.xml" });
-//		IAgenceService metier = (IAgenceService) context.getBean("agenceServiceImpl");
-//	   metier.updateClient(new Client(6l,"nom","prenom","cin","email","tel","mdp"));
+		IAgenceService metier = (IAgenceService) context.getBean("agenceServiceImpl");
+	   metier.updateClient(new Client(8,"noooom","prenom","cin","email","tel","mdp"));
 //		CountFIMetier metierd = (CountFIMetier) context.getBean("countFIMetier");
 		
 		
@@ -59,9 +59,12 @@ public class Test {
 //		 ConsulterCompteMetier metiercp = (ConsulterCompteMetier)
 //		 context.getBean("consulterCompteMetier");
 //		 Compte c=new Compte();
-//		 c=metiercp.consuterCompte("1");
+//		 c=metiercp.consuterCompte("10");
 //		 System.out.println(c.getMt_exigible());
 //		 System.out.println(c.getCredit());
+//		 System.out.println(c.getMt_impayé());
+//		 System.out.println(c.getProvision());
+//		 System.out.println(c.getIdContrat());
 
 		// ConsulterEcheancesMetier metiere = (ConsulterEcheancesMetier)
 		// context.getBean("consulterEcheancesMetier");
@@ -89,8 +92,8 @@ public class Test {
 //		Client c = metier.getClient(1l);
 //		System.out.println(c.getNom());
 //	}
-		AjoutDemAboMetier metieroo = (AjoutDemAboMetier) context.getBean("aboMetier");
-System.out.println(metieroo.ajouterAbo("4455556", "1", "eau", "tarif"));
+//		AjoutDemAboMetier metieroo = (AjoutDemAboMetier) context.getBean("aboMetier");
+//System.out.println(metieroo.ajouterAbo("4455556", "1", "eau", "tarif"));
 	// System.out.println("agence "+l.getAgence());
 	// System.out.println("branchement "+l.getBranchement());
 	// System.out.println("date "+l.getDatePoseCompteurS());

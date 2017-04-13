@@ -59,6 +59,9 @@
 							<!-- BEGIN FORM-->
 							<form action="#" class="form-horizontal" th:action="@{/majClient}" method="post" th:object="${client}">
 								<div class="form-body">
+								<input type="hidden" th:field="*{id}"/>
+								<input type="hidden" th:field="*{email}"/>
+								<input type="hidden" th:field="*{CIN}"/>
 									<div class="form-group">
 										<label class="col-md-4 control-label">Nom</label>
 										<div class="col-md-4">
@@ -75,6 +78,19 @@
 										</div>
 									</div>
 									<div class="form-group">
+										<label class="col-md-4 control-label">Email</label>
+										<div class="col-md-4">
+											<input type="text" class="form-control input-circle"
+												placeholder="Enter text" th:field="*{email}"  readonly="readonly" disabled="disabled"/>
+										</div>
+									</div><div class="form-group">
+										<label class="col-md-4 control-label">CIN</label>
+										<div class="col-md-4">
+												 <input type="text" class="form-control input-circle"
+												placeholder="Enter text" th:field="*{CIN}" readonly="readonly" disabled="disabled"/>
+										</div>
+									</div>
+									<div class="form-group">
 										<label class="col-md-4 control-label">N° Téléphone</label>
 										<div class="col-md-4">
 											<input type="text" class="form-control input-circle"
@@ -82,7 +98,7 @@
 										</div>
 									</div>
 									<div class="form-group">
-										<label class="col-md-4 control-label">Ancien Mot de passe</label>
+										<label class="col-md-4 control-label">Nouveau Mot de passe</label>
 										<div class="col-md-4">
 											<input type="password" class="form-control input-circle"
 												placeholder="Enter text" th:field="*{MDP}" required="required" />

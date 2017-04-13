@@ -33,9 +33,29 @@ public class AgenceDaoImpl implements IAgenceDao {
 		return (Client) req.getSingleResult();
 	}
 
+	// @Override
+	// public void updateClient(Client c) {
+	// Query req = em.createQuery(
+	// "update Client set CIN=:cin , email=:email , nom=:nom , prenom =:prenom,
+	// tel =:tel, MDP=:mdp WHERE id =:id");
+	// req.setParameter("cin", c.getCIN());
+	// req.setParameter("email", c.getEmail());
+	// req.setParameter("nom", c.getNom());
+	// req.setParameter("prenom", c.getPrenom());
+	// req.setParameter("tel", c.getTel());
+	// req.setParameter("mdp", c.getMDP());
+	// req.setParameter("id", c.getId());
+	//
+	// }
 	@Override
 	public void updateClient(Client c) {
-		em.merge(c);
+		Query req = em.createQuery(
+				"update  Client   set  nom=:nom , prenom =:prenom WHERE id =:id");
+	
+		req.setParameter("nom", "e");
+		req.setParameter("prenom", "e");
+
+		req.setParameter("id", 8l);
 
 	}
 }

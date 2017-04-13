@@ -1,10 +1,5 @@
 package org.gestion.av.controllers;
 
-import java.util.ArrayList;
-import java.util.HashMap;
-import java.util.List;
-import java.util.Map;
-
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpSession;
 
@@ -79,13 +74,13 @@ public class ClientController {
 	}
 
 	@RequestMapping(value = "/updateClient", method = RequestMethod.GET)
-	public String updateClient(Model model) {
-		model.addAttribute("client", new Client());
+	public String updateClient(HttpServletRequest pRequest,Model model) {
+		model.addAttribute("client", (Client) pRequest.getSession().getAttribute("clientConnecte"));
 		return "updateClient";
 	}
 	@RequestMapping(value = "/majClient", method = RequestMethod.POST)
-	public String majClient(@ModelAttribute(value = "client") Client c, Model model) {
-		agenceService.updateClient(new Client(13l,c.getNom(),c.getPrenom(),"ii","ii",c.getTel(),c.getMDP()));
+	public String majClient(@ModelAttribute(value = "client") Client client, Model model) {
+		agenceService.updateClient(new Client(client.getId(),client.getNom(),client.getPrenom(),client.getCIN(),client.getEmail(),client.getTel(),client.getMDP()));
 		return "redirect:/Contrat/association";
 	}
 	

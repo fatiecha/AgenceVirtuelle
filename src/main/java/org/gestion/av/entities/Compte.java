@@ -13,7 +13,7 @@ public class Compte  implements Serializable{
 	@Id
 	@GeneratedValue(strategy=GenerationType.IDENTITY)
 	private Long id;
-	private double mt_impayé;
+	private double mt_impaye;
 	private double mt_exigible;
 	private double credit;
 	private double provision;
@@ -29,11 +29,11 @@ public class Compte  implements Serializable{
 	public void setIdContrat(long idContrat) {
 		this.idContrat = idContrat;
 	}
-	public double getMt_impayé() {
-		return mt_impayé;
+	public double getMt_impaye() {
+		return mt_impaye;
 	}
-	public void setMt_impayé(double mt_impayé) {
-		this.mt_impayé = mt_impayé;
+	public void setMt_impaye(double mt_impaye) {
+		this.mt_impaye = mt_impaye;
 	}
 	public double getMt_exigible() {
 		return mt_exigible;
@@ -56,9 +56,9 @@ public class Compte  implements Serializable{
 	public Compte() {
 		super();
 	}
-	public Compte(double mt_impayé, double mt_exigible, double credit, double provision) {
+	public Compte(double mt_impaye, double mt_exigible, double credit, double provision) {
 		super();
-		this.mt_impayé = mt_impayé;
+		this.mt_impaye = mt_impaye;
 		this.mt_exigible = mt_exigible;
 		this.credit = credit;
 		this.provision = provision;

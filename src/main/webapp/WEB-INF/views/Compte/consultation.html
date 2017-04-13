@@ -88,7 +88,7 @@
 						</div>
 					</div>
 				</div>
-				<div class="portlet box green">
+				<div class="portlet box green" th:if="${afficherTab}">
 					<div class="portlet-title" style="background-color: #3b5998;">
 						<div class="caption">
 							<i class="fa fa-cogs"></i>Récapitulatif du Compte
@@ -117,10 +117,10 @@
 								</thead>
 								<tbody>
 									<tr>
-										<td th:text="${compte.mt_exigible}"></td>
-<!-- 										<td th:text="${compte.mt_impayé}"></td> -->
-										<td th:text="${compte.credit}">AAC</td>
-										<td th:text="${compte.provision}">AAC</td>
+										<td th:text="${compte.provision}"></td>
+										<td th:text="${compte.mt_impaye}"></td>
+										<td th:text="${compte.credit}"></td>
+										<td th:text="${compte.provision}"></td>
 
 
 

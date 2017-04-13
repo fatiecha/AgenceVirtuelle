@@ -5,16 +5,11 @@
 <!-- BEGIN HEAD -->
 <meta charset="UTF-8" />
 <head th:replace="/Fragment/resources_css :: css_resources"></head>
-<style>
-.tdAlert {
-	background-color: ffdb4d;
-	color: white;
-}
-</style>
 <!-- END HEAD -->
 
 <body
 	class="page-header-fixed page-sidebar-closed-hide-logo page-container-bg-solid">
+	
 	<!-- BEGIN HEADER -->
 	<div th:include="/Fragment/header :: entete"></div>
 
@@ -141,8 +136,7 @@
 								</thead>
 								<tbody>
 
-									<tr th:each="facture : ${factures}" 	th:if="${facture.etat==false}" 
-									style="background-color: #ffdb4d; color: white;">
+									<tr th:each="facture : ${factures}" th:class="${facture.etat==false}? 'tdAlert' : ''">
 										<td th:text="${facture.id}"></td>
 										<td th:text="${facture.periode}"></td>
 										<td th:text="${facture.montant}"></td>
@@ -158,23 +152,23 @@
 
 
 									</tr>
-																		<tr th:each="facture : ${factures}"
-																			th:if="${facture.etat==true}">
-																			<td th:text="${facture.id}"></td>
-																			<td th:text="${facture.periode}"></td>
-																			<td th:text="${facture.montant}"></td>
+<!-- 																		<tr th:each="facture : ${factures}" -->
+<!-- 																			th:if="${facture.etat==true}"> -->
+<!-- 																			<td th:text="${facture.id}"></td> -->
+<!-- 																			<td th:text="${facture.periode}"></td> -->
+<!-- 																			<td th:text="${facture.montant}"></td> -->
 
-																			<td th:text="${facture.solde}"></td>
-																			<td th:text="${facture.type_fac}"></td>
+<!-- 																			<td th:text="${facture.solde}"></td> -->
+<!-- 																			<td th:text="${facture.type_fac}"></td> -->
 
-																			<td th:text="${facture.date_exigibiliteS}"></td>
-																			<td><button
-																					style="background-color: #3b5998; color: white;"
-																					type="button" class="fa fa-print btn btn-circle ">
-																					Imprimer</button></td>
+<!-- 																			<td th:text="${facture.date_exigibiliteS}"></td> -->
+<!-- 																			<td><button -->
+<!-- 																					style="background-color: #3b5998; color: white;" -->
+<!-- 																					type="button" class="fa fa-print btn btn-circle "> -->
+<!-- 																					Imprimer</button></td> -->
 
 
-																		</tr>
+<!-- 																		</tr> -->
 
 								</tbody>
 							</table>

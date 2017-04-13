@@ -73,6 +73,7 @@ public class Contrat implements Serializable {
 
 	
 
+
 	public String getNumero() {
 		return numero;
 	}
