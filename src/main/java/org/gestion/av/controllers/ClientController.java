@@ -47,8 +47,22 @@ public class ClientController {
 
 	@RequestMapping(value = "/sinscrire", method = RequestMethod.POST)
 	public String Save(@ModelAttribute(value = "client") Client c, Model model) {
-		clientMetier.ajoutClient(c.getNom(), c.getPrenom(), c.getCIN(), c.getEmail(), c.getTel(), c.getMDP());
-		return "redirect:/Contrat/listContrats";
+		String msg=null;
+		boolean boolAjoutClient;
+		msg=clientMetier.ajoutClient(c.getNom(), c.getPrenom(), c.getCIN(), c.getEmail(), c.getTel(), c.getMDP());
+		
+		if (msg.equals("oui")) {
+			boolAjoutClient=true;
+			model.addAttribute("checkRec",boolAjoutClient);
+			
+		}
+		else{
+			boolAjoutClient=false;
+			model.addAttribute("checkRec",boolAjoutClient);
+		}
+
+		
+		return "redirect:/inscriptionClient";
 	}
 
 	@RequestMapping(value = "/seConnecter")

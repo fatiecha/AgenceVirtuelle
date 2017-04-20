@@ -1,9 +1,10 @@
 <html xmlns:th="http://www.thymeleaf.org"
 	xmlns:sec="http://www.thymeleaf.org/thymeleaf-extras-springsecurity3">
-	<head>
+<head>
 <meta charset="UTF-8" />
 </head>
-<div class="portlet box green" th:if="${echeances != null and echeances.size() &gt; 0}">
+<div class="portlet box green"
+	th:if="${echeances != null and echeances.size() &gt; 0}">
 	<div class="portlet-title" style="background-color: #3b5998;">
 		<div class="caption">
 			<i class="fa fa-cogs"></i>Mes Echéances
@@ -47,5 +48,11 @@
 		</div>
 	</div>
 </div>
+
+
+
+
+
+
 
 </html>

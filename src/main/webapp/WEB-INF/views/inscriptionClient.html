@@ -46,6 +46,32 @@
 </script>
 </head>
 <body class="fixed-header   ">
+<div class="modal fade" id="static" tabindex="-1" role="basic"
+		aria-hidden="true">
+		<div class="modal-dialog">
+			<div class="modal-content">
+				<div class="modal-header">
+					<button type="button" class="close" data-dismiss="modal"
+						aria-hidden="true"></button>
+					<h4 class="modal-title">Information</h4>
+				</div>
+				<div class="modal-body">
+
+
+					<div class="portlet-body" id="msg"></div>
+
+
+
+				</div>
+				<div class="modal-footer">
+					<button type="button" class="btn  btn-outline btn-circle"
+						data-dismiss="modal"
+						style="background-color: #ffdb4d; color: white;">Fermer</button>
+				</div>
+			</div>
+		</div>
+	</div>
+	<a id="modalAjoutClient" data-toggle="modal" href="#static"></a>
 	<!-- START PAGE-CONTAINER -->
 	<div class="login-wrapper ">
 		<!-- START Login Background Pic Wrapper-->
@@ -102,7 +128,7 @@
 							class="input-group-addon"><i class="fa fa-user"></i></span>
 					</div>
 					<div class="form-group form-group-default input-group">
-						<label>Email</label> <input type="text" class="form-control"
+						<label>Email</label> <input type="email" class="form-control"
 							th:field="*{email}" required="required" /> <span
 							class="input-group-addon"><i class="fa fa-user"></i></span>
 					</div>
@@ -162,5 +188,6 @@
 	<script th:src="@{~/av/resources/login/js/scripts.js}"
 		type="text/javascript"></script>
 	<!-- END PAGE LEVEL JS -->
+		
 </body>
 </html>
