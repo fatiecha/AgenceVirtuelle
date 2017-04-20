@@ -10,6 +10,32 @@
 
 <body
 	class="page-header-fixed page-sidebar-closed-hide-logo page-container-bg-solid">
+	<div class="modal fade" id="static" tabindex="-1" role="basic"
+		aria-hidden="true">
+		<div class="modal-dialog">
+			<div class="modal-content">
+				<div class="modal-header">
+					<button type="button" class="close" data-dismiss="modal"
+						aria-hidden="true"></button>
+					<h4 class="modal-title">Information</h4>
+				</div>
+				<div class="modal-body">
+
+
+					<div class="portlet-body">Vous n'avez pas de devis pour ce contrat !</div>
+
+
+
+				</div>
+				<div class="modal-footer">
+					<button type="button" class="btn  btn-outline btn-circle"
+						data-dismiss="modal"
+						style="background-color: #ffdb4d; color: white;">Close</button>
+				</div>
+			</div>
+		</div>
+	</div>
+	<a id="modalDevis" data-toggle="modal" href="#static"></a>
 	<!-- BEGIN HEADER -->
 	<div th:include="/Fragment/header :: entete"></div>
 
@@ -145,13 +171,24 @@
 	<!-- END CONTAINER -->
 	<!-- BEGIN FOOTER -->
 	<div th:include="/Fragment/footer:: footer"></div>
-
+		<div th:include="/Fragment/resources_js :: js_resources"></div>
+<script th:inline="javascript">
+	/*<![CDATA[*/
+		
+	$("#modalDevis").hide();
+	empty = /*[[${emptyDevis}]]*/;
+	if (empty) {
+    	$("#modalDevis").click();
+	}
+	
+	 /*]]>*/
+	</script>
 	<!-- END FOOTER -->
 	<!--[if lt IE 9]>
 <script src="resources/assets/global/plugins/respond.min.js"></script>
 <script src="resources/assets/global/plugins/excanvas.min.js"></script> 
 <![endif]-->
-	<div th:include="/Fragment/resources_js :: js_resources"></div>
+
 </body>
 
 </html>

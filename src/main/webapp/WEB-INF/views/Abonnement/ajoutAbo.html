@@ -11,6 +11,35 @@
 
 <body
 	class="page-header-fixed page-sidebar-closed-hide-logo page-container-bg-solid">
+		<div class="modal fade" id="static" tabindex="-1" role="basic"
+		aria-hidden="true">
+		<div class="modal-dialog">
+			<div class="modal-content">
+				<div class="modal-header">
+					<button type="button" class="close" data-dismiss="modal"
+						aria-hidden="true"></button>
+					<h4 class="modal-title">Information</h4>
+				</div>
+				<div class="modal-body">
+
+
+					<div class="portlet-body" id="msg"></div>
+
+
+
+				</div>
+				<div class="modal-footer">
+					<button type="button" class="btn  btn-outline btn-circle"
+						data-dismiss="modal"
+						style="background-color: #ffdb4d; color: white;">Fermer</button>
+				</div>
+			</div>
+		</div>
+	</div>
+	<a id="modalAbo" data-toggle="modal" href="#static"></a>
+	
+	
+
 	<!-- BEGIN HEADER -->
 	<div th:include="/Fragment/header :: entete"></div>
 
@@ -114,7 +143,7 @@
 		<div th:include="/Fragment/resources_js :: js_resources"></div>
 		
 	</div>
-	<script type="text/javascript">
+	<script th:inline="javascript">
 	
 	$(document).ready(function() {
 		$("#service").on("change",function(){
@@ -131,6 +160,20 @@
 		});
 		});
 		
+	/*<![CDATA[*/
+	
+	$("#modalAbo").hide();
+	checkAbo = /*[[${checkAbo}]]*/;
+	if (checkAbo) {
+    	$("#modalAbo").click();
+		$("#msg").html('Demande dabonnement envoyée.');
+	}
+	else if(checkAbo == false){
+		$("#modalAbo").click();
+		$("#msg").html('Demande dabonnement non envoyée. Vérifiez vos informations!');
+	}
+	 
+	 /*]]>*/
 		</script>
 </body>
 

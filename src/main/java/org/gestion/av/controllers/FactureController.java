@@ -64,6 +64,7 @@ public class FactureController {
 		List<Facture> factures = new ArrayList<>();
 		factures = consulterFacturesMetier.consuterFacture(Long.toString(facture.getContrat().getId()));
 		model.addAttribute("factures", factures);
+		model.addAttribute("emptyFacture",factures.isEmpty());
 		model.addAttribute("contrats", consulterContratsMetier.consulterContrats(Long.toString(client.getId())));
 		return "Facture/listFactures";
 	}

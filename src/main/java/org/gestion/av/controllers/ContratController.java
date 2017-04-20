@@ -49,9 +49,15 @@ public class ContratController {
 			Model model) {
 		Client client = (Client) pRequest.getSession().getAttribute("clientConnecte");
 		String msg = null;
+		boolean boolAssociation;
 		msg = concliMetier.ajouterConCli(c.getNumeroContrat(),Long.toString(client.getId()),  c.getService());
 		if (msg.equals("oui")) {
-			return "redirect:/Contrat/listContrats";
+			boolAssociation=true;
+			model.addAttribute("checkAssociation",boolAssociation);
+		}
+		else{
+			boolAssociation=false;
+			model.addAttribute("checkAssociation",boolAssociation);
 		}
 		return "Contrat/association";
 	}

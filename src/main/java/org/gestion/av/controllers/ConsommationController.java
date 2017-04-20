@@ -36,6 +36,7 @@ private ConsulterContratsMetier consulterContratsMetier;
 		model.addAttribute("consommation", new Consommation());
 		return "Consommation/listConsommations";
 	}
+	
 
 	@RequestMapping(value = "/FiltreListes", method = RequestMethod.POST)
 	public String filtreListConsommation(HttpServletRequest pRequest,@ModelAttribute(value = "consommation") Consommation consommation, Model model) {
@@ -43,6 +44,7 @@ private ConsulterContratsMetier consulterContratsMetier;
 		List<Consommation> consommations = new ArrayList<>();
 		consommations = consulterConsommationsMetier.consuterConsommations(Long.toString(consommation.getContrat().getId()));
 		model.addAttribute("consommations", consommations);
+		model.addAttribute("emptyConsommation",consommations.isEmpty());
 		model.addAttribute("contrats", consulterContratsMetier.consulterContrats(Long.toString(client.getId())));
 		return "Consommation/listConsommations";
 	}

@@ -52,14 +52,21 @@ public class AboController {
 
 	@RequestMapping(value = "/creerAbonnement", method = RequestMethod.POST)
 	public String SaveAbo(HttpServletRequest pRequest, @ModelAttribute(value = "abonnement") AboModel a, Model model) {
-
+boolean bool;
 		Client client = (Client) pRequest.getSession().getAttribute("clientConnecte");
 		String msg = null;
 		msg = aboMetier.ajouterAbo(a.getTournee(), Long.toString(client.getId()), a.getService(), a.getTarif());
 		if (msg !=null && msg.equals("oui")) {
-			return "redirect:/Reclamation/listReclamations";
+			
+			bool=true;
+			model.addAttribute("checkAbo",bool);
+			//return "redirect:/Reclamation/listReclamations";
 		}
-
+		else{
+			bool=false;
+			model.addAttribute("checkAbo",bool);
+		}
+		
 		return "Abonnement/ajoutAbo";
 	}
 

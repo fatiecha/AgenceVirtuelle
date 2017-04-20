@@ -38,7 +38,8 @@ public class Test {
 		ClassPathXmlApplicationContext context = new ClassPathXmlApplicationContext(
 				new String[] { "applicationContext.xml" });
 		IAgenceService metier = (IAgenceService) context.getBean("agenceServiceImpl");
-	   metier.updateClient(new Client(8,"noooom","prenom","cin","email","tel","mdp"));
+//		 metier.updateClient(new Client());
+	   metier.updateClient(new Client(7,"ech","ech","ech","ech","ech","ech"));
 //		CountFIMetier metierd = (CountFIMetier) context.getBean("countFIMetier");
 		
 		

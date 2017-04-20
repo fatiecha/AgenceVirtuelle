@@ -45,6 +45,7 @@ public class DevisController {
 		List<Devis> listDevis = new ArrayList<>();
 		listDevis = consulterDevisMetier.consuterDevis(Long.toString(devis.getContrat().getId()));
 		model.addAttribute("listDevis", listDevis);
+		model.addAttribute("emptyDevis",listDevis.isEmpty());
 		model.addAttribute("contrats", consulterContratsMetier.consulterContrats(Long.toString(client.getId())));
 		return "Devis/listDevis";
 	}

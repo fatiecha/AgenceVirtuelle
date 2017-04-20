@@ -53,6 +53,7 @@ private ConsulterEcheancesMetier consulterEcheancesMetier;
 		facilites = consulterFacilitesMetier.consuterFacilite(Long.toString(facilite.getContrat().getId()));
 		facilites = consulterFacilitesMetier.consuterFacilite(Long.toString(facilite.getContrat().getId()));
 		model.addAttribute("facilites", facilites);
+		model.addAttribute("emptyFacilite",facilites.isEmpty());
 		model.addAttribute("contrats", consulterContratsMetier.consulterContrats(Long.toString(client.getId())));
 		return "Facilites/listFacilites";
 	}

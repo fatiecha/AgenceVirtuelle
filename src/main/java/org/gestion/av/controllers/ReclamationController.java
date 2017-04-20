@@ -43,7 +43,7 @@ public class ReclamationController {
 	}
 
 	@RequestMapping(value = "/listReclamations", method = RequestMethod.GET)
-	public String listReclamation(HttpServletRequest pRequest,Model model) {
+	public String listReclamation(HttpServletRequest pRequest, Model model) {
 		Client client = (Client) pRequest.getSession().getAttribute("clientConnecte");
 		model.addAttribute("contrats", consulterContratsMetier.consulterContrats(Long.toString(client.getId())));
 		model.addAttribute("reclamation", new Reclamation());
@@ -51,20 +51,22 @@ public class ReclamationController {
 	}
 
 	@RequestMapping(value = "/FiltreListes", method = RequestMethod.POST)
-	public String filtreListReclamation(HttpServletRequest pRequest,@ModelAttribute(value = "reclamation") Reclamation reclamation, Model model) {
+	public String filtreListReclamation(HttpServletRequest pRequest,
+			@ModelAttribute(value = "reclamation") Reclamation reclamation, Model model) {
 		Client client = (Client) pRequest.getSession().getAttribute("clientConnecte");
 		List<Reclamation> reclamations = new ArrayList<>();
 		reclamations = consulterReclamationsMetier.consuterReclamations(Long.toString(reclamation.getIdcon()));
 		model.addAttribute("reclamations", reclamations);
+		model.addAttribute("emptyReclamation", reclamations.isEmpty());
 		model.addAttribute("contrats", consulterContratsMetier.consulterContrats(Long.toString(client.getId())));
 		return "Reclamation/listReclamations";
 	}
 
 	@RequestMapping(value = "/ajoutReclamation", method = RequestMethod.GET)
 	public String ajoutReclamation(HttpServletRequest pRequest, Model model) {
-		
-		Client client= (Client) pRequest.getSession().getAttribute("clientConnecte");
-		model.addAttribute("contrats", consulterContratsMetier.consulterContrats(Long.toString(client.getId()) ));
+
+		Client client = (Client) pRequest.getSession().getAttribute("clientConnecte");
+		model.addAttribute("contrats", consulterContratsMetier.consulterContrats(Long.toString(client.getId())));
 		model.addAttribute("typesReclamation", agenceService.getlibelleTypeReclamation());
 		model.addAttribute("reclamation", new Reclamation());
 		return "Reclamation/ajoutReclamation";
@@ -73,12 +75,21 @@ public class ReclamationController {
 	@RequestMapping(value = "/creerReclamation", method = RequestMethod.POST)
 	public String SaveReclamation(@ModelAttribute(value = "reclamation") Reclamation r, Model model) {
 		String msg = null;
+		boolean boolReclamation;
+
 		msg = reclamationMetier.ajouterReclamation(Long.toString(r.getIdcon()), r.getOrigine(), r.getTypeR(),
 				r.getCommentaire());
 		if (msg.equals("oui")) {
-			return "redirect:/Reclamation/listReclamations";
+			boolReclamation=true;
+			model.addAttribute("checkRec",boolReclamation);
+			//return "redirect:/Reclamation/listReclamations";
+		}
+		else{
+			boolReclamation=false;
+			model.addAttribute("checkRec",boolReclamation);
 		}
 		return "Reclamation/ajoutReclamation";
+		
 	}
 
 }
