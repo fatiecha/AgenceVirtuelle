@@ -6,6 +6,7 @@
 <title>Radeema | Agence virtuelle</title>
 <meta name="viewport"
 	content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=no" />
+	
 <link rel="apple-touch-icon" th:ref="@{/resources/pages/ico/60.png" />
 <link rel="apple-touch-icon" sizes="76x76"
 	th:href="@{/resources/pages/ico/76.png}" />
@@ -24,8 +25,8 @@
 	rel="stylesheet" type="text/css" />
 <link th:href="@{~/av/resources/login/css/bootstrap.min.css}"
 	rel="stylesheet" type="text/css" />
-<link th:href="@{~/av/resources/login/css/font-awesome.css}"
-	rel="stylesheet" type="text/css" />
+<!-- <link th:href="@{~/av/resources/login/css/font-awesome.css}" -->
+<!-- 	rel="stylesheet" type="text/css" /> -->
 <link th:href="@{~/av/resources/login/css/switchery.min.css}"
 	rel="stylesheet" type="text/css" media="screen" />
 <link th:href="@{~/av/resources/login/css/pages-icons.css}"
@@ -46,6 +47,7 @@
 </script>
 </head>
 <body class="fixed-header   ">
+	<div th:include="Fragment/resources_js :: js_resources"></div>
 <div class="modal fade" id="static" tabindex="-1" role="basic"
 		aria-hidden="true">
 		<div class="modal-dialog">
@@ -156,38 +158,61 @@
 		<!-- END Login Right Container-->
 	</div>
 	<!-- BEGIN VENDOR JS -->
-	<script th:src="@{~/av/resources/login/js/pace.min.js}"
-		type="text/javascript"></script>
-	<script th:src="@{~/av/resources/login/js/jquery-1.11.1.min.js}"
-		type="text/javascript"></script>
-	<script th:src="@{~/av/resources/login/js/modernizr.custom.js}"
-		type="text/javascript"></script>
-	<script th:src="@{~/av/resources/login/js/jquery-ui.min.js}"
-		type="text/javascript"></script>
-	<script th:src="@{~/av/resources/login/js/bootstrap.min.js}"
-		type="text/javascript"></script>
-	<script th:src="@{~/av/resources/login/js/jquery-easy.js}"
-		type="text/javascript"></script>
-	<script th:src="@{~/av/resources/login/js/jquery.unveil.min.js}"
-		type="text/javascript"></script>
-	<script th:src="@{~/av/resources/login/js/jquery.bez.min.js}"></script>
-	<script th:src="@{~/av/resources/login/js/jquery.ioslist.min.js}"
-		type="text/javascript"></script>
-	<script th:src="@{~/av/resources/login/js/jquery.actual.min.js}"></script>
-	<script type="text/javascript"
-		th:src="@{~/av/resources/login/js/classie.js}"></script>
-	<script th:src="@{~/av/resources/login/js/switchery.min.js}"
-		type="text/javascript"></script>
-	<script th:src="@{~/av/resources/login/js/jquery.validate.min.js}"
-		type="text/javascript"></script>
+<!-- 	<script th:src="@{~/av/resources/login/js/pace.min.js}" -->
+<!-- 		type="text/javascript"></script> -->
+<!-- 	<script th:src="@{~/av/resources/login/js/jquery-1.11.1.min.js}" -->
+<!-- 		type="text/javascript"></script> -->
+<!-- 	<script th:src="@{~/av/resources/login/js/modernizr.custom.js}" -->
+<!-- 		type="text/javascript"></script> -->
+<!-- 	<script th:src="@{~/av/resources/login/js/jquery-ui.min.js}" -->
+<!-- 		type="text/javascript"></script> -->
+<!-- 	<script th:src="@{~/av/resources/login/js/bootstrap.min.js}" -->
+<!-- 		type="text/javascript"></script> -->
+<!-- 	<script th:src="@{~/av/resources/login/js/jquery-easy.js}" -->
+<!-- 		type="text/javascript"></script> -->
+<!-- 	<script th:src="@{~/av/resources/login/js/jquery.unveil.min.js}" -->
+<!-- 		type="text/javascript"></script> -->
+<!-- 	<script th:src="@{~/av/resources/login/js/jquery.bez.min.js}"></script> -->
+<!-- 	<script th:src="@{~/av/resources/login/js/jquery.ioslist.min.js}" -->
+<!-- 		type="text/javascript"></script> -->
+<!-- 	<script th:src="@{~/av/resources/login/js/jquery.actual.min.js}"></script> -->
+<!-- 	<script type="text/javascript" -->
+<!-- 		th:src="@{~/av/resources/login/js/classie.js}"></script> -->
+<!-- 	<script th:src="@{~/av/resources/login/js/switchery.min.js}" -->
+<!-- 		type="text/javascript"></script> -->
+<!-- 	<script th:src="@{~/av/resources/login/js/jquery.validate.min.js}" -->
+<!-- 		type="text/javascript"></script> -->
 	<!-- END VENDOR JS -->
 	<!-- BEGIN CORE TEMPLATE JS -->
-	<script th:src="@{~/av/resources/login/js/pages.min.js}"></script>
+<!-- 	<script th:src="@{~/av/resources/login/js/pages.min.js}"></script> -->
 	<!-- END CORE TEMPLATE JS -->
 	<!-- BEGIN PAGE LEVEL JS -->
-	<script th:src="@{~/av/resources/login/js/scripts.js}"
-		type="text/javascript"></script>
+<!-- 	<script th:src="@{~/av/resources/login/js/scripts.js}" -->
+<!-- 		type="text/javascript"></script> -->
 	<!-- END PAGE LEVEL JS -->
 		
+	
+	<script th:inline="javascript">
+	
+	
+		
+	/*<![CDATA[*/
+	
+	$("#modalAjoutClient").hide();
+	checkClt = /*[[${checkClt}]]*/;
+	if (checkClt == "oui") {
+    	$("#modalAjoutClient").click();
+		$("#msg").html('Inscription réussie.');
+	}
+	else if (checkClt == "existant"){
+		$("#modalAjoutClient").click();
+		$("#msg").html('Email déja existant. Vérifiez vos informations!');
+	}
+	else if (checkClt == "non verifie"){
+		$("#modalAjoutClient").click();
+		$("#msg").html('Vérifiez votre mot de passe min 5 cara max 10 cara)!');
+	}
+	 /*]]>*/
+		</script>	
 </body>
 </html>

@@ -14,6 +14,7 @@ import org.gestion.av.entities.Facilite;
 import org.gestion.av.entities.Facture;
 import org.gestion.av.entities.Reclamation;
 import org.gestion.av.entities.Type_reclamation;
+import org.gestion.av.metier.AjoutClientMetier;
 import org.gestion.av.metier.AjoutConCliMetier;
 import org.gestion.av.metier.AjoutDemAboMetier;
 import org.gestion.av.metier.ConnexionMetier;
@@ -39,7 +40,7 @@ public class Test {
 				new String[] { "applicationContext.xml" });
 		IAgenceService metier = (IAgenceService) context.getBean("agenceServiceImpl");
 //		 metier.updateClient(new Client());
-	   metier.updateClient(new Client(7,"ech","ech","ech","ech","ech","ech"));
+	   metier.updateClient(new Client(7,"po","po","po","po","po","p"));
 //		CountFIMetier metierd = (CountFIMetier) context.getBean("countFIMetier");
 		
 		
@@ -93,8 +94,8 @@ public class Test {
 //		Client c = metier.getClient(1l);
 //		System.out.println(c.getNom());
 //	}
-//		AjoutDemAboMetier metieroo = (AjoutDemAboMetier) context.getBean("aboMetier");
-//System.out.println(metieroo.ajouterAbo("4455556", "1", "eau", "tarif"));
+	   AjoutClientMetier metieroo = (AjoutClientMetier) context.getBean("clientMetier");
+System.out.println(metieroo.ajoutClient("4455556", "1", "eau", "f","u","u9638"));
 	// System.out.println("agence "+l.getAgence());
 	// System.out.println("branchement "+l.getBranchement());
 	// System.out.println("date "+l.getDatePoseCompteurS());
