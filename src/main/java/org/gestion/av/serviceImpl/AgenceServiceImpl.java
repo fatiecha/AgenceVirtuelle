@@ -33,8 +33,8 @@ public class AgenceServiceImpl implements IAgenceService {
 
 
 	@Override
-	public void updateClient(Client c) {
+	public boolean updateClient(Client c) {
 		
-		 dao.updateClient(c);
+		return dao.updateClient(c);
 	}
 }

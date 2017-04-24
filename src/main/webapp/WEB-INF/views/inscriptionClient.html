@@ -79,9 +79,9 @@
 		<!-- START Login Background Pic Wrapper-->
 		<div class="bg-pic">
 			<!-- START Background Pic-->
-			<img th:src="@{~/av/resources/login/img/15.jpg}"
-				th:data-src="@{~/av/resources/login/img/15.jpg}"
-				th:data-src-retina="@{~/av/resources/login/img/15.jpg}" alt=""
+			<img th:src="@{~/av/resources/login/img/screenFTI.jpg}"
+				th:data-src="@{~/av/resources/login/img/screenFTI.jpg}"
+				th:data-src-retina="@{~/av/resources/login/img/screenFTI.jpg}" alt=""
 				class="lazy" />
 			<!-- END Background Pic-->
 			<!-- START Background Caption-->
@@ -151,6 +151,7 @@
 						name="_submit" style="background-color: #3b5998; color: white;">S'inscrire</button>
 
 				</form>
+          <a th:href="@{/}">  <button class="btn  btn-cons m-t-10"    style="background-color:#3b5998; color:white;" >Se connecter</button></a> 
 
 				<!--END Login Form-->
 			</div>
@@ -210,7 +211,7 @@
 	}
 	else if (checkClt == "non verifie"){
 		$("#modalAjoutClient").click();
-		$("#msg").html('Vérifiez votre mot de passe min 5 cara max 10 cara)!');
+		$("#msg").html('Vérifiez votre mot de passe (minimum 5 caractères maximum 10 caractères)!');
 	}
 	 /*]]>*/
 		</script>	

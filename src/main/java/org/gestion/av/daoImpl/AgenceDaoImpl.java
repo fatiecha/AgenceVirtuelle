@@ -35,7 +35,8 @@ public class AgenceDaoImpl implements IAgenceDao {
 
 
 	 @Override
-	 public void updateClient(Client c) {
+	 public boolean updateClient(Client c) {
+		 boolean bool;
 		 Client cli=em.find(Client.class, c.getId());
 		 String msg=verifierMDP(c.getMDP());
 		 if(msg.equals("verifie")){
@@ -45,7 +46,12 @@ public class AgenceDaoImpl implements IAgenceDao {
 			cli.setEmail(c.getEmail());
 			cli.setTel(c.getTel());
 			cli.setMDP(c.getMDP());
+			bool=true;
 		 }
+		 else{
+			 bool=false;
+		 }
+		 return bool;
 	 }
 	 public String verifierMDP(String mdp){
 			int size=mdp.length();

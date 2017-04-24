@@ -48,43 +48,48 @@ public class ClientController {
 	@RequestMapping(value = "/sinscrire", method = RequestMethod.POST)
 	public String Save(@ModelAttribute(value = "client") Client c, Model model) {
 		String msg;
-		msg=clientMetier.ajoutClient(c.getNom(), c.getPrenom(), c.getCIN(), c.getEmail(), c.getTel(), c.getMDP());
-			model.addAttribute("checkClt",msg);
-		return "redirect:/inscriptionClient";
+		msg = clientMetier.ajoutClient(c.getNom(), c.getPrenom(), c.getCIN(), c.getEmail(), c.getTel(), c.getMDP());
+		model.addAttribute("checkClt", msg);
+		return "inscriptionClient";
 	}
 
 	@RequestMapping(value = "/seConnecter")
-	public String login(HttpServletRequest pRequest, Model model,@ModelAttribute(value = "client") Client cli) {
-		
+	public String login(HttpServletRequest pRequest, Model model, @ModelAttribute(value = "client") Client cli) {
+
 		HttpSession pSession = pRequest.getSession();
 		int idClientConnecte;
-		
+
 		idClientConnecte = connexionMetier.seConnecter(cli.getEmail(), cli.getMDP());
 		if (idClientConnecte != 0) {
-			pSession.setAttribute("nbrFacture",countFIMetier.countFactureImpayees(Long.toString(idClientConnecte)));
+			pSession.setAttribute("nbrFacture", countFIMetier.countFactureImpayees(Long.toString(idClientConnecte)));
 			pSession.setAttribute("clientConnecte", agenceService.getClient(idClientConnecte));
 			return "redirect:/Contrat/listContrats";
+		} else {
+			model.addAttribute("checkInfo", true);
 		}
-		
+
 		return "connexionClient";
 	}
 
 	@RequestMapping(value = "/", method = RequestMethod.GET)
 	public String seConnecter(Model model) {
-		 model.addAttribute("client",new Client());
+		model.addAttribute("client", new Client());
 		return "connexionClient";
 	}
 
 	@RequestMapping(value = "/updateClient", method = RequestMethod.GET)
-	public String updateClient(HttpServletRequest pRequest,Model model) {
+	public String updateClient(HttpServletRequest pRequest, Model model) {
 		model.addAttribute("client", (Client) pRequest.getSession().getAttribute("clientConnecte"));
 		return "updateClient";
 	}
+
 	@RequestMapping(value = "/majClient", method = RequestMethod.POST)
 	public String majClient(@ModelAttribute(value = "client") Client client, Model model) {
-		agenceService.updateClient(new Client(client.getId(),client.getNom(),client.getPrenom(),client.getCIN(),client.getEmail(),client.getTel(),client.getMDP()));
-		return "redirect:/Contrat/association";
+		boolean bool;
+		bool = agenceService.updateClient(new Client(client.getId(), client.getNom(), client.getPrenom(),
+				client.getCIN(), client.getEmail(), client.getTel(), client.getMDP()));
+		model.addAttribute("checkUpdateClt", bool);
+		return "updateClient";
 	}
-	
-	
+
 }
