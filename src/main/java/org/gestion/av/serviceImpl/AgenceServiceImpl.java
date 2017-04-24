@@ -1,5 +1,7 @@
 package org.gestion.av.serviceImpl;
 
+import java.util.ArrayList;
+import java.util.Arrays;
 import java.util.List;
 
 import org.gestion.av.dao.IAgenceDao;
@@ -8,6 +10,8 @@ import org.gestion.av.entities.Consommation;
 import org.gestion.av.entities.Type_reclamation;
 import org.gestion.av.service.IAgenceService;
 import org.springframework.transaction.annotation.Transactional;
+
+import com.couchbase.client.java.document.json.JsonObject;
 
 @Transactional
 public class AgenceServiceImpl implements IAgenceService {
@@ -43,8 +47,33 @@ public class AgenceServiceImpl implements IAgenceService {
 		return dao.getClientByEmail(email);
 	}
 	@Override
-	public List<Consommation> findConsommationByIdContrat(long idContrat){
-		return dao.findConsommationByIdContrat(idContrat);
-	}
+	public String findConsommationByIdContrat(long idContrat){
+		String ret= "[";
+		List<Consommation> l = new ArrayList<>();
+		l = dao.findConsommationByIdContrat(idContrat);
+//		System.out.println("[");
+		for (int i = 0; i < l.size(); i++) {
+			Consommation r = l.get(i);
+			JsonObject consommationJson1 = JsonObject.empty().put("volumeConsomme",
+					r.getVolume_consomme()).put("periode", r.getPeriode());
+//			System.out.println(consommationJson1 + ",");
+			ret = ret+consommationJson1 + ",";
 
+		}
+//		System.out.println("]");
+		ret = ret+"]";
+		String[] ary = ret.split("");
+		ary[ary.length - 2]="";
+		StringBuilder builder = new StringBuilder();
+		for(String s : ary) {
+		    builder.append(s);
+		}
+		ret= builder.toString();
+//		char[] rettab = ret.toCharArray();
+//		rettab[rettab.length - 2]='\0';
+//		ret = rettab.toString();
+//		System.out.println(ret);
+		return ret;
+
+	}
 }

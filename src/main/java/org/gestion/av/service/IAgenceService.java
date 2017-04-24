@@ -13,6 +13,6 @@ public interface IAgenceService {
 	public Client getClient(long idClient);
 	public boolean updateClient(Client c );
 	public Client getClientByEmail(String email);
-	public List<Consommation> findConsommationByIdContrat(long idContrat);
+	public String findConsommationByIdContrat(long idContrat);
 
 }
