@@ -9,6 +9,7 @@ import javax.persistence.Query;
 
 import org.gestion.av.dao.IAgenceDao;
 import org.gestion.av.entities.Client;
+import org.gestion.av.entities.Consommation;
 import org.gestion.av.entities.Type_reclamation;
 
 public class AgenceDaoImpl implements IAgenceDao {
@@ -62,4 +63,24 @@ public class AgenceDaoImpl implements IAgenceDao {
 			return msg;
 			
 		}
+	 @Override
+	 public Client getClientByEmail(String email){
+		 Query req = em.createQuery("select c from Client c  where email =:x");
+			req.setParameter("x", email);
+			return (Client) req.getSingleResult();
+		 
+	 }
+	 @Override
+	 public List<Consommation> findConsommationByIdContrat(long idContrat){
+		 Query req = em.createQuery("select c from Consommation c  where code_contrat=:x");
+			req.setParameter("x", idContrat);
+			List<Consommation> consommations = new ArrayList<>();
+
+			consommations = req.getResultList();
+			return consommations;
+
+		 
+	 }
+
+
 }

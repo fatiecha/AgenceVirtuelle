@@ -4,6 +4,7 @@ import java.util.List;
 
 import org.gestion.av.dao.IAgenceDao;
 import org.gestion.av.entities.Client;
+import org.gestion.av.entities.Consommation;
 import org.gestion.av.entities.Type_reclamation;
 import org.gestion.av.service.IAgenceService;
 import org.springframework.transaction.annotation.Transactional;
@@ -37,4 +38,13 @@ public class AgenceServiceImpl implements IAgenceService {
 		
 		return dao.updateClient(c);
 	}
+	@Override
+	public Client getClientByEmail(String email){
+		return dao.getClientByEmail(email);
+	}
+	@Override
+	public List<Consommation> findConsommationByIdContrat(long idContrat){
+		return dao.findConsommationByIdContrat(idContrat);
+	}
+
 }

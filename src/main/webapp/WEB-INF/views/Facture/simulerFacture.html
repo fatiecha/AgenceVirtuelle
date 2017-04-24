@@ -4,12 +4,15 @@
 <!--<![endif]-->
 <!-- BEGIN HEAD -->
 <meta charset="UTF-8" />
-<head th:replace="/Fragment/resources_css :: css_resources"></head>
+<head th:replace="/Fragment/resources_css :: css_resources">
+</head>
 <style>
 .tdAlert {
 	background-color: ffdb4d;
 	color: white;
+	
 }
+
 </style>
 <!-- END HEAD -->
 
@@ -190,6 +193,7 @@
 					</div>
 				</div>
 				<!-- END SAMPLE TABLE PORTLET-->
+				<div id="chartdiv"></div>
 			</div>
 		</div>
 	</div>
@@ -205,6 +209,8 @@
 <script src="resources/assets/global/plugins/excanvas.min.js"></script> 
 <![endif]-->
 	<div th:include="/Fragment/resources_js :: js_resources"></div>
+	
+	
 </body>
 
 </html>

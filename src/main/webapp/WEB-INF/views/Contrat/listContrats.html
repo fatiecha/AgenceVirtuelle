@@ -123,7 +123,7 @@
 									<td th:text="${contrat.numero}"></td>
 									<td th:text="${contrat.service}"></td>
 									<td th:text="${contrat.idClient}"></td>
-									<td th:text="${contrat.NomClient}"></td>
+									<td th:text="${contrat.NomClient +'' + session.clientConnecte.prenom}"></td>
 
 									<td><div class="form-actions ">
 											<a data-toggle="modal" href="#static">
