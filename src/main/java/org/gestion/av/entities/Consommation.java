@@ -12,6 +12,12 @@ import javax.persistence.ManyToOne;
 @Entity
 
 public class Consommation implements Serializable {
+	
+	/**
+	 * 
+	 */
+	private static final long serialVersionUID = -8297830126055059825L;
+	
 	@Id
 	@GeneratedValue(strategy=GenerationType.IDENTITY)
 	

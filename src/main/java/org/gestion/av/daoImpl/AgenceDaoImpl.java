@@ -16,6 +16,7 @@ public class AgenceDaoImpl implements IAgenceDao {
 	@PersistenceContext
 	private EntityManager em;
 
+	@SuppressWarnings("unchecked")
 	@Override
 	public List<Type_reclamation> getlibelleTypeReclamation() {
 
@@ -70,7 +71,8 @@ public class AgenceDaoImpl implements IAgenceDao {
 			return (Client) req.getSingleResult();
 		 
 	 }
-	 @Override
+	 @SuppressWarnings("unchecked")
+	@Override
 	 public List<Consommation> findConsommationByIdContrat(long idContrat){
 		 Query req = em.createQuery("select c from Consommation c  where code_contrat=:x");
 			req.setParameter("x", idContrat);

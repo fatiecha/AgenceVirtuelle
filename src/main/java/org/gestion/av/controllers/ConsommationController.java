@@ -7,19 +7,23 @@ import javax.servlet.http.HttpServletRequest;
 
 import org.gestion.av.entities.Client;
 import org.gestion.av.entities.Consommation;
-import org.gestion.av.entities.Reclamation;
 import org.gestion.av.metier.ConsulterConsommationsMetier;
 import org.gestion.av.metier.ConsulterContratsMetier;
+import org.gestion.av.service.IAgenceService;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.ModelAttribute;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestMethod;
+import org.springframework.web.servlet.ModelAndView;
 @RequestMapping(value = "/Consommation")
 @Controller
 public class ConsommationController {
 private ConsulterConsommationsMetier consulterConsommationsMetier;
 private ConsulterContratsMetier consulterContratsMetier;
+
+
+
 
 	public void setConsulterContratsMetier(ConsulterContratsMetier consulterContratsMetier) {
 	this.consulterContratsMetier = consulterContratsMetier;
@@ -48,5 +52,4 @@ private ConsulterContratsMetier consulterContratsMetier;
 		model.addAttribute("contrats", consulterContratsMetier.consulterContrats(Long.toString(client.getId())));
 		return "Consommation/listConsommations";
 	}
-	
 }
