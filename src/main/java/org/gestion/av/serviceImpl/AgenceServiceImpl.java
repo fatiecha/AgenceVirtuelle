@@ -7,6 +7,9 @@ import java.util.List;
 import org.gestion.av.dao.IAgenceDao;
 import org.gestion.av.entities.Client;
 import org.gestion.av.entities.Consommation;
+import org.gestion.av.entities.Contrat;
+import org.gestion.av.entities.Demande_abonnement;
+import org.gestion.av.entities.Facture;
 import org.gestion.av.entities.Type_reclamation;
 import org.gestion.av.service.IAgenceService;
 import org.springframework.transaction.annotation.Transactional;
@@ -75,5 +78,34 @@ public class AgenceServiceImpl implements IAgenceService {
 //		System.out.println(ret);
 		return ret;
 
+	}
+
+
+
+	@Override
+	public Contrat getContratById(long idContrat) {
+		
+		return dao.getContratById(idContrat);
+	}
+
+
+
+	@Override
+	public Facture getFactureById(long idFacture) {
+		return dao.getFactureById(idFacture);
+	}
+
+
+
+	@Override
+	public Consommation getConsommationByIdFactureIdContrat(long idFacture, long idContrat) {
+		return dao.getConsommationByIdFactureIdContrat(idFacture, idContrat);
+	}
+
+
+
+	@Override
+	public Demande_abonnement getAbonnementByIdContrat(long idContrat) {
+		return dao.getAbonnementByIdContrat(idContrat);
 	}
 }

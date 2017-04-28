@@ -2,6 +2,8 @@ package org.gestion.av.controllers;
 
 import static org.mockito.Matchers.matches;
 
+import java.io.FileOutputStream;
+import java.io.IOException;
 import java.util.ArrayList;
 import java.util.List;
 
@@ -9,6 +11,7 @@ import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpSession;
 
 import org.gestion.av.entities.Client;
+import org.gestion.av.entities.Echeance;
 import org.gestion.av.entities.Facture;
 import org.gestion.av.entities.Reclamation;
 import org.gestion.av.metier.ConsulterContratsMetier;
@@ -18,6 +21,12 @@ import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.ModelAttribute;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestMethod;
+import org.springframework.web.servlet.ModelAndView;
+
+import com.itextpdf.text.Document;
+import com.itextpdf.text.DocumentException;
+import com.itextpdf.text.Paragraph;
+import com.itextpdf.text.pdf.PdfWriter;
 
 @RequestMapping(value = "/Facture")
 @Controller
@@ -68,5 +77,27 @@ public class FactureController {
 		model.addAttribute("contrats", consulterContratsMetier.consulterContrats(Long.toString(client.getId())));
 		return "Facture/listFactures";
 	}
+	@RequestMapping(value = "/genererPDF", method = RequestMethod.POST)
+	public String genererPDF(long idFacture) {
+		 String chemin = "C:\\Users\\Fatimzhra\\Desktop\\Files\\fichier1.pdf";
 
+		Document document = new Document();
+	    try 
+	    {
+	      PdfWriter.getInstance(document, new FileOutputStream(chemin));
+	      document.open();
+	      document.add(new Paragraph(idFacture));
+	    } catch (DocumentException de) {
+	     
+	    } catch (IOException de) {
+	     
+	    }
+	   
+	    document.close();
+	  	 
+		
+
+		 
+	 	return "Facture/listFactures";
+	}
 }

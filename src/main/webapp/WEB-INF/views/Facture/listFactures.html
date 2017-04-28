@@ -175,31 +175,13 @@
 										<td th:text="${facture.type_fac}"></td>
 
 										<td th:text="${facture.date_exigibiliteS}"></td>
-										<td><button
+										<td><button id="FilePDF" th:value="${facture.id}"
 												style="background-color: #3b5998; color: white;"
 												type="button" class="fa fa-print btn btn-circle ">
 												Imprimer</button></td>
 
 
 									</tr>
-									<!-- 																		<tr th:each="facture : ${factures}" -->
-									<!-- 																			th:if="${facture.etat==true}"> -->
-									<!-- 																			<td th:text="${facture.id}"></td> -->
-									<!-- 																			<td th:text="${facture.periode}"></td> -->
-									<!-- 																			<td th:text="${facture.montant}"></td> -->
-
-									<!-- 																			<td th:text="${facture.solde}"></td> -->
-									<!-- 																			<td th:text="${facture.type_fac}"></td> -->
-
-									<!-- 																			<td th:text="${facture.date_exigibiliteS}"></td> -->
-									<!-- 																			<td><button -->
-									<!-- 																					style="background-color: #3b5998; color: white;" -->
-									<!-- 																					type="button" class="fa fa-print btn btn-circle "> -->
-									<!-- 																					Imprimer</button></td> -->
-
-
-									<!-- 																		</tr> -->
-
 								</tbody>
 							</table>
 						</div>
@@ -222,6 +204,21 @@
 <![endif]-->
 	<div th:include="/Fragment/resources_js :: js_resources"></div>
 	<script th:inline="javascript">
+	
+	$(document).ready(function() {
+		$("#FilePDF").on("click",function(){
+			$.post("genererPDF",//l url de la fct de traitement
+				{
+				idFacture:$(this).val(),//on envoie les parametres par lesquells on veut travailler dans le controller
+				},
+				function(data, status) {
+					if (status == "success") {
+						alert('ooo');
+					}
+				}			
+			)
+		});
+		});
 	/*<![CDATA[*/
 		
 	$("#modalFacture").hide();

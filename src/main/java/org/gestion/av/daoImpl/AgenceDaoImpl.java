@@ -10,6 +10,9 @@ import javax.persistence.Query;
 import org.gestion.av.dao.IAgenceDao;
 import org.gestion.av.entities.Client;
 import org.gestion.av.entities.Consommation;
+import org.gestion.av.entities.Contrat;
+import org.gestion.av.entities.Demande_abonnement;
+import org.gestion.av.entities.Facture;
 import org.gestion.av.entities.Type_reclamation;
 
 public class AgenceDaoImpl implements IAgenceDao {
@@ -83,6 +86,35 @@ public class AgenceDaoImpl implements IAgenceDao {
 
 		 
 	 }
+
+	@Override
+	public Contrat getContratById(long idContrat) {
+		Query req = em.createQuery("select c from Contrat c  where id =:x");
+		req.setParameter("x", idContrat);
+		return (Contrat) req.getSingleResult();
+	}
+
+	@Override
+	public Facture getFactureById(long idFacture) {
+		Query req = em.createQuery("select f from Facture f  where id =:x");
+		req.setParameter("x", idFacture);
+		return (Facture) req.getSingleResult();
+	}
+
+	@Override
+	public Consommation getConsommationByIdFactureIdContrat(long idFacture, long idContrat) {
+		Query req = em.createQuery("select c from Consommation c , Facture f where c.contrat.id =:x and c.periode=f.periode and f.id =:y");
+		req.setParameter("x", idContrat);
+		req.setParameter("y", idFacture);
+		return (Consommation) req.getSingleResult();
+	}
+
+	@Override
+	public Demande_abonnement getAbonnementByIdContrat(long idContrat) {
+		Query req = em.createQuery("select d from Demande_abonnement d ,Contrat c where  d.id=c.demande_abonnement.id and c.id =:x");
+		req.setParameter("x", idContrat);
+		return (Demande_abonnement) req.getSingleResult();
+	}
 
 
 }
