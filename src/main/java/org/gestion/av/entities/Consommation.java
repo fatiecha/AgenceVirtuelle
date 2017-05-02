@@ -3,12 +3,15 @@ package org.gestion.av.entities;
 import java.io.Serializable;
 import java.util.Date;
 
+import javax.persistence.Column;
 import javax.persistence.Entity;
 import javax.persistence.GeneratedValue;
 import javax.persistence.GenerationType;
 import javax.persistence.Id;
 import javax.persistence.JoinColumn;
 import javax.persistence.ManyToOne;
+
+import org.hibernate.annotations.Type;
 @Entity
 
 public class Consommation implements Serializable {
@@ -23,6 +26,8 @@ public class Consommation implements Serializable {
 	
 	private long id;
 	private String periode;
+	@Column
+	@Type(type="date")
 	private Date date_releve;
 	private int nbr_jour;
 	private double index_lu;

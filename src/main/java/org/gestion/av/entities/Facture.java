@@ -4,6 +4,7 @@ import java.io.Serializable;
 import java.util.Date;
 import java.util.List;
 
+import javax.persistence.Column;
 import javax.persistence.Entity;
 import javax.persistence.GeneratedValue;
 import javax.persistence.GenerationType;
@@ -12,6 +13,8 @@ import javax.persistence.JoinColumn;
 import javax.persistence.ManyToOne;
 import javax.persistence.OneToMany;
 import javax.persistence.OneToOne;
+
+import org.hibernate.annotations.Type;
 @Entity
 public class Facture implements Serializable{
 	@Id
@@ -24,6 +27,8 @@ public class Facture implements Serializable{
 	private double montant;
 	private double solde;
 	private boolean etat;
+	@Column
+	@Type(type="date")
 	private Date date_exigibilite;
 	private Date date;
 	@ManyToOne

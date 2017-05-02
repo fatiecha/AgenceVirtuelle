@@ -4,6 +4,7 @@ import java.io.Serializable;
 import java.util.Date;
 import java.util.List;
 
+import javax.persistence.Column;
 import javax.persistence.Entity;
 import javax.persistence.GeneratedValue;
 import javax.persistence.GenerationType;
@@ -13,6 +14,8 @@ import javax.persistence.ManyToMany;
 import javax.persistence.ManyToOne;
 import javax.persistence.OneToMany;
 import javax.persistence.OneToOne;
+
+import org.hibernate.annotations.Type;
 
 @Entity
 public class Contrat implements Serializable {
@@ -29,6 +32,8 @@ public class Contrat implements Serializable {
 	private String branchement;
 	private String etat;
 	private String numCompteur;
+	@Column
+	@Type(type="date")
 	private Date datePoseCompteur;
 	private String datePoseCompteurS;
 	private String tarif;

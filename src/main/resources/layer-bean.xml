@@ -5,8 +5,24 @@
 	xsi:schemaLocation="http://www.springframework.org/schema/beans http://www.springframework.org/schema/beans/spring-beans.xsd
 		http://www.springframework.org/schema/tx http://www.springframework.org/schema/tx/spring-tx.xsd
 		http://www.springframework.org/schema/context http://www.springframework.org/schema/context/spring-context.xsd">
+		
+<bean id="mailSender" class="org.springframework.mail.javamail.JavaMailSenderImpl">
+   <property name="host" value="smtp.gmail.com" />
+   <property name="port" value="587" />
+   <property name="username" value="radeema.client@gmail.com" />
+   <property name="password" value="azerty123456789" />
+  
+   <property name="javaMailProperties">
+      <props>
+        <prop key="mail.transport.protocol">smtp</prop>
+                <prop key="mail.smtp.auth">true</prop>
+                <prop key="mail.smtp.starttls.enable">true</prop>
+                <prop key="mail.debug">true</prop>
+             </props>
+   </property>
+  </bean>	
 
-
+	<bean id="generatePDF" class="org.gestion.av.serviceImpl.GeneratePDF"></bean>
 	<bean id="countFIMetier" class="org.gestion.av.metier.CountFIMetier"></bean>
 	<bean id="clientMetier" class="org.gestion.av.metier.AjoutClientMetier"></bean>
 	<bean id="concliMetier" class="org.gestion.av.metier.AjoutConCliMetier"></bean>
@@ -35,6 +51,8 @@
 		<property name="connexionMetier" ref="connexionMetier"></property>
 		<property name="countFIMetier" ref="countFIMetier"></property>
 		<property name="agenceService" ref="agenceServiceImpl"></property>
+			<property name="mailSender" ref="mailSender"></property>
+	
 
 
 	</bean>
@@ -68,7 +86,9 @@
 	<bean id="factureController" class="org.gestion.av.controllers.FactureController">
 		<property name="consulterFacturesMetier" ref="consulterFacturesMetier"></property>
 		<property name="consulterContratsMetier" ref="consulterContratsMetier"></property>
+		<property name="generatePDF" ref="generatePDF"></property>
 
+		
 	</bean>
 	<bean id="reclamationController" class="org.gestion.av.controllers.ReclamationController">
 		<property name="reclamationMetier" ref="reclamationMetier"></property>

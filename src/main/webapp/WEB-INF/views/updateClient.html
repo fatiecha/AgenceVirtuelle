@@ -126,15 +126,15 @@
 									<div class="form-group">
 										<label class="col-md-4 control-label">Ancien Mot de passe</label>
 										<div class="col-md-4">
-											<input type="password" class="form-control input-circle"
-												placeholder="Enter text" th:field="*{MDP}" required="required" />
+											<input type="password" class="form-control input-circle"  id="oldMDP"
+												placeholder="Enter text" required="required" />
 										</div>
 										</div>
 									<div class="form-group">
 										<label class="col-md-4 control-label">Nouveau Mot de passe</label>
 										<div class="col-md-4">
-											<input type="password" class="form-control input-circle"
-												placeholder="Enter text" th:field="*{MDP}" required="required" />
+											<input type="password" class="form-control input-circle" id="newMDP"
+												placeholder="Enter text" th:field="*{MDP}" required="required" disabled="disabled"/>
 										</div>
 										</div>
 									
@@ -170,12 +170,18 @@
 		<div th:include="/Fragment/resources_js :: js_resources"></div>
 	</div>
 	
-		<script th:inline="javascript">
-	
-	
-		
+	<script th:inline="javascript">
 	/*<![CDATA[*/
+		
+	//Verifier le mot de passe actuel
+	var motDePasse = /*[[${MDP}]]*/;
+	$("#oldMDP").on("keyup",function(){
+		if ($("#oldMDP").val() === motDePasse) {
+			$("#newMDP").removeAttr( "disabled" );
+		}
+	});
 	
+	//message success update.
 	$("#modalMAJClt").hide();
 	checkUpdateClt = /*[[${checkUpdateClt}]]*/;
 	if (checkUpdateClt) {

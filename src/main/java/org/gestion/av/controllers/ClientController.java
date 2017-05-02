@@ -9,6 +9,8 @@ import org.gestion.av.metier.ConnexionMetier;
 import org.gestion.av.metier.CountFIMetier;
 import org.gestion.av.service.IAgenceService;
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.mail.MailSender;
+import org.springframework.mail.SimpleMailMessage;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.ModelAttribute;
@@ -22,6 +24,11 @@ public class ClientController {
 	private AjoutClientMetier clientMetier;
 	private ConnexionMetier connexionMetier;
 	private IAgenceService agenceService;
+private MailSender mailSender;
+
+	public void setMailSender(MailSender mailSender) {
+	this.mailSender = mailSender;
+}
 
 	public void setConnexionMetier(ConnexionMetier connexionMetier) {
 		this.connexionMetier = connexionMetier;
@@ -49,6 +56,7 @@ public class ClientController {
 	public String Save(@ModelAttribute(value = "client") Client c, Model model) {
 		String msg;
 		msg = clientMetier.ajoutClient(c.getNom(), c.getPrenom(), c.getCIN(), c.getEmail(), c.getTel(), c.getMDP());
+		sendMail(c);
 		model.addAttribute("checkClt", msg);
 		return "inscriptionClient";
 	}
@@ -79,7 +87,9 @@ public class ClientController {
 
 	@RequestMapping(value = "/updateClient", method = RequestMethod.GET)
 	public String updateClient(HttpServletRequest pRequest, Model model) {
-		model.addAttribute("client", (Client) pRequest.getSession().getAttribute("clientConnecte"));
+		Client client = (Client) pRequest.getSession().getAttribute("clientConnecte");
+		model.addAttribute("client", client );
+		model.addAttribute("MDP",client.getMDP());
 		return "updateClient";
 	}
 
@@ -91,5 +101,16 @@ public class ClientController {
 		model.addAttribute("checkUpdateClt", bool);
 		return "updateClient";
 	}
-
+	 public void sendMail(Client c) {
+		   SimpleMailMessage message = new SimpleMailMessage();
+		   String from = "radeema.client@gmail.com";
+		   String subject = "BIENVENU "+c.getPrenom()+" DANS VOTRE ESPACE CLIENT RADEEMA";
+		   message.setFrom(from);
+		   message.setTo(c.getEmail());
+		   message.setSubject(subject);
+		 
+		   message.setText("Votre informations ===> CIN : "+c.getCIN()+ " , MOT DE PASSE : " +c.getMDP());
+		
+		   mailSender.send(message);
+		  }
 }
