@@ -19,7 +19,7 @@ public class MailMail {
 		this.mailSender = mailSender;
 	}
 
-	public void sendMail(String email,long idFacture) {
+	public void sendMailAttachement(String email,long idFacture) {
 
 	   MimeMessage message = mailSender.createMimeMessage();
 

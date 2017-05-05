@@ -4,7 +4,6 @@ import java.io.FileOutputStream;
 import java.io.IOException;
 import java.text.DecimalFormat;
 
-import org.gestion.av.dao.IAgenceDao;
 import org.gestion.av.entities.Client;
 import org.gestion.av.entities.Consommation;
 import org.gestion.av.entities.Contrat;

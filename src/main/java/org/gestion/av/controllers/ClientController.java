@@ -126,18 +126,15 @@ public class ClientController {
 	@RequestMapping(value = "/envoyerMDP", method = RequestMethod.POST)
 	public String envoyerMDP(@ModelAttribute(value = "client") Client client, Model model) {
 		Client cli = new Client();
-		cli = agenceService.getClientByEmail(client.getEmail());
 		try {
-		if (cli != null) {
+			cli = agenceService.getClientByEmail(client.getEmail());
 			sendMailMdpOublie(cli);
 			model.addAttribute("confirmationEnvoiMDP", true);
 
-		} else {
+		
+		} catch (NoResultException e) {
 			model.addAttribute("confirmationEnvoiMDP", false);
 
-		}
-		} catch (NoResultException e) {
-		   
 		}
 		return "mdpOublie";
 	}

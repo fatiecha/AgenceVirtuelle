@@ -17,9 +17,9 @@ import org.springframework.mail.MailSender;
 
 public class Test {
 	// pr faire l'injection des dependances /av/resources/login/img/98-1.jpg}" 
-	static ClassPathXmlApplicationContext context = new ClassPathXmlApplicationContext(
-			new String[] { "applicationContext.xml" });
-	static MailSender mailSender= (MailSender) context.getBean("mailSender");
+//	static ClassPathXmlApplicationContext context = new ClassPathXmlApplicationContext(
+//			new String[] { "applicationContext.xml" });
+//	static MailSender mailSender= (MailSender) context.getBean("mailSender");
 
 	   // record duration, in milliseconds
     static final long RECORD_TIME = 30000;  // 1 minute
@@ -92,32 +92,32 @@ public class Test {
     /**
      * Entry to run the program
      */
-//    public static void main(String[] args) {
-//        final Test recorder = new Test();
-// 
-//        // creates a new thread that waits for a specified
-//        // of time before stopping
-//        Thread stopper = new Thread(new Runnable() {
-//            public void run() {
-//                try {
-//                    Thread.sleep(RECORD_TIME);
-//                } catch (InterruptedException ex) {
-//                    ex.printStackTrace();
-//                }
-//                recorder.finish();
-//            }
-//        });
-// 
-//        stopper.start();
-// 
-//        // start recording
-//        recorder.start();
-//    }
-    
-    
     public static void main(String[] args) {
-    	MailMail mm = (MailMail) context.getBean("mailMail");
-        mm.sendMail("f.karimoullah@gmail.com ",3);
+        final Test recorder = new Test();
+ 
+        // creates a new thread that waits for a specified
+        // of time before stopping
+        Thread stopper = new Thread(new Runnable() {
+            public void run() {
+                try {
+                    Thread.sleep(RECORD_TIME);
+                } catch (InterruptedException ex) {
+                    ex.printStackTrace();
+                }
+                recorder.finish();
+            }
+        });
+ 
+        stopper.start();
+ 
+        // start recording
+        recorder.start();
     }
+    
+    
+//    public static void main(String[] args) {
+//    	MailMail mm = (MailMail) context.getBean("mailMail");
+//        mm.sendMailAttachement("f.karimoullah@gmail.com ",3);
+//    }
 }
 

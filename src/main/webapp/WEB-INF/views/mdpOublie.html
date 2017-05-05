@@ -137,11 +137,13 @@
 		
 	/*<![CDATA[*/
 	
+	$("#btnLogin").hide();
 	$("#modalEnvoiMDP").hide();
 	confirmationEnvoiMDP = /*[[${confirmationEnvoiMDP}]]*/;
 	if (confirmationEnvoiMDP == true) {
     	$("#modalEnvoiMDP").click();
-		$("#msg").html('Vérifiez votre adresse éléctronique .Votre mot de passe a été envoyé.');
+    	$("#btnLogin").show();
+		$("#msg").html('Vérifiez votre boîte éléctronique .Votre mot de passe a été envoyé.');
 	}
 	else if (confirmationEnvoiMDP  == false){
 		$("#modalEnvoiMDP").click();
