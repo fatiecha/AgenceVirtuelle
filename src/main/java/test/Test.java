@@ -1,293 +1,123 @@
 package test;
 
-import java.io.FileOutputStream;
+import java.io.File;
 import java.io.IOException;
-import java.text.DecimalFormat;
-import java.util.Properties;
 
-import javax.mail.Message;
-import javax.mail.MessagingException;
-import javax.mail.Session;
-import javax.mail.Transport;
-import javax.mail.internet.AddressException;
-import javax.mail.internet.InternetAddress;
-import javax.mail.internet.MimeMessage;
+import javax.sound.sampled.AudioFileFormat;
+import javax.sound.sampled.AudioFormat;
+import javax.sound.sampled.AudioInputStream;
+import javax.sound.sampled.AudioSystem;
+import javax.sound.sampled.DataLine;
+import javax.sound.sampled.LineUnavailableException;
+import javax.sound.sampled.TargetDataLine;
 
-import org.gestion.av.entities.Client;
-import org.gestion.av.entities.Consommation;
-import org.gestion.av.entities.Contrat;
-import org.gestion.av.entities.Demande_abonnement;
-import org.gestion.av.entities.Facture;
-import org.gestion.av.service.IAgenceService;
-import org.springframework.beans.factory.annotation.Autowired;
+import org.gestion.av.serviceImpl.MailMail;
 import org.springframework.context.support.ClassPathXmlApplicationContext;
-
-import com.itextpdf.text.BaseColor;
-import com.itextpdf.text.Document;
-import com.itextpdf.text.DocumentException;
-import com.itextpdf.text.Element;
-import com.itextpdf.text.Font;
-import com.itextpdf.text.Image;
-import com.itextpdf.text.Paragraph;
-import com.itextpdf.text.Phrase;
-import com.itextpdf.text.pdf.PdfPCell;
-import com.itextpdf.text.pdf.PdfPTable;
-import com.itextpdf.text.pdf.PdfWriter;
+import org.springframework.mail.MailSender;
 
 public class Test {
 	// pr faire l'injection des dependances /av/resources/login/img/98-1.jpg}" 
 	static ClassPathXmlApplicationContext context = new ClassPathXmlApplicationContext(
 			new String[] { "applicationContext.xml" });
-	static IAgenceService agenceService = (IAgenceService) context.getBean("agenceServiceImpl");
+	static MailSender mailSender= (MailSender) context.getBean("mailSender");
 
-	public static void genererPdf(long idFacture, long idContrat, long idClient) {
-		Client client = agenceService.getClient(idClient);
-		Facture facture = agenceService.getFactureById(idFacture);
-		Contrat contrat = agenceService.getContratById(idContrat);
-		Demande_abonnement demande_abonnement = agenceService.getAbonnementByIdContrat(idContrat);
-		Consommation consommation = agenceService.getConsommationByIdFactureIdContrat(idFacture, idContrat);
-		String chemin = "C:\\Users\\Fatimzhra\\Desktop\\Files\\Facture" + idFacture + ".pdf";
-		Document document = new Document();
-		try { 
-			if(contrat.getService().equals("Basse tension") || (contrat.getService().equals("Basse Tension") )){
-				contrat.setService("Electricité");
-			}
-			PdfWriter.getInstance(document, new FileOutputStream(chemin));
-			document.open();
-//			Image img = Image.getInstance("C:\\Users\\Fatimzhra\\Downloads\\98-1.jpg");
-			Image img = Image.getInstance("C:\\Users\\Fatimzhra\\workspace\\Agence_virtuelle\\src\\main\\webapp\\resources\\login\\img\\98-1.jpg");
-
-//	        img.setAbsolutePosition(450f, 10f);
-			 document.add(img);
-			Font f = new Font();
-			// FontFamily.ROMAN,50.0f,Font.UNDERLINE,BaseColor.RED
-			
-			f.setSize(16.0f);
-			Paragraph titre = new Paragraph("Facture d'" + contrat.getService() + " N°" + facture.getId(),f);
-			titre.setAlignment(Element.ALIGN_CENTER);
-			document.add(titre);
-			document.add(new Paragraph("            "));
-			Paragraph Prenom = new Paragraph("Prénom Client : " +  client.getPrenom());
-			document.add(Prenom);
-			Paragraph Nom = new Paragraph("Nom Client : " + client.getNom() );
-			document.add(Nom);
-			Paragraph Tel = new Paragraph("N° Téléphone : " + client.getTel());
-			document.add(Tel);
-			Paragraph periodeFacturation = new Paragraph("Période Facturation : " + facture.getPeriode());
-			document.add(periodeFacturation);
-			// table.setWidthPercentage(100);
-			Paragraph InfoContrat = new Paragraph("Informations Contrat :");
-			document.add(InfoContrat);
-			document.add(new Paragraph("            "));
-			document.add(Tableau1(demande_abonnement, contrat, idClient));
-			document.add(new Paragraph("            "));
-			Paragraph InfoConsommation = new Paragraph("Informations Consommation :");
-			document.add(InfoConsommation);
-			document.add(new Paragraph("            "));
-			document.add(Tableau2(consommation,contrat));
-			document.add(new Paragraph("            "));
-			Paragraph detailFacture = new Paragraph("Détails facture :");
-			document.add(detailFacture);
-			document.add(new Paragraph("            "));
-			document.add(Tableau3(consommation, contrat));
-			document.add(new Paragraph("            "));
-
-			document.add(Tableau5(facture));
-			document.add(new Paragraph("            "));
-			document.add(Tableau4());
-		} catch (DocumentException de) {
-
-		} catch (IOException de) {
-
-		}
-
-		document.close();
-	}
-
-	public static Paragraph Tableau4() {
-
-		Paragraph footer = new Paragraph("Numéro de centre relation client: 080 2000 123 ");
-		footer.setAlignment(Element.ALIGN_CENTER);
-		return footer;
-	}
-
-	public static Paragraph Tableau5(Facture facture) {
-		Font f = new Font();
-		// FontFamily.ROMAN,50.0f,Font.UNDERLINE,BaseColor.RED
-		f.setColor(BaseColor.RED);
-		f.setFamily("Helvetica");
-		f.setSize(16.0f);
-		Paragraph titre = new Paragraph("Facture à payer avant :  " + facture.getDate_exigibilite(), f);
-		titre.setAlignment(Element.ALIGN_CENTER);
-		return titre;
-	}
-
-	public static PdfPTable Tableau3(Consommation consommation, Contrat contrat) {
-		double prixHT;
-		if (contrat.getService().equals("Eau") || contrat.getService().equals("eau")) {
-			prixHT = 1.7;
-		} else {
-			prixHT = 0.7904;
-		}
-		PdfPTable table = new PdfPTable(6);
-		PdfPCell cell;
-		cell = new PdfPCell(new Phrase("Détail de votre facture "));
-		table.addCell(cell);
-		cell = new PdfPCell(new Phrase("Consommation "));
-		table.addCell(cell);
-		cell = new PdfPCell(new Phrase("Prix unitaire HT "));
-		table.addCell(cell);
-		cell = new PdfPCell(new Phrase("Montant HT "));
-		table.addCell(cell);
-		cell = new PdfPCell(new Phrase("Taux TVA "));
-		table.addCell(cell);
-		cell = new PdfPCell(new Phrase("Montant TVA "));
-		table.addCell(cell);
-		table.addCell(new PdfPCell(new Paragraph("Redevances de consommation" + contrat.getService())));
-		table.addCell(new PdfPCell(new Paragraph("" + consommation.getVolume_facture())));
-		table.addCell(new PdfPCell(new Paragraph("" + prixHT)));
-		double montantHT = consommation.getVolume_facture() * prixHT;
-		double montantTVA = consommation.getVolume_facture() * prixHT * 14 / 100;
-		DecimalFormat df = new DecimalFormat();
-		df.setMaximumFractionDigits(2); // arrondi à 2 chiffres apres la
-										// virgules
-		df.setMinimumFractionDigits(2);
-		df.setDecimalSeparatorAlwaysShown(true);
-		table.addCell(new PdfPCell(new Paragraph("" + Double.parseDouble(df.format(montantHT)))));
-		table.addCell(new PdfPCell(new Paragraph("14.0")));
-		table.addCell(new PdfPCell(new Paragraph("" + Double.parseDouble(df.format(montantTVA)))));
-		table.addCell(new PdfPCell(new Paragraph("Redevances fixes " + contrat.getService())));
-		table.addCell(new PdfPCell(new Paragraph("1.00")));
-		table.addCell(new PdfPCell(new Paragraph("9.87")));
-		table.addCell(new PdfPCell(new Paragraph("9.87")));
-		table.addCell(new PdfPCell(new Paragraph("")));
-		table.addCell(new PdfPCell(new Paragraph("1.75")));
-		table.addCell(new PdfPCell(new Paragraph("Timbre ")));
-		table.addCell(new PdfPCell(new Paragraph("")));
-		table.addCell(new PdfPCell(new Paragraph("")));
-		table.addCell(new PdfPCell(new Paragraph("0.16")));
-		table.addCell(new PdfPCell(new Paragraph("")));
-		table.addCell(new PdfPCell(new Paragraph("")));
-		cell = new PdfPCell(new Phrase("Total Hors Taxes"));
-		cell.setColspan(4);
-		table.addCell(cell);
-		double totalHT = montantHT + 9.87 + 0.16;
-		cell = new PdfPCell(new Phrase("" + Double.parseDouble(df.format(totalHT))));
-		cell.setColspan(2);
-		table.addCell(cell);
-		cell = new PdfPCell(new Phrase("Total TVA"));
-		cell.setColspan(4);
-		table.addCell(cell);
-		double totalTVA = montantTVA + 1.75;
-		cell = new PdfPCell(new Phrase(new Paragraph("" + Double.parseDouble(df.format(totalTVA)))));
-		cell.setColspan(2);
-		table.addCell(cell);
-		cell = new PdfPCell(new Phrase("Montant TTC"));
-		cell.setColspan(4);
-		table.addCell(cell);
-		cell = new PdfPCell(new Phrase(new Paragraph("" + Double.parseDouble(df.format(totalTVA + totalHT)))));
-		cell.setColspan(2);
-		table.addCell(cell);
-		table.setWidthPercentage(100);
-
-		return table;
-	}
-
-	public static PdfPTable Tableau2(Consommation consommation,Contrat contrat ) {
-		String unite;
-		if (contrat.getService().equals("Eau") || contrat.getService().equals("eau")) {
-			unite = " m3";
-		} else {
-			unite = " Kwh";
-		}
-		PdfPTable table = new PdfPTable(5);
-		PdfPCell cell;
-		cell = new PdfPCell(new Phrase("Date relève "));
-		table.addCell(cell);
-		cell = new PdfPCell(new Phrase("Index lu "));
-		table.addCell(cell);
-		cell = new PdfPCell(new Phrase("Nombre jour "));
-		table.addCell(cell);
-		cell = new PdfPCell(new Phrase("Volume consommé "));
-		table.addCell(cell);
-		cell = new PdfPCell(new Phrase("Volume facturé "));
-		table.addCell(cell);
-		table.addCell(new PdfPCell(new Paragraph("" + consommation.getDate_releve())));
-		table.addCell(new PdfPCell(new Paragraph("" + consommation.getIndex_lu())));
-		table.addCell(new PdfPCell(new Paragraph("" + consommation.getNbr_jour())));
-		table.addCell(new PdfPCell(new Paragraph("" + consommation.getVolume_consomme() + unite)));
-		table.addCell(new PdfPCell(new Paragraph("" + consommation.getVolume_facture() +  unite)));
-
-		return table;
-	}
-
-	public static PdfPTable Tableau1(Demande_abonnement demande_abonnement, Contrat contrat, long idClient) {
-		PdfPTable table = new PdfPTable(new float[] { 1, 1 });
-		table.setWidthPercentage(55.067f);
-		PdfPCell cell;
-		cell = new PdfPCell(new Phrase("Tournée "));
-		table.addCell(cell);
-		cell = new PdfPCell(new Paragraph("" + demande_abonnement.getTournee()));
-		table.addCell(cell);
-		cell = new PdfPCell(new Phrase("Contrat "));
-		table.addCell(cell);
-		cell = new PdfPCell(new Paragraph("" + contrat.getNumero()));
-		table.addCell(cell);
-		cell = new PdfPCell(new Phrase("N°Client "));
-		table.addCell(cell);
-		cell = new PdfPCell(new Paragraph("" + idClient));
-		table.addCell(cell);
-		cell = new PdfPCell(new Phrase("Compteur "));
-		table.addCell(cell);
-		cell = new PdfPCell(new Paragraph("" + contrat.getNumCompteur()));
-		table.addCell(cell);
-		cell = new PdfPCell(new Phrase("Usage "));
-		table.addCell(cell);
-		cell = new PdfPCell(new Paragraph("" + demande_abonnement.getTarif()));
-		table.addCell(cell);
-		return table;
-	}
-//	@Autowired
-//	public static void sendMessage(String subject, String text, String destinataire, String copyDest) {
-//	    // 1 -> Création de la session
-//	    Properties properties = new Properties();
-//	    properties.setProperty("mail.transport.protocol", "smtp");
-//	    properties.setProperty("mail.smtp.host", SMTP_HOST1);
-//	    properties.setProperty("mail.smtp.user", LOGIN_SMTP1);
-//	    properties.setProperty("mail.from", IMAP_ACCOUNT1);
-//	    Session session = Session.getInstance(properties);
-//	    MimeMessage message = new MimeMessage(session);
-//	    try {
-//	        message.setText(text);
-//	        message.setSubject(subject);
-//	        message.addRecipients(Message.RecipientType.TO, destinataire);
-//	        message.addRecipients(Message.RecipientType.CC, copyDest);
-//	    } catch (MessagingException e) {
-//	        e.printStackTrace();
-//	    }
-//	    Transport transport;
-//	    try {
-//	        transport = session.getTransport("smtp");
-//	        transport.connect(LOGIN_SMTP1, PASSWORD_SMTP1);
-//	        transport.sendMessage(message, new Address[] { new InternetAddress(destinataire),
-//	                                                        new InternetAddress(copyDest) });
-//	    } catch (MessagingException e) {
-//	        e.printStackTrace();
-//	    } finally {
-//	        try {
-//	            if (transport != null) {
-//	                transport.close();
-//	            }
-//	        } catch (MessagingException e) {
-//	            e.printStackTrace();
-//	        }
-//	    }
-//	}
-
-	
-	public static void main(String[] args) {
-//		genererPdf(3, 3, 1);
-//		genererPdf(5, 28, 1);
-		
-	}
+	   // record duration, in milliseconds
+    static final long RECORD_TIME = 30000;  // 1 minute
+ 
+    // path of the wav file
+    File wavFile = new File("E:/Test/RecordAudio.wav");
+ 
+    // format of audio file
+    AudioFileFormat.Type fileType = AudioFileFormat.Type.WAVE;
+ 
+    // the line from which audio data is captured
+    TargetDataLine line;
+ 
+    /**
+     * Defines an audio format
+     */
+    AudioFormat getAudioFormat() {
+        float sampleRate = 16000;
+        int sampleSizeInBits = 8;
+        int channels = 2;
+        boolean signed = true;
+        boolean bigEndian = true;
+        AudioFormat format = new AudioFormat(sampleRate, sampleSizeInBits,
+                                             channels, signed, bigEndian);
+        return format;
+    }
+ 
+    /**
+     * Captures the sound and record into a WAV file
+     */
+    void start() {
+        try {
+            AudioFormat format = getAudioFormat();
+            DataLine.Info info = new DataLine.Info(TargetDataLine.class, format);
+ 
+            // checks if system supports the data line
+            if (!AudioSystem.isLineSupported(info)) {
+                System.out.println("Line not supported");
+                System.exit(0);
+            }
+            line = (TargetDataLine) AudioSystem.getLine(info);
+            line.open(format);
+            line.start();   // start capturing
+ 
+            System.out.println("Start capturing...");
+ 
+            AudioInputStream ais = new AudioInputStream(line);
+ 
+            System.out.println("Start recording...");
+ 
+            // start recording
+            AudioSystem.write(ais, fileType, wavFile);
+ 
+        } catch (LineUnavailableException ex) {
+            ex.printStackTrace();
+        } catch (IOException ioe) {
+            ioe.printStackTrace();
+        }
+    }
+ 
+    /**
+     * Closes the target data line to finish capturing and recording
+     */
+    void finish() {
+        line.stop();
+        line.close();
+        System.out.println("Finished");
+    }
+ 
+    /**
+     * Entry to run the program
+     */
+//    public static void main(String[] args) {
+//        final Test recorder = new Test();
+// 
+//        // creates a new thread that waits for a specified
+//        // of time before stopping
+//        Thread stopper = new Thread(new Runnable() {
+//            public void run() {
+//                try {
+//                    Thread.sleep(RECORD_TIME);
+//                } catch (InterruptedException ex) {
+//                    ex.printStackTrace();
+//                }
+//                recorder.finish();
+//            }
+//        });
+// 
+//        stopper.start();
+// 
+//        // start recording
+//        recorder.start();
+//    }
+    
+    
+    public static void main(String[] args) {
+    	MailMail mm = (MailMail) context.getBean("mailMail");
+        mm.sendMail("f.karimoullah@gmail.com ",3);
+    }
 }
+

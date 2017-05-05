@@ -4,12 +4,14 @@ import java.util.ArrayList;
 import java.util.List;
 
 import javax.servlet.http.HttpServletRequest;
+import javax.servlet.http.HttpServletResponse;
 
 import org.gestion.av.entities.Client;
 import org.gestion.av.entities.Facture;
 import org.gestion.av.metier.ConsulterContratsMetier;
 import org.gestion.av.metier.ConsulterFacturesMetier;
 import org.gestion.av.serviceImpl.GeneratePDF;
+import org.gestion.av.serviceImpl.MailMail;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.ModelAttribute;
@@ -22,6 +24,11 @@ public class FactureController {
 	private ConsulterFacturesMetier consulterFacturesMetier;
 	private ConsulterContratsMetier consulterContratsMetier;
 	private GeneratePDF generatePDF;
+	private MailMail mailMail;
+	
+	public void setMailMail(MailMail mailMail) {
+		this.mailMail = mailMail;
+	}
 
 	public void setConsulterContratsMetier(ConsulterContratsMetier consulterContratsMetier) {
 		this.consulterContratsMetier = consulterContratsMetier;
@@ -79,6 +86,7 @@ public class FactureController {
 			Model model,long idFacture) {
 		Client client = (Client) pRequest.getSession().getAttribute("clientConnecte");
 		generatePDF.genererPdf(idFacture,client.getId());
+		mailMail.sendMail(client.getEmail(), idFacture);
 		return "Facture/listFactures";
 	}
 }

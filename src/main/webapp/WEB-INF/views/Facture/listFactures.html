@@ -9,7 +9,32 @@
 
 <body
 	class="page-header-fixed page-sidebar-closed-hide-logo page-container-bg-solid">
+	<div class="modal fade" id="pdf" tabindex="-1" role="basic"
+		aria-hidden="true">
+		<div class="modal-dialog">
+			<div class="modal-content">
+				<div class="modal-header">
+					<button type="button" class="close" data-dismiss="modal"
+						aria-hidden="true"></button>
+					<h4 class="modal-title">Information</h4>
+				</div>
+				<div class="modal-body">
 
+
+					<div class="portlet-body">Facture téléchargée.</div>
+
+
+
+				</div>
+				<div class="modal-footer">
+					<button type="button" class="btn  btn-outline btn-circle"
+						data-dismiss="modal"
+						style="background-color: #ffdb4d; color: white;">Fermer</button>
+				</div>
+			</div>
+		</div>
+	</div>
+	<a id="modalpdf" data-toggle="modal" href="#pdf"></a>
 	<div class="modal fade" id="static" tabindex="-1" role="basic"
 		aria-hidden="true">
 		<div class="modal-dialog">
@@ -204,7 +229,7 @@
 <![endif]-->
 	<div th:include="/Fragment/resources_js :: js_resources"></div>
 	<script th:inline="javascript">
-
+	$("#modalpdf").hide();
 	$(document).ready(function() {
 		$(".FilePDF").on("click",function(){
 			$.post("genererPDF",//l url de la fct de traitement
@@ -214,7 +239,7 @@
 				},
 				function(data, status) {
 					if (status == "success") {
-						alert("ee");
+						$("#modalpdf").click();
 					}
 				}			
 			)

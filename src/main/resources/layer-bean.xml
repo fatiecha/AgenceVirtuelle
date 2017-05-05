@@ -21,6 +21,23 @@
              </props>
    </property>
   </bean>	
+  
+<!--   pr piece joint -->
+  
+  <bean id="mailMail" class="org.gestion.av.serviceImpl.MailMail">
+	<property name="mailSender" ref="mailSender" />
+	<property name="simpleMailMessage" ref="customeMailMessage" />
+</bean>
+
+<bean id="customeMailMessage"
+	class="org.springframework.mail.SimpleMailMessage">
+
+	
+	<property name="subject" value="BIENVENU DANS VOTRE ESPACE CLIENT RADEEMA" />
+	
+</bean>
+  
+  
 
 	<bean id="generatePDF" class="org.gestion.av.serviceImpl.GeneratePDF"></bean>
 	<bean id="countFIMetier" class="org.gestion.av.metier.CountFIMetier"></bean>
@@ -87,6 +104,7 @@
 		<property name="consulterFacturesMetier" ref="consulterFacturesMetier"></property>
 		<property name="consulterContratsMetier" ref="consulterContratsMetier"></property>
 		<property name="generatePDF" ref="generatePDF"></property>
+			<property name="mailMail" ref="mailMail"></property>
 
 		
 	</bean>

@@ -60,7 +60,7 @@
 			</div>
 		</div>
 	</div>
-	<a id="modalLogin" data-toggle="modal" href="#static"></a>
+	<a id="modalEnvoiMDP" data-toggle="modal" href="#static"></a>
     <!-- START PAGE-CONTAINER -->
     <div class="login-wrapper ">
       <!-- START Login Background Pic Wrapper-->
@@ -87,36 +87,22 @@
           <div style="height: 20px;"></div>
            <p th:if="${loginError}" style="color:red;">Email ou mot de passe erroné</p>
           <!-- START Login Form -->
-          <form id="form-login" class="p-t-15" role="form"  th:action="@{/seConnecter}" method="post" th:object="${client}">
+          <form id="form-login" class="p-t-15" role="form"  th:action="@{/envoyerMDP}" method="post" th:object="${client}">
             <!-- START Form Control-->
             <div class="form-group form-group-default input-group">
                 <label>Email</label>
-                <input type="text" class="form-control" id="email" name="j_username" required="required" th:field="*{email}" />
-                <span class="input-group-addon"><i class="fa fa-user"></i></span>
+                <input type="text" class="form-control"  name="j_username" required="required" th:field="*{email}" />
+              <span class="input-group-addon"><i class="icon-user"> </i></span>
             </div>
-            <!-- END Form Control-->
-            <!-- START Form Control-->
-            <div class="form-group form-group-default input-group">
-                <label>Mot de passe</label>
-                <input type="password" class="form-control" name="j_password" id="password" required="required" th:field="*{MDP}"/>
-                <span class="input-group-addon"><i class="fa fa-unlock-alt"></i></span>
-            </div>
-            <!-- START Form Control-->
-<!--             <div class="row"> -->
-<!--               <div class="col-md-6 no-padding"> -->
-<!--                 <div class="checkbox check-danger"> -->
- <!--                   <input type="checkbox" id="remember_me" name="_remember_me" value="on"/> -->
-<!--                  <a> <label >Mot de passe oublié</label></a> -->
-<!--                 </div> -->
-<!--               </div> -->
-<!--             </div> -->
- <div class="row"><a th:href="@{/mdpOublie}" id="mdpOublie"> <label >Mot de passe oublié?</label></a>   </div>
+       
+
             <input type="hidden" name="_csrf_token" class=""  />
             <!-- END Form Control-->
-            <button class="btn  btn-cons m-t-10" type="submit"  id="_submit" name="_submit" style="background-color:#3b5998; color:white;" >Se connecter</button>
+            <button class="btn  btn-cons m-t-10" type="submit"  id="_submit" name="_submit" style="background-color:#3b5998; color:white;" >Envoyer</button>
                    
           </form>
-          <a th:href="@{/inscriptionClient}">  <button class="btn  btn-cons m-t-10"    style="background-color:#3b5998; color:white;" >S'inscrire</button></a> 
+          <a th:href="@{/}">  <button class="btn  btn-cons m-t-10"   id="btnLogin" style="background-color:#3b5998; color:white;" >Se connecter</button></a> 
+          
           <!--END Login Form-->
         </div>
       </div>
@@ -147,17 +133,20 @@
     
     <script th:inline="javascript">
 	
-  
+   
 		
 	/*<![CDATA[*/
 	
-	$("#modalLogin").hide();
-	checkInfo = /*[[${checkInfo}]]*/;
-	if (checkInfo) {
-    	$("#modalLogin").click();
-		$("#msg").html('Vérifiez vos informations !');
+	$("#modalEnvoiMDP").hide();
+	confirmationEnvoiMDP = /*[[${confirmationEnvoiMDP}]]*/;
+	if (confirmationEnvoiMDP == true) {
+    	$("#modalEnvoiMDP").click();
+		$("#msg").html('Vérifiez votre adresse éléctronique .Votre mot de passe a été envoyé.');
 	}
-	
+	else if (confirmationEnvoiMDP  == false){
+		$("#modalEnvoiMDP").click();
+		$("#msg").html('cette adresse ne correspond a aucun compte !');
+	}
 	
 	 /*]]>*/
 		</script>	

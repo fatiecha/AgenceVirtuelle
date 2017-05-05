@@ -1,5 +1,6 @@
 package org.gestion.av.controllers;
 
+import javax.persistence.NoResultException;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpSession;
 
@@ -24,11 +25,12 @@ public class ClientController {
 	private AjoutClientMetier clientMetier;
 	private ConnexionMetier connexionMetier;
 	private IAgenceService agenceService;
-private MailSender mailSender;
+	private MailSender mailSender;
+
 
 	public void setMailSender(MailSender mailSender) {
-	this.mailSender = mailSender;
-}
+		this.mailSender = mailSender;
+	}
 
 	public void setConnexionMetier(ConnexionMetier connexionMetier) {
 		this.connexionMetier = connexionMetier;
@@ -56,7 +58,7 @@ private MailSender mailSender;
 	public String Save(@ModelAttribute(value = "client") Client c, Model model) {
 		String msg;
 		msg = clientMetier.ajoutClient(c.getNom(), c.getPrenom(), c.getCIN(), c.getEmail(), c.getTel(), c.getMDP());
-		sendMail(c);
+		sendMailInscription(c);
 		model.addAttribute("checkClt", msg);
 		return "inscriptionClient";
 	}
@@ -88,8 +90,8 @@ private MailSender mailSender;
 	@RequestMapping(value = "/updateClient", method = RequestMethod.GET)
 	public String updateClient(HttpServletRequest pRequest, Model model) {
 		Client client = (Client) pRequest.getSession().getAttribute("clientConnecte");
-		model.addAttribute("client", client );
-		model.addAttribute("MDP",client.getMDP());
+		model.addAttribute("client", client);
+		model.addAttribute("MDP", client.getMDP());
 		return "updateClient";
 	}
 
@@ -101,16 +103,54 @@ private MailSender mailSender;
 		model.addAttribute("checkUpdateClt", bool);
 		return "updateClient";
 	}
-	 public void sendMail(Client c) {
-		   SimpleMailMessage message = new SimpleMailMessage();
-		   String from = "radeema.client@gmail.com";
-		   String subject = "BIENVENU "+c.getPrenom()+" DANS VOTRE ESPACE CLIENT RADEEMA";
-		   message.setFrom(from);
-		   message.setTo(c.getEmail());
-		   message.setSubject(subject);
-		 
-		   message.setText("Votre informations ===> CIN : "+c.getCIN()+ " , MOT DE PASSE : " +c.getMDP());
-		
-		   mailSender.send(message);
-		  }
+
+	public void sendMailInscription(Client c) {
+		SimpleMailMessage message = new SimpleMailMessage();
+		String from = "radeema.client@gmail.com";
+		String subject = "BIENVENU " + c.getPrenom() + " DANS VOTRE ESPACE CLIENT RADEEMA";
+		message.setFrom(from);
+		message.setTo(c.getEmail());
+		message.setSubject(subject);
+
+		message.setText("Votre informations ===> CIN : " + c.getCIN() + " , MOT DE PASSE : " + c.getMDP());
+
+		mailSender.send(message);
+	}
+
+	@RequestMapping(value = "/mdpOublie", method = RequestMethod.GET)
+	public String mdpoublie(Model model) {
+		model.addAttribute("client", new Client());
+		return "mdpOublie";
+	}
+
+	@RequestMapping(value = "/envoyerMDP", method = RequestMethod.POST)
+	public String envoyerMDP(@ModelAttribute(value = "client") Client client, Model model) {
+		Client cli = new Client();
+		cli = agenceService.getClientByEmail(client.getEmail());
+		try {
+		if (cli != null) {
+			sendMailMdpOublie(cli);
+			model.addAttribute("confirmationEnvoiMDP", true);
+
+		} else {
+			model.addAttribute("confirmationEnvoiMDP", false);
+
+		}
+		} catch (NoResultException e) {
+		   
+		}
+		return "mdpOublie";
+	}
+
+	public void sendMailMdpOublie(Client c) {
+		SimpleMailMessage message = new SimpleMailMessage();
+		String from = "radeema.client@gmail.com";
+		String subject = "BIENVENU " + c.getPrenom() + " DANS VOTRE ESPACE CLIENT RADEEMA";
+		message.setFrom(from);
+		message.setTo(c.getEmail());
+		message.setSubject(subject);
+		message.setText("Votre mot de passe: " + c.getMDP());
+		mailSender.send(message);
+	}
+
 }
